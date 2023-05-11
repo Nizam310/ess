@@ -6,13 +6,14 @@ class CusButton extends StatefulWidget {
   final Color color;
   final Color? textColor;
   final double? textSize;
-  const CusButton(
-      {Key? key,
-      required this.text,
-      required this.onTap,
-      required this.color, this.textColor, this.textSize,
-      })
-      : super(key: key);
+  const CusButton({
+    Key? key,
+    required this.text,
+    required this.onTap,
+    required this.color,
+    this.textColor,
+    this.textSize,
+  }) : super(key: key);
 
   @override
   State<CusButton> createState() => _CusButtonState();
@@ -32,7 +33,7 @@ class _CusButtonState extends State<CusButton> {
         child: Center(
             child: Text(
           widget.text,
-          style: TextStyle(color: widget.textColor,fontSize: widget.textSize),
+          style: TextStyle(color: widget.textColor, fontSize: widget.textSize),
         )),
       ),
     );
