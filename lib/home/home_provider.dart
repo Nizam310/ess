@@ -1,0 +1,31 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
+class HomeVm extends ChangeNotifier {
+  int counter = 0;
+  Timer? timer;
+  bool isRunning = false;
+
+  startStop() {
+    if (isRunning) {
+      timer?.cancel();
+      counter = 0;
+      isRunning = false;
+      notifyListeners();
+    } else {
+      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        counter++;
+        isRunning=true;
+        notifyListeners();
+      });
+    }
+    notifyListeners();
+  }
+
+  String get timerText {
+    int minutes = counter ~/ 60;
+    int seconds = counter % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+}
