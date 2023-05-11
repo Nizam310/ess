@@ -10,7 +10,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider(
       create: (context) => HomeVm(),
       child:
@@ -32,15 +31,17 @@ class Home extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Container(
-                                        margin: const EdgeInsets.symmetric(vertical: 5),
-                                        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 2),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 2),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                             border: Border.all(
                                               width: 0.2,
-                                              color: Colors.grey.shade400,)
-                                        ),
-
+                                              color: Colors.grey.shade400,
+                                            )),
                                         child: Column(
                                           children: [
                                             Row(
@@ -54,7 +55,7 @@ class Home extends StatelessWidget {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                  MainAxisAlignment.end,
                                               children: [
                                                 Center(
                                                   child: IconButton(
@@ -69,7 +70,7 @@ class Home extends StatelessWidget {
                                               ],
                                             )
                                           ],
-                                        ),
+                                        ).paddingRight(20),
                                       ),
                                     ),
                                   ],
@@ -84,7 +85,6 @@ class Home extends StatelessWidget {
               title: Text("Leave Balance :   ${'5'}"),
             ).paddingSymmetric(vertical: 5),
             ListTile(
-
               hoverColor: const Color(0xFF6098FE),
               title: const Text("Apply for leave"),
               onTap: () {

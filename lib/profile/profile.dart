@@ -12,11 +12,17 @@ class Profile extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (c) => ProfileVm(),
       child: Consumer<ProfileVm>(builder: (context, data, _) {
+        /// shape
+
         final shape = RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
           side: BorderSide(width: 0.3, color: Colors.grey.shade500),
         );
+
+        /// textStyle
+
         const textStyle = TextStyle(fontSize: 13, color: Colors.black54);
+
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -47,7 +53,7 @@ class Profile extends StatelessWidget {
                 shape: shape,
                 tileColor: Colors.grey[50],
                 title: const Text(
-                  "Date Of join",
+                  "Date Of  join",
                   style: textStyle,
                 ),
               ).paddingAll(10),
@@ -59,16 +65,6 @@ class Profile extends StatelessWidget {
                   style: textStyle,
                 ),
               ).paddingAll(10),
-              /* CusTextField(
-                controller: data.dateOfJoin,
-                onChanged: (v) {},
-                hintText: ,
-              ).paddingAll(10),
-              CusTextField(
-                controller: data.yearsWithCompany,
-                onChanged: (v) {},
-                hintText: "years with company",
-              ).paddingAll(10),*/
             ],
           ).paddingSymmetric(vertical: 10),
         );
