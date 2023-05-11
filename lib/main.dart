@@ -17,7 +17,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Employee Self Service',
-      theme: ThemeData(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey[10],
+        
+        listTileTheme: ListTileThemeData(
+      tileColor: Colors.white,
+         shape : RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+          side: BorderSide(color: Colors.grey.shade400,width: 0.2)),
+
+    )
+      ),
       routes: {
         '/': (context) => const LoginScreen(),
         '/dash': (context) => const DashBoard(),

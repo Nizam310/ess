@@ -26,7 +26,7 @@ class _CusButtonState extends State<CusButton> {
       child: Container(
         decoration: BoxDecoration(
           color: widget.color,
-          borderRadius: BorderRadius.circular(3),
+          borderRadius: BorderRadius.circular(5),
         ),
         height: 30,
         child: Center(

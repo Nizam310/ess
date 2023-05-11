@@ -12,11 +12,13 @@ class DashBoard extends StatelessWidget {
       create: (context) => DashBoardVm(),
       child: Consumer<DashBoardVm>(builder: (context, data, _) {
         return Scaffold(
+
           drawer: const Drawer(
             width: 250,
             child: CusDrawer(),
           ),
           appBar: AppBar(
+            backgroundColor: const Color(0xFF4C4C4A),
             title: Text(data.index == 0
                 ? "Dash Board"
                 : data.index == 1
@@ -46,9 +48,6 @@ class CusDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const color = Color(0xFF6098FE);
-    final shape = RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-        side: BorderSide(color: Colors.grey.shade400));
     return Consumer<DashBoardVm>(builder: (context, data, _) {
       return ListView(
         children: [
@@ -68,7 +67,6 @@ class CusDrawer extends StatelessWidget {
             ).paddingAll(10),
           ).paddingSymmetric(horizontal: 8, vertical: 5),
           ListTile(
-            shape: shape,
             hoverColor: color,
             trailing: const Icon(Icons.home),
             title: const Text("Home"),
@@ -79,7 +77,6 @@ class CusDrawer extends StatelessWidget {
             },
           ).paddingSymmetric(horizontal: 10, vertical: 5),
           ListTile(
-            shape: shape,
             hoverColor: color,
             trailing: const Icon(Icons.person),
             title: const Text("Profile"),
@@ -90,9 +87,8 @@ class CusDrawer extends StatelessWidget {
             },
           ).paddingSymmetric(horizontal: 10, vertical: 5),
           ListTile(
-            shape: shape,
             hoverColor: color,
-            trailing: const Icon(Icons.person),
+            trailing: const Icon(Icons.receipt_long),
             title: const Text("Leave Apply"),
             onTap: () {
               data.index = 2;
@@ -101,7 +97,6 @@ class CusDrawer extends StatelessWidget {
             },
           ).paddingSymmetric(horizontal: 10, vertical: 5),
           ListTile(
-            shape: shape,
             hoverColor: color,
             trailing: const Icon(Icons.settings),
             title: const Text("Settings"),
@@ -112,7 +107,6 @@ class CusDrawer extends StatelessWidget {
             },
           ).paddingSymmetric(horizontal: 10, vertical: 5),
           ListTile(
-            shape: shape,
             hoverColor: color,
             trailing: const Icon(
               Icons.logout,
