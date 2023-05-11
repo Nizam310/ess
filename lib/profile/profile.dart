@@ -23,50 +23,52 @@ class Profile extends StatelessWidget {
 
         const textStyle = TextStyle(fontSize: 13, color: Colors.black54);
 
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey[300],
-                    child: const Icon(Icons.person),
-                  )).paddingBottom(10),
-              CusTextField(
-                controller: data.name,
-                onChanged: (v) {},
-                hintText: "Name",
-              ).paddingAll(10),
-              CusTextField(
-                controller: data.position,
-                onChanged: (v) {},
-                hintText: "Position",
-              ).paddingAll(10),
-              CusTextField(
-                controller: data.mob,
-                onChanged: (v) {},
-                hintText: "Mobile",
-              ).paddingAll(10),
-              ListTile(
-                shape: shape,
-                tileColor: Colors.grey[50],
-                title: const Text(
-                  "Date Of  join",
-                  style: textStyle,
-                ),
-              ).paddingAll(10),
-              ListTile(
-                shape: shape,
-                tileColor: Colors.grey[50],
-                title: const Text(
-                  "Years with company",
-                  style: textStyle,
-                ),
-              ).paddingAll(10),
-            ],
-          ).paddingSymmetric(vertical: 10),
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey[300],
+                      child: const Icon(Icons.person),
+                    )).paddingBottom(10),
+                CusTextField(
+                  controller: data.name,
+                  onChanged: (v) {},
+                  hintText: "Name",
+                ).paddingAll(10),
+                CusTextField(
+                  controller: data.position,
+                  onChanged: (v) {},
+                  hintText: "Position",
+                ).paddingAll(10),
+                CusTextField(
+                  controller: data.mob,
+                  onChanged: (v) {},
+                  hintText: "Mobile",
+                ).paddingAll(10),
+                ListTile(
+                  shape: shape,
+                  tileColor: Colors.grey[50],
+                  title: const Text(
+                    "Date Of  join",
+                    style: textStyle,
+                  ),
+                ).paddingAll(10),
+                ListTile(
+                  shape: shape,
+                  tileColor: Colors.grey[50],
+                  title: const Text(
+                    "Years with company",
+                    style: textStyle,
+                  ),
+                ).paddingAll(10),
+              ],
+            ).paddingSymmetric(vertical: 10),
+          ),
         );
       }),
     );

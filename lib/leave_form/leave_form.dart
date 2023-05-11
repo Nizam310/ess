@@ -13,24 +13,26 @@ class LeaveForm extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => LeaveFormVm(),
       child: Consumer<LeaveFormVm>(builder: (context, data, _) {
-        return Column(
-          children: [
-            CusTextField(
-              controller: data.days,
-              onChanged: (val) {},
-              hintText: "How many days are you taking?",
-            ).paddingSymmetric(horizontal: 10, vertical: 10),CusTextField(
-              controller: data.reason,
-              onChanged: (val) {},
-              maxLines: 3,
-              hintText: "Reason",
-            ).paddingSymmetric(horizontal: 10, vertical: 10),
-            CusButton(text: "Apply", onTap: (){},
-              color: const Color(0xFF555557),
-              textColor: CupertinoColors.white,
-              textSize: 13,).paddingSymmetric(horizontal: 10, vertical: 10),
-          ],
-        ).paddingSymmetric(vertical: 10);
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              CusTextField(
+                controller: data.days,
+                onChanged: (val) {},
+                hintText: "How many days are you taking?",
+              ).paddingSymmetric(horizontal: 10, vertical: 10),CusTextField(
+                controller: data.reason,
+                onChanged: (val) {},
+                maxLines: 3,
+                hintText: "Reason",
+              ).paddingSymmetric(horizontal: 10, vertical: 10),
+              CusButton(text: "Apply", onTap: (){},
+                color: const Color(0xFF555557),
+                textColor: CupertinoColors.white,
+                textSize: 13,).paddingSymmetric(horizontal: 10, vertical: 10),
+            ],
+          ).paddingSymmetric(vertical: 10),
+        );
       }),
     );
   }
