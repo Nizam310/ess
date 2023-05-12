@@ -40,7 +40,6 @@ class LoginScreen extends StatelessWidget {
                       text: 'Login',
                       textColor: Colors.white,
                       onTap: () {Navigator.pushNamed(context, "/dash");},
-                      color: const Color(0xFF4C4C4A),
                     ).paddingSymmetric(horizontal: 30, vertical: 10)),
                   ],
                 )

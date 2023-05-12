@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class CusButton extends StatefulWidget {
   final String text;
   final Function() onTap;
-  final Color color;
+  final Color? color;
   final Color? textColor;
   final double? textSize;
   const CusButton({
     Key? key,
     required this.text,
     required this.onTap,
-    required this.color,
+    this.color,
     this.textColor,
     this.textSize,
   }) : super(key: key);
@@ -26,7 +26,7 @@ class _CusButtonState extends State<CusButton> {
       onTap: widget.onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: widget.color,
+          color: widget.color ?? const Color(0xFF555557),
           borderRadius: BorderRadius.circular(5),
         ),
         height: 30,

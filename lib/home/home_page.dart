@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
                       child: SizedBox(
                         height: 300,
                         child: ListView.builder(
-                            itemCount: 5,
+                            itemCount: 1,
                             itemBuilder: (context, index) => Row(
                                   children: [
                                     Expanded(
@@ -85,8 +85,13 @@ class Home extends StatelessWidget {
               title: Text("Leave Balance :   ${'5'}"),
             ).paddingSymmetric(vertical: 5),
             ListTile(
-              hoverColor: const Color(0xFF6098FE),
-              title: const Text("Apply for leave"),
+              tileColor: const Color(0xFF4C4C4A),
+              hoverColor: const Color(0xFF6B6B68),
+              title: const Text(
+                "Apply for leave",
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
               onTap: () {
                 dataDash.index = 2;
                 dataDash.refresh();

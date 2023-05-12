@@ -16,7 +16,7 @@ class HomeVm extends ChangeNotifier {
     } else {
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         counter++;
-        isRunning=true;
+        isRunning = true;
         notifyListeners();
       });
     }
@@ -27,5 +27,11 @@ class HomeVm extends ChangeNotifier {
     int minutes = counter ~/ 60;
     int seconds = counter % 60;
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  bool hover = false;
+
+  refresh(){
+    notifyListeners();
   }
 }
