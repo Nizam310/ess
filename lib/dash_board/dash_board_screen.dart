@@ -12,8 +12,8 @@ class DashBoard extends StatelessWidget {
       create: (context) => DashBoardVm(),
       child: Consumer<DashBoardVm>(builder: (context, data, _) {
         return Scaffold(
-
           drawer: const Drawer(
+            backgroundColor: Color(0xFF4C4C4A) /*.withOpacity(0.9)*/,
             width: 250,
             child: CusDrawer(),
           ),
@@ -47,7 +47,6 @@ class CusDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const color = Color(0xFF6098FE);
     return Consumer<DashBoardVm>(builder: (context, data, _) {
       return ListView(
         children: [
@@ -57,68 +56,132 @@ class CusDrawer extends StatelessWidget {
               children: [
                 const Text(
                   "Name",
-                  style: TextStyle(fontSize: 17),
+                  style: TextStyle(fontSize: 17, color: Colors.white),
                 ).paddingTop(10),
                 const Text(
                   "Role",
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12, color: Colors.white),
                 ).paddingTop(10),
               ],
             ).paddingAll(10),
           ).paddingSymmetric(horizontal: 8, vertical: 5),
-          ListTile(
-            hoverColor: color,
-            trailing: const Icon(Icons.home),
-            title: const Text("Home"),
+          const Divider(
+            color: Color(0xFFB3D452),
+            thickness: 0.5,
+          ),
+          CusCard(
+            icon: Icons.home,
+            title: "Home",
             onTap: () {
               data.index = 0;
               Navigator.of(context).pop();
               data.refresh();
             },
-          ).paddingSymmetric(horizontal: 10, vertical: 5),
-          ListTile(
-            hoverColor: color,
-            trailing: const Icon(Icons.person),
-            title: const Text("Profile"),
+          ),
+          CusCard(
+            icon: Icons.person,
+            title: "Profile",
             onTap: () {
               data.index = 1;
               Navigator.of(context).pop();
               data.refresh();
             },
-          ).paddingSymmetric(horizontal: 10, vertical: 5),
-          ListTile(
-            hoverColor: color,
-            trailing: const Icon(Icons.receipt_long),
-            title: const Text("Leave Apply"),
+          ),
+          CusCard(
+            icon: Icons.receipt_long,
+            title: "Leave Apply",
             onTap: () {
               data.index = 2;
               Navigator.of(context).pop();
               data.refresh();
             },
-          ).paddingSymmetric(horizontal: 10, vertical: 5),
-          ListTile(
-            hoverColor: color,
-            trailing: const Icon(Icons.settings),
-            title: const Text("Settings"),
+          ),
+          CusCard(
+            icon: Icons.settings,
+            title: "Settings",
             onTap: () {
               data.index = 3;
               data.refresh();
               Navigator.of(context).pop();
             },
-          ).paddingSymmetric(horizontal: 10, vertical: 5),
-          ListTile(
-            hoverColor: color,
-            trailing: const Icon(
-              Icons.logout,
-              color: Colors.red,
-            ),
-            title: const Text("Logout"),
+          ),
+          CusCard(
+            icon: Icons.logout,
+            title: "Logout",
+            iconColor: Colors.red,
             onTap: () {
               Navigator.pushNamed(context, "/");
             },
-          ).paddingSymmetric(horizontal: 10, vertical: 5),
+          ),
         ],
       );
     });
+  }
+}
+
+class CusCard extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Color? iconColor;
+  final Function() onTap;
+
+  const CusCard({
+    Key? key,
+    required this.title,
+    required this.icon,
+    this.iconColor,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<DashBoardVm>(
+      builder: (context,data,_) {
+        return MouseRegion(
+          onHover: (event) {
+            data.hover=true;
+            data.refresh();
+          },
+          onExit: (event) {
+            data.hover=false;
+            data.refresh();
+          },
+          child: Container(
+            // color: ,
+            height: 46,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: const Color(0xFFB3D452),)
+            ),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: onTap,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        Icon(
+                          icon,
+                          color: iconColor ?? white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    );
   }
 }

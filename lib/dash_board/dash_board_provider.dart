@@ -6,7 +6,9 @@ import '../profile/profile.dart';
 import '../settings/settings.dart';
 
 class DashBoardVm extends ChangeNotifier {
+  bool hover = false;
   int index = 0;
+
   final List screen = const [
     Home(),
     Profile(),

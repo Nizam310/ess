@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Self Service',
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.grey[10],
+          scaffoldBackgroundColor: Colors.grey[40],
           listTileTheme: ListTileThemeData(
             tileColor: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
-                side: BorderSide(color: Colors.grey.shade400, width: 0.2)),
+                side: BorderSide(color: Colors.grey.shade400, width: 0.5)),
           )),
       routes: {
         '/': (context) => const LoginScreen(),
