@@ -20,21 +20,37 @@ class CusButton extends StatefulWidget {
 }
 
 class _CusButtonState extends State<CusButton> {
+  bool hover = false;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: widget.onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: widget.color ?? const Color(0xFF555557),
-          borderRadius: BorderRadius.circular(5),
+    return MouseRegion(
+      onHover: (val) {
+        hover = true;
+        setState(() {});
+      },
+      onExit: (val) {
+        hover = false;
+        setState(() {});
+      },
+      child: InkWell(
+        highlightColor: const Color(0xFF717173),
+        splashColor: const Color(0xFF717173),
+        onTap: widget.onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: hover == false
+                ? (widget.color ?? const Color(0xFF555557))
+                : (const Color(0xFF717173)),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          height: 30,
+          child: Center(
+              child: Text(
+            widget.text,
+            style:
+                TextStyle(color: widget.textColor, fontSize: widget.textSize),
+          )),
         ),
-        height: 30,
-        child: Center(
-            child: Text(
-          widget.text,
-          style: TextStyle(color: widget.textColor, fontSize: widget.textSize),
-        )),
       ),
     );
   }
