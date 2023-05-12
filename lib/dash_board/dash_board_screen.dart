@@ -24,7 +24,7 @@ class DashBoard extends StatelessWidget {
                 : data.index == 1
                     ? "Profile"
                     : data.index == 2
-                        ? "Leave Form"
+                        ? "Request Form"
                         : data.index == 3
                             ? "Settings"
                             : ""),
@@ -89,7 +89,7 @@ class CusDrawer extends StatelessWidget {
           ),
           CusCard(
             icon: Icons.receipt_long,
-            title: "Leave Apply",
+            title: "Request Form",
             onTap: () {
               data.index = 2;
               Navigator.of(context).pop();

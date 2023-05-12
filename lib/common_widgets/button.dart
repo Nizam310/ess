@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CusButton extends StatefulWidget {
   final String text;
@@ -43,13 +44,13 @@ class _CusButtonState extends State<CusButton> {
                 : (const Color(0xFF717173)),
             borderRadius: BorderRadius.circular(5),
           ),
-          height: 30,
+          height: 40,
           child: Center(
               child: Text(
             widget.text,
             style:
-                TextStyle(color: widget.textColor, fontSize: widget.textSize),
-          )),
+                TextStyle(color: widget.textColor??white, fontSize: widget.textSize),
+          )).paddingSymmetric(horizontal: 10,),
         ),
       ),
     );

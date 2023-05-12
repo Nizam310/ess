@@ -1,0 +1,5 @@
+enum RequestType {
+  Leave,
+  Certificates,
+
+}

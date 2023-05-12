@@ -3,7 +3,7 @@ import 'package:employee_self_service_flutter/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'dash_board/dash_board_screen.dart';
-import 'leave_form/leave_form.dart';
+import 'request_form/request_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         '/dash': (context) => const DashBoard(),
         '/home': (context) => const Home(),
         '/profile': (context) => const DashBoard(),
-        '/leave': (context) => const LeaveForm(),
+        '/leave': (context) => const RequestForm(),
       },
     );
   }

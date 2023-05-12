@@ -1,8 +1,8 @@
 import 'package:employee_self_service_flutter/home/home_page.dart';
 import 'package:flutter/foundation.dart';
 
-import '../leave_form/leave_form.dart';
 import '../profile/profile.dart';
+import '../request_form/request_form.dart';
 import '../settings/settings.dart';
 
 class DashBoardVm extends ChangeNotifier {
@@ -12,7 +12,7 @@ class DashBoardVm extends ChangeNotifier {
   final List screen = const [
     Home(),
     Profile(),
-    LeaveForm(),
+    RequestForm(),
     Settings(),
   ];
 
