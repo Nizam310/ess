@@ -7,7 +7,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class LeaveForm extends StatelessWidget {
-  const LeaveForm({Key? key}) : super(key: key);
+
+  const LeaveForm({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class LeaveForm extends StatelessWidget {
                   dashData.index = 0;
                   dashData.refresh();
                 },
+                // color: const red,
                 textColor: CupertinoColors.white,
                 textSize: 13,
               ).paddingSymmetric(horizontal: 10, vertical: 10),
