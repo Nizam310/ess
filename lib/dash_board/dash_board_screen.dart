@@ -1,4 +1,6 @@
 import 'package:employee_self_service_flutter/dash_board/dash_board_provider.dart';
+import 'package:employee_self_service_flutter/home/home_provider.dart';
+import 'package:employee_self_service_flutter/tasks/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +10,12 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DashBoardVm(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DashBoardVm()),
+        ChangeNotifierProvider(create: (context) => TaskVm()),
+        ChangeNotifierProvider(create: (context) => HomeVm()),
+      ],
       child: Consumer<DashBoardVm>(builder: (context, data, _) {
         return Scaffold(
           drawer: const Drawer(
@@ -29,7 +35,9 @@ class DashBoard extends StatelessWidget {
                             ? "Settings"
                             : data.index == 4
                                 ? "Chat With HR"
-                                : ""),
+                                : data.index == 5
+                                    ? "Task"
+                                    : ""),
             actions: [
               PopupMenuButton(
                   icon: const Icon(Icons.circle_notifications),
@@ -103,6 +111,15 @@ class CusDrawer extends StatelessWidget {
             title: "Profile",
             onTap: () {
               data.index = 1;
+              Navigator.of(context).pop();
+              data.refresh();
+            },
+          ),
+          CusCard(
+            icon: Icons.person,
+            title: "Tasks",
+            onTap: () {
+              data.index = 5;
               Navigator.of(context).pop();
               data.refresh();
             },

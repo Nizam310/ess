@@ -30,7 +30,7 @@ class CusDropdown<T> extends StatelessWidget {
       children: [
         Expanded(
           child: SizedBox(
-            height: 60,
+            height: 71,
             child: InputDecorator(
               decoration: InputDecoration(
                 labelText: label??"",
