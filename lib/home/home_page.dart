@@ -1,5 +1,6 @@
 import 'package:employee_self_service_flutter/common_widgets/button.dart';
 import 'package:employee_self_service_flutter/tasks/task_provider.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -90,9 +91,16 @@ class Home extends StatelessWidget {
                   })
             ],
           ).paddingSymmetric(vertical: 5),
-          const ListTile(
+          /*const ListTile(
             title: Text("Leave Balance :   ${'5'}"),
-          ).paddingSymmetric(vertical: 5),
+          ).paddingSymmetric(vertical: 5),*/
+          Row(
+            children: const [
+              Expanded(
+                  child: SizedBox(
+                      height: 300, width: 300, child: LeaveGraphicalView())),
+            ],
+          ),
           ListTile(
             tileColor: const Color(0xFF4C4C4A),
             hoverColor: const Color(0xFF6B6B68),
@@ -109,5 +117,91 @@ class Home extends StatelessWidget {
         ],
       );
     });
+  }
+}
+
+class LeaveGraphicalView extends StatelessWidget {
+  const LeaveGraphicalView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<BarChartGroupData> data = [
+      BarChartGroupData(x: 10, barRods: [
+        BarChartRodData(toY: 10, color: Colors.red),
+        BarChartRodData(
+          toY: 1,
+        ),
+      ]),
+      BarChartGroupData(x: 20, barRods: [
+        BarChartRodData(toY: 50, color: Colors.red),
+        BarChartRodData(toY: 6),
+      ]),
+      BarChartGroupData(x: 30, barRods: [
+        BarChartRodData(toY: 5, color: Colors.red),
+        BarChartRodData(toY: 6),
+      ]),
+      BarChartGroupData(x: 40, barRods: [
+        BarChartRodData(toY: 5, color: Colors.red),
+        BarChartRodData(toY: 6),
+      ]),
+      BarChartGroupData(x: 50, barRods: [
+        BarChartRodData(toY: 5, color: Colors.red),
+        BarChartRodData(toY: 6),
+      ]),
+    ];
+
+    return BarChart(
+            swapAnimationCurve: Curves.bounceIn,
+            swapAnimationDuration: const Duration(minutes: 1),
+            BarChartData(
+                maxY: 100,
+                borderData: FlBorderData(
+                    border: Border.all(color: Colors.red), show: true),
+                gridData: FlGridData(
+                  show: true,
+                ),
+                groupsSpace: 1000,
+                titlesData: FlTitlesData(
+                  bottomTitles: AxisTitles(
+                      axisNameWidget: SizedBox(
+                    height: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        Text(
+                          "Jan",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "Feb",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "Mar",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "Apr",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "May",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ).paddingSymmetric(horizontal: 35),
+                  )),
+                  topTitles: AxisTitles(axisNameWidget: const Text("")),
+                  leftTitles: AxisTitles(axisNameWidget: const Text("")),
+                  rightTitles: AxisTitles(axisNameWidget: const Text("")),
+                ),
+                rangeAnnotations: RangeAnnotations(horizontalRangeAnnotations: [
+                  HorizontalRangeAnnotation(y1: 70, y2: 60)
+                ]),
+                alignment: BarChartAlignment.spaceEvenly,
+                baselineY: 100,
+                barGroups: data,
+                barTouchData: BarTouchData(enabled: true)))
+        .paddingSymmetric(vertical: 10);
   }
 }
