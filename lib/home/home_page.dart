@@ -42,21 +42,25 @@ class Home extends StatelessWidget {
                                               width: 0.2,
                                               color: Colors.grey.shade400,
                                             )),
-                                        child: Column(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Row(
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                const Text("Task"),
-                                                Text(data.timerText),
+                                                const Text("Task")
+                                                    .paddingBottom(5),
+                                                const Text("21/12/23")
                                               ],
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                            Column(
                                               children: [
+                                                Text(data.timerText),
                                                 Center(
                                                   child: IconButton(
                                                     onPressed: () {
@@ -68,7 +72,7 @@ class Home extends StatelessWidget {
                                                   ),
                                                 )
                                               ],
-                                            )
+                                            ),
                                           ],
                                         ).paddingRight(20),
                                       ),

@@ -25,14 +25,75 @@ class RequestForm extends StatelessWidget {
           child: Column(
             children: [
               CusDropdown<RequestType>(
+                label: "Request Type",
                 verPadding: 5,
                 value: data.type,
                 items: RequestType.values,
                 itemBuilder: (type) => Text(type.name),
                 onChanged: (RequestType? value) {
                   if (value != null) data.type = value;
+                  data.certifyType = null;
+                  data.leaveType = null;
                   data.refresh();
                 },
+              ),
+              Visibility(
+                visible: data.type == RequestType.Certificates,
+                child: Column(
+                  children: [
+                    Visibility(
+                      visible: !(data.certifyType == "Other"),
+                      child: CusDropdown<String>(
+                        label: "Certificate Type",
+                        verPadding: 5,
+                        value: data.certifyType,
+                        items: data.certificateTypeList,
+                        itemBuilder: (type) => Text(type),
+                        onChanged: (String? value) {
+                          if (value != null) {
+                            data.certifyType = value;
+                          }
+                          data.refresh();
+                        },
+                      ),
+                    ),
+                    Visibility(
+                      visible: data.certifyType == "Other",
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              child: CusTextField(
+                                      controller: data.other,
+                                      onChanged: (val) {})
+                                  .paddingSymmetric(horizontal: 10)),
+                          CusButton(
+                              text: "Add",
+                              onTap: () {
+                                if (data.type == RequestType.Leave) {
+                                  data.other.text == ""
+                                      ? null
+                                      : data.leaveList.add(data.other.text);
+
+                                  data.leaveType = data.leaveList.last;
+                                } else if (data.type ==
+                                    RequestType.Certificates) {
+                                  data.other.text == ""
+                                      ? null
+                                      : data.certificateTypeList
+                                          .add(data.other.text);
+
+                                  data.certifyType =
+                                      data.certificateTypeList.last;
+                                }
+                                data.other.clear();
+                                data.refresh();
+                              }).paddingRight(11)
+                        ],
+                      ).paddingSymmetric(vertical: 5),
+                    ),
+                  ],
+                ),
               ),
               Visibility(
                 visible: data.type == RequestType.Leave,
@@ -56,31 +117,37 @@ class RequestForm extends StatelessWidget {
                     Visibility(
                       visible: !(data.leaveType == "Other"),
                       child: CusDropdown<String>(
+                        label: "Leave Type",
                         verPadding: 5,
                         value: data.leaveType,
                         items: data.leaveList,
                         itemBuilder: (type) => Text(type),
                         onChanged: (String? value) {
-                          if (value != null) data.leaveType = value;
+                          if (value != null) {
+                            data.leaveType = value;
+                          }
                           data.refresh();
                         },
                       ),
                     ),
                     Visibility(
                       visible: (data.leaveType == "Other"),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                                  child: CusTextField(
-                                      controller: data.otherLeave,
-                                      onChanged: (val) {}).paddingSymmetric(horizontal: 10)),
-
+                              child: CusTextField(
+                                      hintText: "Leave type",
+                                      controller: data.other,
+                                      onChanged: (val) {})
+                                  .paddingSymmetric(horizontal: 10)),
                           CusButton(
-                              text: "text",
+                              text: "Add",
                               onTap: () {
-                                data.leaveList.add(data.otherLeave.text);
-                                data.leaveType="";
-                                data.otherLeave.clear();
+                                data.other.text == ""
+                                    ? null
+                                    : data.leaveList.add(data.other.text);
+                                data.leaveType = data.leaveList.last;
                                 data.refresh();
                               }).paddingRight(11)
                         ],

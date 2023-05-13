@@ -5,13 +5,14 @@ class CusTextField extends StatefulWidget {
   final String? labelText;
   final TextEditingController controller;
   final Function(String) onChanged;
-  final int ? maxLines;
+  final int? maxLines;
   const CusTextField(
       {Key? key,
-       this.hintText,
-       this.labelText,
+      this.hintText,
+      this.labelText,
       required this.controller,
-      required this.onChanged, this.maxLines})
+      required this.onChanged,
+      this.maxLines})
       : super(key: key);
 
   @override
@@ -23,35 +24,35 @@ class _CusTextFieldState extends State<CusTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(
-            color: Colors.grey.shade400,
-            width: 0.5,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(
+              color: Colors.grey.shade400,
+              width: 0.5,
+            ),
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(
-            color: Colors.grey.shade400,
-            width: 0.5,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(
+              color: Colors.grey.shade400,
+              width: 0.5,
+            ),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(
-            color: Colors.blue,
-            width: 2.0,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(
+              color: Colors.blue,
+              width: 2.0,
+            ),
           ),
-        ),
-        hintText: widget.hintText,
-        hintStyle: const TextStyle(fontSize: 13),
-        labelText: widget.labelText
-      ),
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(fontSize: 13),
+          labelText: widget.labelText),
       onChanged: widget.onChanged,
       controller: widget.controller,
-      maxLines: widget.maxLines,
+      maxLines: widget.maxLines ?? 1,
     );
   }
 }

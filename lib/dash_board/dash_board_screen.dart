@@ -27,7 +27,16 @@ class DashBoard extends StatelessWidget {
                         ? "Request Form"
                         : data.index == 3
                             ? "Settings"
-                            : ""),
+                            : data.index == 4
+                                ? "Chat With HR"
+                                : ""),
+            actions: [
+              PopupMenuButton(
+                  icon: const Icon(Icons.circle_notifications),
+                  itemBuilder: (context) => const [
+                        PopupMenuItem(child: Text("No Notifications Yet!"))
+                      ])
+            ],
           ),
           body: Column(
             children: [
@@ -35,6 +44,17 @@ class DashBoard extends StatelessWidget {
                 child: data.screen.elementAt(data.index),
               ),
             ],
+          ),
+          floatingActionButton: Visibility(
+            visible: !(data.index == 4),
+            child: FloatingActionButton.extended(
+                backgroundColor: const Color(0xFF4C4C4A),
+                onPressed: () {
+                  data.index = 4;
+                  data.refresh();
+                },
+                label: const Text("Chat"),
+                icon: const Icon(Icons.chat_bubble_outline)),
           ),
         );
       }),
@@ -135,53 +155,112 @@ class CusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DashBoardVm>(
-      builder: (context,data,_) {
-        return MouseRegion(
-          onHover: (event) {
-            data.hover=true;
-            data.refresh();
-          },
-          onExit: (event) {
-            data.hover=false;
-            data.refresh();
-          },
-          child: Container(
-            // color: ,
-            height: 46,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: BoxDecoration(
+    return Consumer<DashBoardVm>(builder: (context, data, _) {
+      return MouseRegion(
+        onHover: (event) {
+          data.hover = true;
+          data.refresh();
+        },
+        onExit: (event) {
+          data.hover = false;
+          data.refresh();
+        },
+        child: Container(
+          // color: ,
+          height: 46,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0xFFB3D452),)
-            ),
-            child: InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: onTap,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Wrap(
-                      alignment: WrapAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          icon,
-                          color: iconColor ?? white,
-                        ),
-                      ],
-                    ),
+              border: Border.all(
+                color: const Color(0xFFB3D452),
+              )),
+          child: InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: onTap,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      Icon(
+                        icon,
+                        color: iconColor ?? white,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        );
-      }
+        ),
+      );
+    });
+  }
+}
+
+class NotificationMenu extends StatelessWidget {
+  const NotificationMenu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem(
+          child: ListTile(
+            title: const Text('Option 1'),
+            onTap: () {},
+          ),
+        ),
+        PopupMenuItem(
+          child: ListTile(
+            title: const Text('Option 2'),
+            onTap: () {},
+          ),
+        ),
+        PopupMenuItem(
+          child: ListTile(
+            title: const Text('Show Notification'),
+            onTap: () {
+              _showNotification(context);
+            },
+          ),
+        ),
+      ],
+      icon: const Icon(Icons.menu),
+    );
+  }
+
+  void _showNotification(BuildContext context) {
+    final notification = Container(
+      width: double.infinity,
+      height: 100,
+      color: Colors.blue,
+      child: const Center(
+        child: Text(
+          'New Notification',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.transparent,
+        duration: const Duration(seconds: 3),
+        content: notification,
+        behavior: SnackBarBehavior.floating,
+      ),
     );
   }
 }
