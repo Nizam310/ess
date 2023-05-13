@@ -15,10 +15,11 @@ class ChatPage extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Ink(
-              //color: Colors.red,
+            SizedBox(
               height: 300,
               child: ListView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 children: [
                   Align(
                     alignment: AlignmentDirectional.bottomEnd,
@@ -28,13 +29,14 @@ class ChatPage extends StatelessWidget {
                       height: 35,
                       width: 50,
                       decoration: const BoxDecoration(
-                          color: Colors.blue,
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20),
                               bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
+                              bottomRight: Radius.circular(20)),
+                          color: Color(0xFF4C4C4A)),
                       child: const Text(
                         "hi",
+                        style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                     ),
