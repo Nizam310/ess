@@ -55,7 +55,7 @@ class Profile extends StatelessWidget {
                   shape: shape,
                   tileColor: Colors.grey[50],
                   title: const Text(
-                    "Date Of  join",
+                    "Date Of  join :   ${"21/12/23"}",
                     style: textStyle,
                   ),
                 ).paddingAll(10),
@@ -63,7 +63,7 @@ class Profile extends StatelessWidget {
                   shape: shape,
                   tileColor: Colors.grey[50],
                   title: const Text(
-                    "Years with company",
+                    "Total years with company :  ${'5'}",
                     style: textStyle,
                   ),
                 ).paddingAll(10),

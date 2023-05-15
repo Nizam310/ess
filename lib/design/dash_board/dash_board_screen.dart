@@ -1,3 +1,4 @@
+import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class DashBoard extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DashBoardVm()),
         ChangeNotifierProvider(create: (context) => TaskVm()),
         ChangeNotifierProvider(create: (context) => HomeVm()),
+        ChangeNotifierProvider(create: (context) => ProfileVm()),
       ],
       child: Consumer<DashBoardVm>(builder: (context, data, _) {
         return Scaffold(
@@ -44,8 +46,13 @@ class DashBoard extends StatelessWidget {
                   icon: const Icon(Icons.circle_notifications),
                   itemBuilder: (context) => const [
                         PopupMenuItem(child: Text("No Notifications Yet!"))
-                      ])
-            ],
+                      ]),
+         /*     Visibility(
+                  visible: data.index == 1,
+                  child: IconButton(onPressed: (){
+                    context.read<ProfileVm>().onEdit();
+                  },icon: const Icon(Icons.edit_calendar_outlined),)),
+           */ ],
           ),
           body: Column(
             children: [
