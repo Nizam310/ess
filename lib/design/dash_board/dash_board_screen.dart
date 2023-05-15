@@ -1,9 +1,10 @@
-import 'package:employee_self_service_flutter/dash_board/dash_board_provider.dart';
-import 'package:employee_self_service_flutter/home/home_provider.dart';
-import 'package:employee_self_service_flutter/tasks/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../home/home_provider.dart';
+import '../tasks/task_provider.dart';
+import 'dash_board_provider.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class DashBoard extends StatelessWidget {
       child: Consumer<DashBoardVm>(builder: (context, data, _) {
         return Scaffold(
           drawer: const Drawer(
-            backgroundColor: Color(0xFF4C4C4A) /*.withOpacity(0.9)*/,
+            backgroundColor: Color(0xFF4C4C4A),
             width: 250,
             child: CusDrawer(),
           ),
@@ -183,7 +184,6 @@ class CusCard extends StatelessWidget {
           data.refresh();
         },
         child: Container(
-          // color: ,
           height: 46,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

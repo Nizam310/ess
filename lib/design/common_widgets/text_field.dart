@@ -23,6 +23,9 @@ class _CusTextFieldState extends State<CusTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.phone,
+
+      keyboardAppearance: Brightness.dark,
       decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),

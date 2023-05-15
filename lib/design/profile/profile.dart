@@ -1,8 +1,9 @@
-import 'package:employee_self_service_flutter/common_widgets/text_field.dart';
-import 'package:employee_self_service_flutter/profile/profile_provider.dart';
+import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../common_widgets/text_field.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);

@@ -1,8 +1,9 @@
-import 'package:employee_self_service_flutter/chat_page/chat_provider.dart';
-import 'package:employee_self_service_flutter/common_widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../common_widgets/text_field.dart';
+import 'chat_provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -11,7 +12,9 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ChatVm(),
-      child: Consumer<ChatVm>(builder: (context, data, _) {
+      child: Builder(builder: (
+        context,
+      ) {
         final widget = Align(
           alignment: AlignmentDirectional.bottomEnd,
           child: Container(
@@ -48,10 +51,25 @@ class ChatPage extends StatelessWidget {
             ),
             Align(
                 alignment: AlignmentDirectional.bottomEnd,
-                child: CusTextField(
-                  controller: data.chatController,
-                  onChanged: (val) {},
-                  hintText: "Chat With HR",
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CusTextField(
+                        controller: context
+                            .select((ChatVm value) => value.chatController),
+                        onChanged: (val) {},
+                        hintText: "Chat With HR",
+                      ).paddingRight(15),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(color: Colors.black)),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.send_rounded)),
+                    ),
+                  ],
                 ).paddingSymmetric(horizontal: 30, vertical: 30)),
           ],
         );

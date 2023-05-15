@@ -1,10 +1,11 @@
-import 'package:employee_self_service_flutter/common_widgets/button.dart';
-import 'package:employee_self_service_flutter/common_widgets/drop_down.dart';
-import 'package:employee_self_service_flutter/common_widgets/text_field.dart';
-import 'package:employee_self_service_flutter/tasks/task_provider.dart';
+import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../common_widgets/button.dart';
+import '../common_widgets/drop_down.dart';
+import '../common_widgets/text_field.dart';
 
 class Tasks extends StatelessWidget {
   const Tasks({Key? key}) : super(key: key);

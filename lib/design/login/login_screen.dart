@@ -1,9 +1,10 @@
-import 'package:employee_self_service_flutter/common_widgets/button.dart';
-import 'package:employee_self_service_flutter/common_widgets/text_field.dart';
-import 'package:employee_self_service_flutter/login/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../common_widgets/button.dart';
+import '../common_widgets/text_field.dart';
+import 'login_provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

@@ -1,9 +1,11 @@
-import 'package:employee_self_service_flutter/home/home_page.dart';
-import 'package:employee_self_service_flutter/login/login_screen.dart';
+import 'package:employee_self_service_flutter/design/profile/profile.dart';
+import 'package:employee_self_service_flutter/design/request_form/request_form.dart';
 import 'package:flutter/material.dart';
 
 import 'dash_board/dash_board_screen.dart';
-import 'request_form/request_form.dart';
+import 'home/home_page.dart';
+import 'login/login_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginScreen(),
         '/dash': (context) => const DashBoard(),
         '/home': (context) => const Home(),
-        '/profile': (context) => const DashBoard(),
+        '/profile': (context) => const Profile(),
         '/leave': (context) => const RequestForm(),
       },
     );
