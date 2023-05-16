@@ -21,8 +21,8 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.network(
-                    "https://cloudmesoft.com/wp-content/uploads/2017/03/origin-logo.png",
+                  Image.asset(
+                    "assets/images/cloud_me.png",
                     width: 300,
                   ).paddingSymmetric(horizontal: 30),
                   CusTextField(
