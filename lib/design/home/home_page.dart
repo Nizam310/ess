@@ -224,37 +224,44 @@ class LeaveGraphicalView extends StatelessWidget {
                 ),
                 titlesData: FlTitlesData(
                   bottomTitles: AxisTitles(
-                    axisNameWidget: Column(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                "Maternity",
-                                style: style,
-                              ),
-                              Text(
-                                "Haj",
-                                style: style,
-                              ),
-                              Text(
-                                "Sick",
-                                style: style,
-                              ),
-                              Text(
-                                "Annual",
-                                style: style,
-                              ),
-                              Text(
-                                "Paternity",
-                                style: style,
+                    axisNameWidget: MediaQuery.of(context).size.width > 240
+                        ? Column(
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      "Maternity",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Haj",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Sick",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Annual",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Paternity",
+                                      style: style,
+                                    ),
+                                  ],
+                                ).paddingSymmetric(
+                                    horizontal:
+                                        MediaQuery.of(context).size.width < 500
+                                            ? 30
+                                            : 70),
                               ),
                             ],
-                          ).paddingSymmetric(horizontal: 35),
-                        ),
-                      ],
-                    ),
+                          )
+                        : const Text(""),
                   ),
                   topTitles: AxisTitles(axisNameWidget: const Text("")),
                   leftTitles: AxisTitles(axisNameWidget: const Text("")),
@@ -294,11 +301,12 @@ class MonthWidget extends StatelessWidget {
           ),
           Text(
             text,
-            style:  const TextStyle(fontSize: 12,),
+            style: const TextStyle(
+              fontSize: 12,
+            ),
           )
         ],
       ),
     );
   }
 }
-
