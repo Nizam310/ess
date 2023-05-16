@@ -6,11 +6,14 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding:const  EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       children: const [
         ListTile(
-          leading: Icon(Icons.help_outline),
-          title: Text("Help center",style: TextStyle(fontSize: 15),),
+          leading: Icon(Icons.help_outline_rounded),
+          title: Text(
+            "Help center",
+            style: TextStyle(fontSize: 15,color: Colors.black),
+          ),
         )
       ],
     );

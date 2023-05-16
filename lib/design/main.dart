@@ -6,7 +6,6 @@ import 'dash_board/dash_board_screen.dart';
 import 'home/home_page.dart';
 import 'login/login_screen.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,11 +20,38 @@ class MyApp extends StatelessWidget {
       title: 'Employee Self Service',
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.grey[40],
+          inputDecorationTheme: InputDecorationTheme(
+              labelStyle: const TextStyle(color: Colors.black),
+              hintStyle: const TextStyle(color: Colors.red),
+              floatingLabelStyle: const TextStyle(color: Colors.black),
+              errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF3BBFC0),
+                  )),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF3BBFC0),
+                  )),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF3BBFC0),
+                  )),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF3BBFC0),
+                  ))),
           listTileTheme: ListTileThemeData(
-            tileColor: Colors.white,
+            //  tileColor: Colors.white,
+            iconColor: Colors.black,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
-                side: BorderSide(color: Colors.grey.shade400, width: 0.5)),
+                borderRadius: BorderRadius.circular(10),
+                side: const BorderSide(
+                  color: Color(0xFF3BBFC0),
+                )),
           )),
       routes: {
         '/': (context) => const LoginScreen(),

@@ -40,17 +40,19 @@ class _CusButtonState extends State<CusButton> {
         child: Container(
           decoration: BoxDecoration(
             color: hover == false
-                ? (widget.color ?? const Color(0xFF555557))
-                : (const Color(0xFF717173)),
-            borderRadius: BorderRadius.circular(5),
+                ? (widget.color ?? const Color(0xFF3BBFC0))
+                : (const Color(0xFF3BBFC0)),
+            borderRadius: BorderRadius.circular(10),
           ),
           height: 40,
           child: Center(
               child: Text(
             widget.text,
-            style:
-                TextStyle(color: widget.textColor??white, fontSize: widget.textSize),
-          )).paddingSymmetric(horizontal: 10,),
+            style: TextStyle(
+                color: widget.textColor ?? white, fontSize: widget.textSize),
+          )).paddingSymmetric(
+            horizontal: 10,
+          ),
         ),
       ),
     );

@@ -52,12 +52,19 @@ class Tasks extends StatelessWidget {
                   horPadding: 0,
                 ),
                 ListTile(
-                  tileColor: data.isRunning ?Colors.transparent:Colors.blue,
+                  tileColor: data.isRunning
+                      ? Colors.transparent
+                      : const Color(0xFF3BBFC0),
                   leading: Icon(
-                      data.isRunning ? Icons.stop_circle : Icons.play_circle),
+                    data.isRunning ? Icons.stop_circle : Icons.play_circle,
+                    color: data.isRunning ? Colors.black : Colors.white,
+                  ),
                   title: Text(
                     data.isRunning ? data.timerText : "Start Tracking",
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: data.isRunning ? Colors.black : Colors.white,
+                    ),
                   ).paddingRight(20),
                   onTap: () {
                     data.startStop();

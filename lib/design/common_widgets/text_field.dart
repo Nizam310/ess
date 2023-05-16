@@ -6,6 +6,7 @@ class CusTextField extends StatefulWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
   final int? maxLines;
+
   const CusTextField(
       {Key? key,
       this.hintText,
@@ -23,35 +24,11 @@ class _CusTextFieldState extends State<CusTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: TextInputType.phone,
-
       keyboardAppearance: Brightness.dark,
       decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(
-              color: Colors.grey.shade400,
-              width: 0.5,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(
-              color: Colors.grey.shade400,
-              width: 0.5,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-              color: Colors.blue,
-              width: 2.0,
-            ),
-          ),
+
           hintText: widget.hintText,
-          hintStyle: const TextStyle(fontSize: 13),
+          hintStyle: const TextStyle(fontSize: 13,color: Colors.black),
           labelText: widget.labelText),
       onChanged: widget.onChanged,
       controller: widget.controller,

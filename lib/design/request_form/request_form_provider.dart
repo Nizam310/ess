@@ -7,7 +7,7 @@ class RequestFormVm extends ChangeNotifier {
   TextEditingController other = TextEditingController();
   String? leaveType;
   String? certifyType;
-  List<String> leaveList = <String>["Medical", "Casual", "Other"];
+  List<String> leaveTypeList = <String>["Sick", "Annual","Paternity","Maternity","Haj", "Other"];
   List<String> certificateTypeList = <String>[
     "Experience",
     "Salary Slip",

@@ -16,31 +16,33 @@ class Home extends StatelessWidget {
     return Consumer3<HomeVm, DashBoardVm, TaskVm>(
         builder: (context, data, dataDash, taskData, _) {
       List<MonthWidget> monthList = const [
-        MonthWidget(text: "Jan", color: Colors.red),
-        MonthWidget(text: "Feb", color: Colors.blue),
-        MonthWidget(text: "Mar", color: Colors.orange),
-        MonthWidget(text: "Apr", color: Colors.yellow),
-        MonthWidget(text: "May", color: Colors.lightGreen),
-        MonthWidget(text: "Jun", color: Colors.deepPurpleAccent),
-        MonthWidget(text: "Jul", color: Colors.pink),
-        MonthWidget(text: "Aug", color: Colors.greenAccent),
-        MonthWidget(text: "Sep", color: Colors.purple),
-        MonthWidget(text: "Oct", color: Colors.grey),
-        MonthWidget(text: "Nov", color: Colors.brown),
-        MonthWidget(text: "Dec", color: Colors.indigo),
+        MonthWidget(
+          text: "Total Leaves",
+          color: Color(0xFF3BBFC0),
+        ),
+        MonthWidget(text: "Taken leaves", color: Colors.red),
+        MonthWidget(text: "Available Leaves", color: Colors.green),
       ];
 
       return ListView(
         padding: const EdgeInsets.all(10),
         children: [
           ExpansionTile(
-            title: const Text("Pending Tasks"),
+            /* shape: RoundedRectangleBorder(
+              side: BorderSide(color: Color(0xFF2A2D35),)
+            ),*/
+
+            // backgroundColor: Colors.white,
+            title: const Text(
+              "Pending Tasks",
+              style: TextStyle(/*color: Colors.white*/),
+            ),
             children: [
               Row(
                 children: [
                   Expanded(
                     child: SizedBox(
-                      height: 300,
+                      height: 200,
                       child: ListView.builder(
                           itemCount: 1,
                           itemBuilder: (context, index) => Row(
@@ -53,10 +55,9 @@ class Home extends StatelessWidget {
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(5),
+                                              BorderRadius.circular(10),
                                           border: Border.all(
-                                            width: 0.2,
-                                            color: Colors.grey.shade400,
+                                            color: const Color(0xFF3BBFC0),
                                           )),
                                       child: Row(
                                         mainAxisAlignment:
@@ -106,26 +107,45 @@ class Home extends StatelessWidget {
                   })
             ],
           ).paddingSymmetric(vertical: 5),
-          Column(
-            children: [
-              Row(
-                children: const [
-                  Expanded(
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: const Color(0xFF3BBFC0))),
+            width: 300,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
                       child: SizedBox(
-                          height: 200,
-                          width: 300,
-                          child: LeaveGraphicalView())),
-                ],
-              ).paddingBottom(10),
-              Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: monthList.map((e) => e).toList())
-            ],
-          ).paddingSymmetric(vertical: 10),
+                        // width: 300,
+                        child: Wrap(
+                            // crossAxisAlignment: WrapCrossAlignment.start,
+                            alignment: WrapAlignment.start,
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: monthList.map((e) => e).toList()),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: const [
+                    Expanded(
+                        child: SizedBox(
+                            height: 200,
+                            // width: 300,
+                            child: LeaveGraphicalView())),
+                  ],
+                ).paddingBottom(20),
+              ],
+            ).paddingSymmetric(vertical: 10),
+          ),
           ListTile(
-            tileColor: const Color(0xFF4C4C4A),
-            hoverColor: const Color(0xFF6B6B68),
+            tileColor: const Color(
+              0xFF3BBFC0,
+            ),
             title: const Text(
               "Apply for leave",
               style: TextStyle(color: Colors.white),
@@ -135,7 +155,7 @@ class Home extends StatelessWidget {
               dataDash.index = 2;
               dataDash.refresh();
             },
-          ).paddingSymmetric(vertical: 5),
+          ).paddingSymmetric(vertical: 10),
         ],
       );
     });
@@ -148,112 +168,94 @@ class LeaveGraphicalView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const style = TextStyle(fontSize: 10);
-    List<PieChartSectionData> data = [
-      PieChartSectionData(
-          title: "1", color: Colors.red, value: 1, titleStyle: style),
-      PieChartSectionData(
-          title: "2", color: Colors.blue, value: 2, titleStyle: style),
-      PieChartSectionData(
-          title: "3", color: Colors.orange, value: 3, titleStyle: style),
-      PieChartSectionData(
-          title: "4", color: Colors.yellow, value: 4, titleStyle: style),
-      PieChartSectionData(
-        title: "5",
-        color: Colors.lightGreen,
-        value: 1,
-        titleStyle: style,
-      ),
-      PieChartSectionData(
-          title: "6",
-          color: Colors.deepPurpleAccent,
-          value: 6,
-          titleStyle: style),
-      PieChartSectionData(
-          title: "7", color: Colors.pink, value: 7, titleStyle: style),
-      PieChartSectionData(
-          title: "8", color: Colors.greenAccent, value: 8, titleStyle: style),
-      PieChartSectionData(
-          title: "9", color: Colors.purple, value: 9, titleStyle: style),
-      PieChartSectionData(
-          title: "10", color: Colors.grey, value: 10, titleStyle: style),
-      PieChartSectionData(
-          title: "11", color: Colors.brown, value: 11, titleStyle: style),
-      PieChartSectionData(
-          title: "12", color: Colors.indigo, value: 12, titleStyle: style),
-    ];
-    /*List<BarChartGroupData> data = [
+
+    List<BarChartGroupData> data = [
       BarChartGroupData(x: 10, barRods: [
-        BarChartRodData(toY: 10, color: Colors.red),
         BarChartRodData(
-          toY: 1,
+          toY: 10,
+          color: const Color(0xFF3BBFC0),
         ),
+        BarChartRodData(toY: 5, color: Colors.red),
+        BarChartRodData(toY: 1, color: Colors.green),
       ]),
       BarChartGroupData(x: 20, barRods: [
-        BarChartRodData(toY: 50, color: Colors.red),
-        BarChartRodData(toY: 6),
+        BarChartRodData(
+          toY: 10,
+          color: const Color(0xFF3BBFC0),
+        ),
+        BarChartRodData(toY: 8, color: Colors.red),
+        BarChartRodData(toY: 2, color: Colors.green),
       ]),
       BarChartGroupData(x: 30, barRods: [
-        BarChartRodData(toY: 5, color: Colors.red),
-        BarChartRodData(toY: 6),
+        BarChartRodData(
+          toY: 5,
+          color: const Color(0xFF3BBFC0),
+        ),
+        BarChartRodData(toY: 3, color: Colors.red),
+        BarChartRodData(toY: 2, color: Colors.green),
       ]),
       BarChartGroupData(x: 40, barRods: [
+        BarChartRodData(
+          toY: 10,
+          color: const Color(0xFF3BBFC0),
+        ),
         BarChartRodData(toY: 5, color: Colors.red),
-        BarChartRodData(toY: 6),
+        BarChartRodData(toY: 5, color: Colors.green),
       ]),
       BarChartGroupData(x: 50, barRods: [
-        BarChartRodData(toY: 5, color: Colors.red),
-        BarChartRodData(toY: 6),
+        BarChartRodData(
+          toY: 10,
+          color: const Color(0xFF3BBFC0),
+        ),
+        BarChartRodData(toY: 7, color: Colors.red),
+        BarChartRodData(toY: 3, color: Colors.green),
       ]),
-    ];*/
-    return PieChart(PieChartData(
-            sectionsSpace: 0.26,
-            centerSpaceRadius: 60,
-            sections: data,
-            pieTouchData: PieTouchData(
-              enabled: true,
-            )))
-
-        /*BarChart(
+    ];
+    return BarChart(
             swapAnimationCurve: Curves.bounceIn,
             swapAnimationDuration: const Duration(minutes: 1),
             BarChartData(
-                maxY: 30,
+                maxY: 15,
                 borderData: FlBorderData(
-                    */ /*border: Border.all(color: Colors.red),*/ /* show: true),
+                    border: Border.all(color: const Color(0xFF5F6E86)),
+                    show: true),
                 gridData: FlGridData(
                   show: true,
                 ),
-                groupsSpace: 1000,
                 titlesData: FlTitlesData(
                   bottomTitles: AxisTitles(
-                      axisNameWidget: SizedBox(
-                    height: 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        Text(
-                          "Jan",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        Text(
-                          "Feb",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        Text(
-                          "Mar",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        Text(
-                          "Apr",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        Text(
-                          "May",
-                          style: TextStyle(fontSize: 12),
+                    axisNameWidget: Column(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text(
+                                "Maternity",
+                                style: style,
+                              ),
+                              Text(
+                                "Haj",
+                                style: style,
+                              ),
+                              Text(
+                                "Sick",
+                                style: style,
+                              ),
+                              Text(
+                                "Annual",
+                                style: style,
+                              ),
+                              Text(
+                                "Paternity",
+                                style: style,
+                              ),
+                            ],
+                          ).paddingSymmetric(horizontal: 35),
                         ),
                       ],
-                    ).paddingSymmetric(horizontal: 35),
-                  )),
+                    ),
+                  ),
                   topTitles: AxisTitles(axisNameWidget: const Text("")),
                   leftTitles: AxisTitles(axisNameWidget: const Text("")),
                   rightTitles: AxisTitles(axisNameWidget: const Text("")),
@@ -262,9 +264,9 @@ class LeaveGraphicalView extends StatelessWidget {
                   HorizontalRangeAnnotation(y1: 10, y2: 10)
                 ]),
                 alignment: BarChartAlignment.spaceEvenly,
-                baselineY: 100,
+                // baselineY: 100,
                 barGroups: data,
-                barTouchData: BarTouchData(enabled: true)))*/
+                barTouchData: BarTouchData(enabled: true)))
         .paddingSymmetric(vertical: 10);
   }
 }
@@ -279,20 +281,24 @@ class MonthWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 40,
+      width: 130,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
             height: 10,
-            width: 10,
             child: CircleAvatar(
               backgroundColor: color,
             ),
           ),
-          Text(text)
+          Text(
+            text,
+            style:  const TextStyle(fontSize: 12,),
+          )
         ],
       ),
     );
   }
 }
+

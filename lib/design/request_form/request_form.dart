@@ -73,9 +73,9 @@ class RequestForm extends StatelessWidget {
                                 if (data.type == RequestType.Leave) {
                                   data.other.text == ""
                                       ? null
-                                      : data.leaveList.add(data.other.text);
+                                      : data.leaveTypeList.add(data.other.text);
 
-                                  data.leaveType = data.leaveList.last;
+                                  data.leaveType = data.leaveTypeList.last;
                                 } else if (data.type ==
                                     RequestType.Certificates) {
                                   data.other.text == ""
@@ -120,7 +120,7 @@ class RequestForm extends StatelessWidget {
                         label: "Leave Type",
                         verPadding: 5,
                         value: data.leaveType,
-                        items: data.leaveList,
+                        items: data.leaveTypeList,
                         itemBuilder: (type) => Text(type),
                         onChanged: (String? value) {
                           if (value != null) {
@@ -146,8 +146,8 @@ class RequestForm extends StatelessWidget {
                               onTap: () {
                                 data.other.text == ""
                                     ? null
-                                    : data.leaveList.add(data.other.text);
-                                data.leaveType = data.leaveList.last;
+                                    : data.leaveTypeList.add(data.other.text);
+                                data.leaveType = data.leaveTypeList.last;
                                 data.refresh();
                               }).paddingRight(11)
                         ],

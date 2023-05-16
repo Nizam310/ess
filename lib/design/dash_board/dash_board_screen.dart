@@ -22,37 +22,38 @@ class DashBoard extends StatelessWidget {
       child: Consumer<DashBoardVm>(builder: (context, data, _) {
         return Scaffold(
           drawer: const Drawer(
-            backgroundColor: Color(0xFF4C4C4A),
+          //  backgroundColor: Color(0xFFEDF3FA),
             width: 250,
             child: CusDrawer(),
           ),
           appBar: AppBar(
-            backgroundColor: const Color(0xFF4C4C4A),
-            title: Text(data.index == 0
-                ? "Dash Board"
-                : data.index == 1
-                    ? "Profile"
-                    : data.index == 2
-                        ? "Request Form"
-                        : data.index == 3
-                            ? "Settings"
-                            : data.index == 4
-                                ? "Chat With HR"
-                                : data.index == 5
-                                    ? "Task"
-                                    : ""),
+            iconTheme: const IconThemeData(
+              color: Color(0xFF5F6E86),
+            ),
+            backgroundColor: Colors.white,
+            title: Text(
+              data.index == 0
+                  ? "Dash Board"
+                  : data.index == 1
+                      ? "Profile"
+                      : data.index == 2
+                          ? "Request Form"
+                          : data.index == 3
+                              ? "Settings"
+                              : data.index == 4
+                                  ? "Chat With HR"
+                                  : data.index == 5
+                                      ? "Task"
+                                      : "",
+              style: const TextStyle(color: Color(0xFF5F6E86)),
+            ),
             actions: [
               PopupMenuButton(
                   icon: const Icon(Icons.circle_notifications),
                   itemBuilder: (context) => const [
                         PopupMenuItem(child: Text("No Notifications Yet!"))
                       ]),
-         /*     Visibility(
-                  visible: data.index == 1,
-                  child: IconButton(onPressed: (){
-                    context.read<ProfileVm>().onEdit();
-                  },icon: const Icon(Icons.edit_calendar_outlined),)),
-           */ ],
+            ],
           ),
           body: Column(
             children: [
@@ -61,16 +62,76 @@ class DashBoard extends StatelessWidget {
               ),
             ],
           ),
-          floatingActionButton: Visibility(
-            visible: !(data.index == 4),
-            child: FloatingActionButton.extended(
-                backgroundColor: const Color(0xFF4C4C4A),
-                onPressed: () {
-                  data.index = 4;
-                  data.refresh();
-                },
-                label: const Text("Chat"),
-                icon: const Icon(Icons.chat_bubble_outline)),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Builder(builder: (context) {
+            return FloatingActionButton(
+                    backgroundColor: const Color(0xFF3BBFC0),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    // label: const Text(""),
+                    child: const Icon(Icons.add))
+                .paddingLeft(10);
+          }),
+          bottomNavigationBar: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: const  BorderRadius.only(
+                topLeft: Radius.circular(25),
+                topRight: Radius.circular(25),
+              ),
+              child: BottomAppBar(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                //  color:  const Color(0xFF000000),
+                height: 50,
+                shape: const CircularNotchedRectangle(),
+                // elevation: 29.236,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.home,
+                        color: data.index == 0
+                            ? const Color(0xFF3BBFC0)
+                            : const Color(0xFF8F9FBC),
+                      ),
+                      onPressed: () {
+                        data.index = 0;
+                        data.refresh();
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.timer,
+                        color: data.index == 5
+                            ? const Color(0xFF3BBFC0)
+                            : const Color(0xFF8F9FBC),
+                      ),
+                      onPressed: () {
+                        data.index = 5;
+
+                        data.refresh();
+                      },
+                    ),
+                  ],
+                ),
+              ).paddingSymmetric(
+                vertical: 5,
+              ),
+            ),
           ),
         );
       }),
@@ -92,17 +153,21 @@ class CusDrawer extends StatelessWidget {
               children: [
                 const Text(
                   "Name",
-                  style: TextStyle(fontSize: 17, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ).paddingTop(10),
                 const Text(
                   "Role",
-                  style: TextStyle(fontSize: 12, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
                 ).paddingTop(10),
               ],
             ).paddingAll(10),
           ).paddingSymmetric(horizontal: 8, vertical: 5),
           const Divider(
-            color: Color(0xFFB3D452),
+            // color: Color(0xFFB3D452),
             thickness: 0.5,
           ),
           CusCard(
@@ -197,7 +262,7 @@ class CusCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: const Color(0xFFB3D452),
+                color: const Color(0xFF3BBFC0),
               )),
           child: InkWell(
             splashColor: Colors.transparent,
@@ -211,11 +276,11 @@ class CusCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Color(0xFF5F6E86)),
                       ),
                       Icon(
                         icon,
-                        color: iconColor ?? white,
+                        color: iconColor ?? const Color(0xFF5F6E86),
                       ),
                     ],
                   ),

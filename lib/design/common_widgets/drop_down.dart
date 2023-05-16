@@ -34,16 +34,6 @@ class CusDropdown<T> extends StatelessWidget {
             child: InputDecorator(
               decoration: InputDecoration(
                 labelText: label??"",
-                alignLabelWithHint: true,
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: OutlineInputBorder(
-                  gapPadding: 10,
-                  borderRadius:BorderRadius.circular(8.0),
-                  borderSide:  const BorderSide(
-                    color:Colors.red,
-                    width: 0.2,
-                  )
-                ),
                 isDense: true,
               ),
               child: DropdownButton<T>(

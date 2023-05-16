@@ -13,16 +13,9 @@ class Profile extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (c) => ProfileVm(),
       child: Consumer<ProfileVm>(builder: (context, data, _) {
-        /// shape
-
-        final shape = RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-          side: BorderSide(width: 0.3, color: Colors.grey.shade500),
-        );
-
         /// textStyle
 
-        const textStyle = TextStyle(fontSize: 13, color: Colors.black54);
+        const textStyle = TextStyle(fontSize: 13,);
 
         return SingleChildScrollView(
           child: Padding(
@@ -51,18 +44,14 @@ class Profile extends StatelessWidget {
                   onChanged: (v) {},
                   hintText: "Mobile",
                 ).paddingAll(10),
-                ListTile(
-                  shape: shape,
-                  tileColor: Colors.grey[50],
-                  title: const Text(
+               const  ListTile(
+                     title: Text(
                     "Date Of  join :   ${"21/12/23"}",
                     style: textStyle,
                   ),
                 ).paddingAll(10),
-                ListTile(
-                  shape: shape,
-                  tileColor: Colors.grey[50],
-                  title: const Text(
+               const  ListTile(
+                     title: Text(
                     "Total years with company :  ${'5'}",
                     style: textStyle,
                   ),
