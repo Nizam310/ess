@@ -1,3 +1,4 @@
+import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
 import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -7,8 +8,8 @@ import '../common_widgets/button.dart';
 import '../common_widgets/drop_down.dart';
 import '../common_widgets/text_field.dart';
 
-class Tasks extends StatelessWidget {
-  const Tasks({Key? key}) : super(key: key);
+class TaskAdd extends StatelessWidget {
+  const TaskAdd({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,10 @@ class Tasks extends StatelessWidget {
                         maxLines: 3,
                         onChanged: (val) {})
                     .paddingSymmetric(vertical: 10),
-                CusButton(text: "Save", onTap: () {})
+                CusButton(text: "Save", onTap: () {
+                  context.read<DashBoardVm>().index=5;
+                  context.read<DashBoardVm>().refresh();
+                })
                     .paddingSymmetric(vertical: 5),
               ],
             )

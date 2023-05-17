@@ -6,15 +6,14 @@ import 'package:provider/provider.dart';
 import '../common_widgets/button.dart';
 import '../dash_board/dash_board_provider.dart';
 import '../tasks/task_provider.dart';
-import 'home_provider.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<HomeVm, DashBoardVm, TaskVm>(
-        builder: (context, data, dataDash, taskData, _) {
+    return Builder(
+        builder: (context) {
       List<MonthWidget> monthList = const [
         MonthWidget(
           text: "Total Leaves",
@@ -27,86 +26,85 @@ class Home extends StatelessWidget {
       return ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          ExpansionTile(
-            /* shape: RoundedRectangleBorder(
-              side: BorderSide(color: Color(0xFF2A2D35),)
-            ),*/
-
-            // backgroundColor: Colors.white,
-            title: const Text(
-              "Pending Tasks",
-              style: TextStyle(/*color: Colors.white*/),
-            ),
-            children: [
-              Row(
+          Consumer<TaskVm>(
+            builder: (context,data,_) {
+              return ExpansionTile(
+                title: const Text(
+                  "Pending Tasks",
+                ),
                 children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                          itemCount: 1,
-                          itemBuilder: (context, index) => Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 5),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
-                                            color: const Color(0xFF3BBFC0),
-                                          )),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 200,
+                          child: ListView.builder(
+                              itemCount: 1,
+                              itemBuilder: (context, index) => Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: const Color(0xFF3BBFC0),
+                                              )),
+                                          child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              const Text("Task")
-                                                  .paddingBottom(5),
-                                              const Text("21/12/23")
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  const Text("Task")
+                                                      .paddingBottom(5),
+                                                  const Text("21/12/23")
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Text(data.timerText),
+                                                  Center(
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        data.startStop();
+                                                        data.refresh();
+                                                      },
+                                                      icon: Icon(data.isRunning
+                                                          ? Icons.stop_circle
+                                                          : Icons.play_circle),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Text(taskData.timerText),
-                                              Center(
-                                                child: IconButton(
-                                                  onPressed: () {
-                                                    taskData.startStop();
-                                                  },
-                                                  icon: Icon(taskData.isRunning
-                                                      ? Icons.stop_circle
-                                                      : Icons.play_circle),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ).paddingRight(20),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                    ),
+                                          ).paddingRight(20),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                        ),
+                      ),
+                    ],
                   ),
+                  CusButton(
+                      text: "Show More",
+                      onTap: () {
+                        context.read<DashBoardVm>().index=5;
+                        context.read<DashBoardVm>().refresh();
+                      })
                 ],
-              ),
-              CusButton(
-                  text: "Show More",
-                  onTap: () {
-                    dataDash.index = 5;
-                    dataDash.refresh();
-                  })
-            ],
-          ).paddingSymmetric(vertical: 5),
+              ).paddingSymmetric(vertical: 5);
+            }
+          ),
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -119,9 +117,7 @@ class Home extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SizedBox(
-                        // width: 300,
                         child: Wrap(
-                            // crossAxisAlignment: WrapCrossAlignment.start,
                             alignment: WrapAlignment.start,
                             spacing: 10,
                             runSpacing: 10,
@@ -135,7 +131,6 @@ class Home extends StatelessWidget {
                     Expanded(
                         child: SizedBox(
                             height: 200,
-                            // width: 300,
                             child: LeaveGraphicalView())),
                   ],
                 ).paddingBottom(20),
@@ -152,8 +147,9 @@ class Home extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             onTap: () {
-              dataDash.index = 2;
-              dataDash.refresh();
+
+              context.read<DashBoardVm>().index=2;
+              context.read<DashBoardVm>().refresh();
             },
           ).paddingSymmetric(vertical: 10),
         ],
@@ -176,7 +172,7 @@ class LeaveGraphicalView extends StatelessWidget {
           color: const Color(0xFF3BBFC0),
         ),
         BarChartRodData(toY: 5, color: Colors.red),
-        BarChartRodData(toY: 1, color: Colors.green),
+        BarChartRodData(toY: 5, color: Colors.green),
       ]),
       BarChartGroupData(x: 20, barRods: [
         BarChartRodData(

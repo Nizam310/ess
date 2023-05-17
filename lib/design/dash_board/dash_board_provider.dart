@@ -5,7 +5,8 @@ import '../home/home_page.dart';
 import '../profile/profile.dart';
 import '../request_form/request_form.dart';
 import '../settings/settings.dart';
-import '../tasks/tasks.dart';
+import '../tasks/task_add.dart';
+import '../tasks/task_main.dart';
 
 class DashBoardVm extends ChangeNotifier {
   bool hover = false;
@@ -18,6 +19,7 @@ class DashBoardVm extends ChangeNotifier {
     Settings(),
     ChatPage(),
     Tasks(),
+    TaskAdd(),
   ];
 
   refresh() {

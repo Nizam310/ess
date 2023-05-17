@@ -15,7 +15,9 @@ class Profile extends StatelessWidget {
       child: Consumer<ProfileVm>(builder: (context, data, _) {
         /// textStyle
 
-        const textStyle = TextStyle(fontSize: 13,);
+        const textStyle = TextStyle(
+          fontSize: 13,
+        );
 
         return SingleChildScrollView(
           child: Padding(
@@ -30,28 +32,45 @@ class Profile extends StatelessWidget {
                       child: const Icon(Icons.person),
                     )).paddingBottom(10),
                 CusTextField(
+                  enabled: data.enable,
                   controller: data.name,
                   onChanged: (v) {},
                   hintText: "Name",
                 ).paddingAll(10),
                 CusTextField(
+                  enabled: data.enable,
                   controller: data.position,
                   onChanged: (v) {},
                   hintText: "Position",
                 ).paddingAll(10),
                 CusTextField(
+                  enabled: data.enable,
                   controller: data.mob,
                   onChanged: (v) {},
                   hintText: "Mobile",
                 ).paddingAll(10),
-               const  ListTile(
-                     title: Text(
+              /*  Visibility(
+                  visible: data.en==false,
+                  child: CusButton(text: "Edit", onTap: (){
+                    data.en =true;
+                    data.refresh();
+                  }).paddingSymmetric(horizontal: 10),
+                ),
+                Visibility(
+                  visible: data.en==true,
+                  child: CusButton(text: "Submit", onTap: (){
+                    data.en = false;
+                    data.refresh();
+                  }).paddingSymmetric(horizontal: 10),
+                ),*/
+                const ListTile(
+                  title: Text(
                     "Date Of  join :   ${"21/12/23"}",
                     style: textStyle,
                   ),
                 ).paddingAll(10),
-               const  ListTile(
-                     title: Text(
+                const ListTile(
+                  title: Text(
                     "Total years with company :  ${'5'}",
                     style: textStyle,
                   ),

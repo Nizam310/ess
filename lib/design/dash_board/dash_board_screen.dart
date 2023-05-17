@@ -19,10 +19,9 @@ class DashBoard extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeVm()),
         ChangeNotifierProvider(create: (context) => ProfileVm()),
       ],
-      child: Consumer<DashBoardVm>(builder: (context, data, _) {
+      child: Builder(builder: (context) {
         return Scaffold(
           drawer: const Drawer(
-          //  backgroundColor: Color(0xFFEDF3FA),
             width: 250,
             child: CusDrawer(),
           ),
@@ -32,17 +31,17 @@ class DashBoard extends StatelessWidget {
             ),
             backgroundColor: Colors.white,
             title: Text(
-              data.index == 0
+              context.read<DashBoardVm>().index == 0
                   ? "Dash Board"
-                  : data.index == 1
+                  : context.read<DashBoardVm>().index == 1
                       ? "Profile"
-                      : data.index == 2
+                      : context.read<DashBoardVm>().index == 2
                           ? "Request Form"
-                          : data.index == 3
+                          : context.read<DashBoardVm>().index == 3
                               ? "Settings"
-                              : data.index == 4
+                              : context.read<DashBoardVm>().index == 4
                                   ? "Chat With HR"
-                                  : data.index == 5
+                                  : context.read<DashBoardVm>().index == 5
                                       ? "Task"
                                       : "",
               style: const TextStyle(color: Color(0xFF5F6E86)),
@@ -55,12 +54,16 @@ class DashBoard extends StatelessWidget {
                       ]),
             ],
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: data.screen.elementAt(data.index),
-              ),
-            ],
+          body: Consumer<DashBoardVm>(
+            builder: (context,data,_) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: data.screen.elementAt(data.index),
+                  ),
+                ],
+              );
+            }
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
@@ -97,36 +100,40 @@ class DashBoard extends StatelessWidget {
                 height: 50,
                 shape: const CircularNotchedRectangle(),
                 // elevation: 29.236,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.home,
-                        color: data.index == 0
-                            ? const Color(0xFF3BBFC0)
-                            : const Color(0xFF8F9FBC),
-                      ),
-                      onPressed: () {
-                        data.index = 0;
-                        data.refresh();
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.timer,
-                        color: data.index == 5
-                            ? const Color(0xFF3BBFC0)
-                            : const Color(0xFF8F9FBC),
-                      ),
-                      onPressed: () {
-                        data.index = 5;
+                child: Consumer<DashBoardVm>(
+                    builder: (context,data,_) {
+                    return Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.home,
+                            color: data.index == 0
+                                ? const Color(0xFF3BBFC0)
+                                : const Color(0xFF8F9FBC),
+                          ),
+                          onPressed: () {
+                            data.index = 0;
+                            data.refresh();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.timer,
+                            color: data.index == 5
+                                ? const Color(0xFF3BBFC0)
+                                : const Color(0xFF8F9FBC),
+                          ),
+                          onPressed: () {
+                            data.index = 5;
 
-                        data.refresh();
-                      },
-                    ),
-                  ],
+                            data.refresh();
+                          },
+                        ),
+                      ],
+                    );
+                  }
                 ),
               ).paddingSymmetric(
                 vertical: 5,

@@ -13,7 +13,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => LoginVm(),
-      child: Consumer<LoginVm>(builder: (context, data, _) {
+      child: Builder(builder: (
+        context,
+      ) {
         return Scaffold(
           body: Center(
             child: SingleChildScrollView(
@@ -26,12 +28,14 @@ class LoginScreen extends StatelessWidget {
                     width: 300,
                   ).paddingSymmetric(horizontal: 30),
                   CusTextField(
-                    controller: data.userName,
+                    controller:
+                        context.select((LoginVm value) => value.userName),
                     onChanged: (val) {},
                     hintText: "Username",
                   ).paddingSymmetric(horizontal: 30, vertical: 10),
                   CusTextField(
-                    controller: data.password,
+                    controller:
+                        context.select((LoginVm value) => value.password),
                     onChanged: (val) {},
                     hintText: "Password",
                   ).paddingSymmetric(horizontal: 30, vertical: 10),
@@ -41,7 +45,9 @@ class LoginScreen extends StatelessWidget {
                           child: CusButton(
                         text: 'Login',
                         textColor: Colors.white,
-                        onTap: () {Navigator.pushNamed(context, "/dash");},
+                        onTap: () {
+                          Navigator.pushNamed(context, "/dash");
+                        },
                       ).paddingSymmetric(horizontal: 30, vertical: 10)),
                     ],
                   )
@@ -54,3 +60,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+
