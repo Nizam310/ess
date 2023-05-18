@@ -2,9 +2,9 @@ import 'package:employee_self_service_flutter/design/profile/profile.dart';
 import 'package:employee_self_service_flutter/design/request_form/request_form.dart';
 import 'package:flutter/material.dart';
 
-import 'dash_board/dash_board_screen.dart';
-import 'home/home_page.dart';
-import 'login/login_screen.dart';
+import 'design/dash_board/dash_board_screen.dart';
+import 'design/home/home_page.dart';
+import 'design/login/login_screen.dart';
 
 void main() {
   runApp(const MyApp());

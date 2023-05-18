@@ -19,43 +19,84 @@ class DashBoard extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeVm()),
         ChangeNotifierProvider(create: (context) => ProfileVm()),
       ],
-      child: Builder(builder: (context) {
-        return Scaffold(
-          drawer: const Drawer(
-            width: 250,
-            child: CusDrawer(),
-          ),
-          appBar: AppBar(
-            iconTheme: const IconThemeData(
-              color: Color(0xFF5F6E86),
+      child: ChangeNotifierProvider.value(
+        value: ProfileVm(),
+        child: Consumer<DashBoardVm>(builder: (context, data, _) {
+          return Scaffold(
+            drawer: const Drawer(
+              width: 250,
+              child: CusDrawer(),
             ),
-            backgroundColor: Colors.white,
-            title: Text(
-              context.read<DashBoardVm>().index == 0
-                  ? "Dash Board"
-                  : context.read<DashBoardVm>().index == 1
-                      ? "Profile"
-                      : context.read<DashBoardVm>().index == 2
-                          ? "Request Form"
-                          : context.read<DashBoardVm>().index == 3
-                              ? "Settings"
-                              : context.read<DashBoardVm>().index == 4
-                                  ? "Chat With HR"
-                                  : context.read<DashBoardVm>().index == 5
-                                      ? "Task"
-                                      : "",
-              style: const TextStyle(color: Color(0xFF5F6E86)),
+            appBar: AppBar(
+              iconTheme: const IconThemeData(
+                color: Color(0xFF5F6E86),
+              ),
+              backgroundColor: Colors.white,
+              title: Text(
+                data.index == 0
+                    ? "Dash Board"
+                    : data.index == 1
+                        ? "Profile"
+                        : data.index == 2
+                            ? "Request Form"
+                            : data.index == 3
+                                ? "Settings"
+                                : data.index == 4
+                                    ? "Chat With HR"
+                                    : data.index == 5
+                                        ? "Task"
+                                        : "",
+                style: const TextStyle(color: Color(0xFF5F6E86)),
+              ),
+              actions: [
+                Visibility(
+                    visible: data.index == 1,
+                    child: IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (m) {
+                              final data = Provider.of<ProfileVm>(context);
+                              return AlertDialog(
+                                title: const Text("Edit"),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ListTile(
+                                      leading: const Icon(Icons.photo),
+                                      title: Text(data.picked != null
+                                          ? "Edit Image"
+                                          : "Add Image"),
+                                      onTap: () {
+                                        data.pickFile();
+                                        data.refresh();
+                                        Navigator.pop(context);
+                                      },
+                                    ).paddingBottom(10),
+                                    ListTile(
+                                      leading: const Icon(Icons.receipt),
+                                      title: const Text("Edit Info"),
+                                      onTap: () {
+                                        data.enable = true;
+                                        data.refresh();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                      icon: const Icon(Icons.edit),
+                    )),
+                PopupMenuButton(
+                    icon: const Icon(Icons.circle_notifications),
+                    itemBuilder: (context) => const [
+                          PopupMenuItem(child: Text("No Notifications Yet!"))
+                        ]),
+              ],
             ),
-            actions: [
-              PopupMenuButton(
-                  icon: const Icon(Icons.circle_notifications),
-                  itemBuilder: (context) => const [
-                        PopupMenuItem(child: Text("No Notifications Yet!"))
-                      ]),
-            ],
-          ),
-          body: Consumer<DashBoardVm>(
-            builder: (context,data,_) {
+            body: Consumer<DashBoardVm>(builder: (context, data, _) {
               return Column(
                 children: [
                   Expanded(
@@ -63,45 +104,42 @@ class DashBoard extends StatelessWidget {
                   ),
                 ],
               );
-            }
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Builder(builder: (context) {
-            return FloatingActionButton(
-                    backgroundColor: const Color(0xFF3BBFC0),
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    // label: const Text(""),
-                    child: const Icon(Icons.add))
-                .paddingLeft(10);
-          }),
-          bottomNavigationBar: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: const  BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
+            }),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Builder(builder: (context) {
+              return FloatingActionButton(
+                      backgroundColor: const Color(0xFF3BBFC0),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: const Icon(Icons.add))
+                  .paddingLeft(10);
+            }),
+            bottomNavigationBar: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-              child: BottomAppBar(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                //  color:  const Color(0xFF000000),
-                height: 50,
-                shape: const CircularNotchedRectangle(),
-                // elevation: 29.236,
-                child: Consumer<DashBoardVm>(
-                    builder: (context,data,_) {
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                ),
+                child: BottomAppBar(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  //  color:  const Color(0xFF000000),
+                  height: 50,
+                  shape: const CircularNotchedRectangle(),
+                  // elevation: 29.236,
+                  child: Consumer<DashBoardVm>(builder: (context, data, _) {
                     return Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -133,15 +171,15 @@ class DashBoard extends StatelessWidget {
                         ),
                       ],
                     );
-                  }
+                  }),
+                ).paddingSymmetric(
+                  vertical: 5,
                 ),
-              ).paddingSymmetric(
-                vertical: 5,
               ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 }

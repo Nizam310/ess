@@ -216,6 +216,8 @@ class LeaveGraphicalView extends StatelessWidget {
                     border: Border.all(color: const Color(0xFF5F6E86)),
                     show: true),
                 gridData: FlGridData(
+                  verticalInterval: 1,
+                  // horizontalInterval: 1,
                   show: true,
                 ),
                 titlesData: FlTitlesData(
@@ -260,7 +262,7 @@ class LeaveGraphicalView extends StatelessWidget {
                         : const Text(""),
                   ),
                   topTitles: AxisTitles(axisNameWidget: const Text("")),
-                  leftTitles: AxisTitles(axisNameWidget: const Text("")),
+                //  leftTitles: AxisTitles(axisNameWidget: const Text("")),
                   rightTitles: AxisTitles(axisNameWidget: const Text("")),
                 ),
                 rangeAnnotations: RangeAnnotations(horizontalRangeAnnotations: [

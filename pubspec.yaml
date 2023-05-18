@@ -40,6 +40,7 @@ dependencies:
   fab_circular_menu: ^1.0.2
   gradient_borders: ^1.0.0
   fl_chart: ^0.62.0
+  file_picker: ^5.3.0
 
 dev_dependencies:
   flutter_test:
