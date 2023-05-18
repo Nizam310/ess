@@ -45,7 +45,9 @@ class DashBoard extends StatelessWidget {
                                     ? "Chat With HR"
                                     : data.index == 5
                                         ? "Task"
-                                        : "",
+                                        : data.index == 6
+                                            ? "Task Add"
+                                            : "",
                 style: const TextStyle(color: Color(0xFF5F6E86)),
               ),
               actions: [
