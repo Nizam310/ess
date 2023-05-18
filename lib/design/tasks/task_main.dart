@@ -2,9 +2,8 @@ import 'package:employee_self_service_flutter/design/common_widgets/button.dart'
 import 'package:employee_self_service_flutter/design/common_widgets/drop_down.dart';
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
 import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
-import 'package:employee_self_service_flutter/design/tasks/work_items/recently_completed.dart';
-import 'package:employee_self_service_flutter/design/tasks/work_items/recently_created.dart';
-import 'package:employee_self_service_flutter/design/tasks/work_items/recently_updated.dart';
+import 'package:employee_self_service_flutter/design/tasks/work_items/actitvity_screen.dart';
+import 'package:employee_self_service_flutter/enum/enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -19,14 +18,14 @@ class Tasks extends StatelessWidget {
       return ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          CusDropdown<String>(
+          CusDropdown<ActivityType>(
             label: "Work Item",
-            items: context.select((TaskVm value) => value.workItemList),
-            itemBuilder: (c) => Text(c),
-            value: context.select((TaskVm value) => value.workItem),
+            items: ActivityType.values,
+            itemBuilder: (c) => Text(c.name),
+            value: context.select((TaskVm value) => value.type),
             onChanged: (val) {
               if (val != null) {
-                context.read<TaskVm>().workItem = val;
+                context.read<TaskVm>().type = val;
                 context.read<TaskVm>().refresh();
               }
             },
@@ -38,7 +37,7 @@ class Tasks extends StatelessWidget {
             onTap: () {
               context.read<DashBoardVm>().index = 6;
               context.read<DashBoardVm>().refresh();
-              context.read<TaskVm>().workItem = null;
+              context.read<TaskVm>().type = null;
             },
           ),
           Consumer<TaskVm>(
@@ -47,16 +46,7 @@ class Tasks extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.9,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        child: data.workItem == "Recently Completed"
-                            ? const RecentlyCompleted()
-                            : data.workItem == "Recently Updated"
-                                ? const RecentlyUpdated()
-                                : data.workItem == "Recently Created"
-                                    ? const RecentlyCreated()
-                                    : const RecentlyCreated())
-                  ],
+                  children: const [Expanded(child: ActivityScreen())],
                 ),
               );
             },

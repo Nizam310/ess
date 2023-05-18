@@ -1,27 +1,16 @@
 import 'dart:async';
 
-import 'package:employee_self_service_flutter/design/tasks/work_items/recently_completed.dart';
-import 'package:employee_self_service_flutter/design/tasks/work_items/recently_created.dart';
-import 'package:employee_self_service_flutter/design/tasks/work_items/recently_updated.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../enum/enum.dart';
 
 class TaskVm extends ChangeNotifier {
   ///Task
 
-  String? workItem;
-  List<String> workItemList = [
-    "Recently Completed",
-    "Recently Updated",
-    "Recently created"
-  ];
+  ActivityType ? type;
 
   int activeIndex =0;
 
-  List activityList =const [
-    RecentlyCompleted(),
-    RecentlyUpdated(),
-    RecentlyCreated(),
-  ];
 
   /// Task Add
   TextEditingController taskTitle = TextEditingController();
