@@ -234,7 +234,7 @@ class CusDrawer extends StatelessWidget {
             },
           ),
           CusCard(
-            icon: Icons.person,
+            icon: Icons.add_task,
             title: "Tasks",
             onTap: () {
               data.index = 5;
