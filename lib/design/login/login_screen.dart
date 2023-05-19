@@ -34,6 +34,7 @@ class LoginScreen extends StatelessWidget {
                     hintText: "Username",
                   ).paddingSymmetric(horizontal: 30, vertical: 10),
                   CusTextField(
+
                     controller:
                         context.select((LoginVm value) => value.password),
                     onChanged: (val) {},
@@ -60,5 +61,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-

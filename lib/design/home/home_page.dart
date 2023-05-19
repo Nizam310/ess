@@ -9,6 +9,7 @@ import '../dash_board/widgets/calendar.dart';
 import '../dash_board/widgets/feedback.dart';
 import '../dash_board/widgets/leave_chart.dart';
 import '../dash_board/widgets/signature.dart';
+import 'home_provider.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,20 +17,88 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      /*final decoration = BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: const Color(0xFF3BBFC0),
-          ));*/
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final snackBar = SnackBar(
+          // backgroundColor: Colors.white,
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.only(bottom: 400, right: 30, left: 30),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: const BorderSide(color: Color(0xFF3BBFC0))),
+          dismissDirection: DismissDirection.up,
+          content: Row(
+            children: [
+              const Icon(
+                Icons.notifications_active_outlined,
+                color: white,
+              ).paddingRight(10),
+              const Text(
+                "New Task Assigned",
+                style: TextStyle(color: white),
+              ),
+            ],
+          ),
+          duration: const Duration(seconds: 3),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      });
       return ListView(
-        // padding: const EdgeInsets.all(10),
         children: [
-
           const LeaveChart(),
-          CusButton(text: "Task management", onTap:(){
-            context.read<DashBoardVm>().index = 5;
-            context.read<DashBoardVm>().refresh();
-          }).paddingSymmetric(vertical: 10,horizontal: 10),
+          Visibility(
+            visible:
+                context.select((HomeVm value) => value.taskManagement) == false,
+            child: CusButton(
+                text: "Task management",
+                onTap: () {
+                  /* context.read<DashBoardVm>().index = 5;
+                  context.read<DashBoardVm>().refresh();*/
+                  context.read<HomeVm>().taskManagement = true;
+                  context.read<HomeVm>().refresh();
+                }).paddingSymmetric(vertical: 10, horizontal: 10),
+          ),
+          Visibility(
+            visible:
+                context.select((HomeVm value) => value.taskManagement) == true,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    runSpacing: 5,
+                    children: [
+                      SizedBox(
+                          width: 150,
+                          child: CusButton(
+                              text: "Recently Created",
+                              onTap: () {
+                                context.read<DashBoardVm>().index = 5;
+                                context.read<HomeVm>().taskManagement = false;
+                                context.read<HomeVm>().refresh();
+                                context.read<DashBoardVm>().refresh();
+                              })).paddingRight(10),
+                      SizedBox(
+                          width: 150,
+                          child: CusButton(
+                              text: "Recently Updated",
+                              onTap: () {
+                                context.read<HomeVm>().taskManagement = false;
+                                context.read<HomeVm>().refresh();
+                              })).paddingRight(10),
+                      SizedBox(
+                          width: 150,
+                          child: CusButton(
+                              text: "Recently Completed",
+                              onTap: () {
+                                context.read<HomeVm>().taskManagement = false;
+                                context.read<HomeVm>().refresh();
+                              })),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
           /*   Consumer<TaskVm>(builder: (context, data, _) {
             return ExpansionTile(
               title: const Text(

@@ -5,6 +5,7 @@ class CusButton extends StatefulWidget {
   final String text;
   final Function() onTap;
   final Color? color;
+  final Color? hoverColor;
   final Color? textColor;
   final double? textSize;
   const CusButton({
@@ -13,7 +14,7 @@ class CusButton extends StatefulWidget {
     required this.onTap,
     this.color,
     this.textColor,
-    this.textSize,
+    this.textSize, this.hoverColor,
   }) : super(key: key);
 
   @override
@@ -41,7 +42,7 @@ class _CusButtonState extends State<CusButton> {
           decoration: BoxDecoration(
             color: hover == false
                 ? (widget.color ?? const Color(0xFF3BBFC0))
-                : (const Color(0xFF3BBFC0)),
+                : (widget.hoverColor ??const Color(0xFF3BBFC0)),
             borderRadius: BorderRadius.circular(10),
           ),
           height: 40,
