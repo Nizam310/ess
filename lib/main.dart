@@ -20,6 +20,13 @@ class MyApp extends StatelessWidget {
       title: 'Employee Self Service',
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.grey[40],
+          cardTheme: CardTheme(
+            shape: RoundedRectangleBorder(
+                side: const BorderSide(
+                  color: Color(0xFF3BBFC0),
+                ),
+                borderRadius: BorderRadius.circular(10)),
+          ),
           inputDecorationTheme: InputDecorationTheme(
               labelStyle: const TextStyle(color: Colors.black),
               hintStyle: const TextStyle(color: Colors.red),
@@ -39,7 +46,6 @@ class MyApp extends StatelessWidget {
                   borderSide: const BorderSide(
                     color: Color(0xFF3BBFC0),
                   )),
-
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
