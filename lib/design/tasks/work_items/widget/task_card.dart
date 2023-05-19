@@ -48,6 +48,8 @@ class TaskCard extends StatelessWidget {
                     const Text("Started Time : 11:48 ").paddingBottom(5),
                     const Text("Date : 5/17/2023").paddingBottom(5),
                     const Text("Assigned To : You").paddingBottom(5),
+                    Text("Status : ${data.type == ActivityType.RecentlyCreated ? "To Do" : data.type == ActivityType.RecentlyCompleted ? "Done" : data.type == ActivityType.RecentlyUpdated ? "Doing" : "To Do"}")
+                        .paddingBottom(5),
                     const Text("Description : ").paddingBottom(5),
                   ],
                 ),

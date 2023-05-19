@@ -16,7 +16,7 @@ class LeaveChart extends StatelessWidget {
       MonthWidget(text: "Available Leaves", color: Colors.green),
     ];
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFF3BBFC0))),

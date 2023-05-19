@@ -27,10 +27,12 @@ class TaskVm extends ChangeNotifier {
   Timer? timer;
   bool isRunning = false;
 
+
   startStop() {
     if (isRunning) {
       timer?.cancel();
       counter = 0;
+      isRunning = false;
       isRunning = false;
       notifyListeners();
     } else {

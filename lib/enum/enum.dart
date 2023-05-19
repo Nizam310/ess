@@ -4,3 +4,8 @@ enum RequestType {
 }
 
 enum ActivityType { RecentlyCompleted, RecentlyUpdated, RecentlyCreated }
+
+enum CusAttendeeType {
+  attendee,
+  customer
+}
