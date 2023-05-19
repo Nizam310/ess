@@ -12,15 +12,11 @@ final today = DateUtils.dateOnly(DateTime.now());
 
 class _MultiCalendarState extends State<MultiCalendar> {
   List<DateTime?> _multiDatePickerValueWithDefaultValue = [
-    /*DateTime(today.year, today.month, 1),
-    DateTime(today.year, today.month, 5),
-    DateTime(today.year, today.month, 14),
-    DateTime(today.year, today.month, 17),
-    DateTime(today.year, today.month, 25),*/
+    DateTime.now(),
   ];
   final config = CalendarDatePicker2Config(
     calendarType: CalendarDatePicker2Type.multi,
-    selectedDayHighlightColor: Colors.indigo,
+    selectedDayHighlightColor: const Color(0xFF3BBFC0),
   );
 
   @override
@@ -32,7 +28,10 @@ class _MultiCalendarState extends State<MultiCalendar> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 10),
-            const Text('Calendar',textAlign: TextAlign.center,),
+            const Text(
+              'Calendar',
+              textAlign: TextAlign.center,
+            ),
             CalendarDatePicker2(
               config: config,
               value: _multiDatePickerValueWithDefaultValue,
