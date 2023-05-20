@@ -1,3 +1,4 @@
+import 'package:employee_self_service_flutter/design/notification/notification.dart';
 import 'package:flutter/foundation.dart';
 
 import '../chat_page/chat_page.dart';
@@ -20,6 +21,7 @@ class DashBoardVm extends ChangeNotifier {
     ChatPage(),
     Tasks(),
     TaskAdd(),
+    Notifications(),
   ];
 
   refresh() {

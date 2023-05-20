@@ -41,6 +41,7 @@ dependencies:
   gradient_borders: ^1.0.0
   fl_chart: ^0.62.0
   file_picker: ^5.3.0
+  table_calendar: ^3.0.9
   calendar_date_picker2: ^0.5.2
 
 dev_dependencies:

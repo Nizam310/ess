@@ -47,6 +47,8 @@ class DashBoard extends StatelessWidget {
                                         ? "Task"
                                         : data.index == 6
                                             ? "Task Add"
+                                          : data.index == 7
+                                            ? "Notifications"
                                             : "",
                 style: const TextStyle(color: Color(0xFF5F6E86)),
               ),
@@ -91,11 +93,7 @@ class DashBoard extends StatelessWidget {
                       },
                       icon: const Icon(Icons.edit),
                     )),
-                PopupMenuButton(
-                    icon: const Icon(Icons.circle_notifications),
-                    itemBuilder: (context) => const [
-                          PopupMenuItem(child: Text("No Notifications Yet!"))
-                        ]),
+                const NotificationMenu(),
               ],
             ),
             body: Consumer<DashBoardVm>(builder: (context, data, _) {
@@ -130,10 +128,7 @@ class DashBoard extends StatelessWidget {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                ),
+                borderRadius: BorderRadius.circular(20),
                 child: BottomAppBar(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -349,54 +344,14 @@ class NotificationMenu extends StatelessWidget {
     return PopupMenuButton(
       itemBuilder: (BuildContext context) => [
         PopupMenuItem(
-          child: ListTile(
-            title: const Text('Option 1'),
-            onTap: () {},
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            title: const Text('Option 2'),
-            onTap: () {},
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            title: const Text('Show Notification'),
-            onTap: () {
-              _showNotification(context);
-            },
-          ),
+          child: const Text('One Notification'),
+          onTap: () {
+           context.read<DashBoardVm>().index = 7;
+           context.read<DashBoardVm>().refresh();
+          },
         ),
       ],
-      icon: const Icon(Icons.menu),
-    );
-  }
-
-  void _showNotification(BuildContext context) {
-    final notification = Container(
-      width: double.infinity,
-      height: 100,
-      color: Colors.blue,
-      child: const Center(
-        child: Text(
-          'New Notification',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.transparent,
-        duration: const Duration(seconds: 3),
-        content: notification,
-        behavior: SnackBarBehavior.floating,
-      ),
+      icon: const Icon(Icons.circle_notifications),
     );
   }
 }
