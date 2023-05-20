@@ -17,11 +17,7 @@ class TaskCard extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(10)),
         child: ListTileTheme(
-          shape: RoundedRectangleBorder(
-              side: const BorderSide(
-                color: Color(0xFFFFFFFF),
-              ),
-              borderRadius: BorderRadius.circular(10)),
+          shape: const RoundedRectangleBorder(),
           child: ExpansionTile(
             leading: Icon(data.type == ActivityType.RecentlyCreated
                 ? Icons.stop_circle
