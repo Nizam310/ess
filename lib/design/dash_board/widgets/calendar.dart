@@ -41,16 +41,6 @@ class _MultiCalendarState extends State<MultiCalendar> {
               'Calendar',
               textAlign: TextAlign.center,
             ).paddingAll(10),
-
-            /*Align(
-                alignment: AlignmentDirectional.topStart,
-                child: Wrap(
-                  children:const  [
-                    MonthWidget(color: Colors.red, text: "Holiday"),
-                    MonthWidget(color:  Color(0xFF3BBFC0), text: "Today"),
-                  ],
-                )),*/
-
             MediaQuery.of(context).size.width > 318
                 ? CalendarDatePicker2(
                     config: config,
@@ -66,9 +56,6 @@ class _MultiCalendarState extends State<MultiCalendar> {
                       headerMargin: EdgeInsets.only(
                         bottom: 20,
                       ),
-                      /* decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xFF3BBFC0))),*/
                     ),
                     firstDay: DateTime.utc(2010, 10, 16),
                     calendarStyle: CalendarStyle(
