@@ -1,4 +1,5 @@
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
+import 'package:employee_self_service_flutter/design/tasks/location.dart';
 import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -10,6 +11,26 @@ import '../common_widgets/text_field.dart';
 
 class TaskAdd extends StatelessWidget {
   const TaskAdd({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: const LocationView(),
+      bottomSheet: Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
+        child:const  _TaskAdd(),
+      ),
+    );
+  }
+}
+
+class _TaskAdd extends StatelessWidget {
+  const _TaskAdd({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +99,12 @@ class TaskAdd extends StatelessWidget {
                         maxLines: 3,
                         onChanged: (val) {})
                     .paddingSymmetric(vertical: 10),
-                CusButton(text: "Save", onTap: () {
-                  context.read<DashBoardVm>().index=5;
-                  context.read<DashBoardVm>().refresh();
-                })
-                    .paddingSymmetric(vertical: 5),
+                CusButton(
+                    text: "Save",
+                    onTap: () {
+                      context.read<DashBoardVm>().index = 5;
+                      context.read<DashBoardVm>().refresh();
+                    }).paddingSymmetric(vertical: 5),
               ],
             )
           ],

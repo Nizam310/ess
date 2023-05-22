@@ -56,6 +56,11 @@ class MyApp extends StatelessWidget {
                   borderSide: const BorderSide(
                     color: Color(0xFF3BBFC0),
                   ))),
+          bottomSheetTheme: const BottomSheetThemeData(
+              shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          )),
           listTileTheme: ListTileThemeData(
             //  tileColor: Colors.white,
             iconColor: Colors.black,
