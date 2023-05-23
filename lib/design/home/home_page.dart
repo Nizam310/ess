@@ -21,22 +21,25 @@ class Home extends StatelessWidget {
         final snackBar = SnackBar(
           // backgroundColor: Colors.white,
           behavior: SnackBarBehavior.floating,
-          margin: const EdgeInsets.only(bottom: 400, right: 30, left: 30),
+       //   margin: const EdgeInsets.only(bottom: 350, right: 30, left: 30),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: const BorderSide(color: Color(0xFF3BBFC0))),
-          dismissDirection: DismissDirection.up,
-          content: Row(
-            children: [
-              const Icon(
-                Icons.notifications_active_outlined,
-                color: white,
-              ).paddingRight(10),
-              const Text(
-                "New Task Assigned",
-                style: TextStyle(color: white),
-              ),
-            ],
+          dismissDirection: DismissDirection.horizontal,
+          content: Align(
+            alignment: Alignment.topCenter,
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.notifications_active_outlined,
+                  color: white,
+                ).paddingRight(10),
+                const Text(
+                  "New Task Assigned",
+                  style: TextStyle(color: white),
+                ),
+              ],
+            ),
           ),
           duration: const Duration(seconds: 3),
         );
