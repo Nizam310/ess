@@ -17,24 +17,29 @@ class LoginScreen extends StatelessWidget {
         context,
       ) {
         return Scaffold(
+          backgroundColor: Color(0xFF7158CD),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
+                 /* Image.asset(
                     "assets/images/cloud_me.png",
                     width: 300,
-                  ).paddingSymmetric(horizontal: 30),
+                  ).paddingSymmetric(horizontal: 30),*/
+                  Image.network('https://blog.vantagecircle.com/content/images/size/w1000/2021/01/Employee-Management-Meaning-Importance-Tips-Tools---More.png'),
                   CusTextField(
+                    hintColor: const Color(0xFFD1C9EF),
+                    borderColor:const Color(0xFFD1C9EF),
                     controller:
                         context.select((LoginVm value) => value.userName),
                     onChanged: (val) {},
                     hintText: "Username",
                   ).paddingSymmetric(horizontal: 30, vertical: 10),
                   CusTextField(
-
+                    hintColor: const Color(0xFFD1C9EF),
+                    borderColor: const Color(0xFFD1C9EF),
                     controller:
                         context.select((LoginVm value) => value.password),
                     onChanged: (val) {},
@@ -45,7 +50,9 @@ class LoginScreen extends StatelessWidget {
                       Expanded(
                           child: CusButton(
                         text: 'Login',
-                        textColor: Colors.white,
+                        textColor: const Color(0xFF7158CD),
+                        color: const Color(0xFFD1C9EF),
+                        hoverColor: const Color(0xFFD1C9EF),
                         onTap: () {
                           Navigator.pushNamed(context, "/dash");
                         },

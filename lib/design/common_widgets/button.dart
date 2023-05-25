@@ -38,6 +38,7 @@ class _CusButtonState extends State<CusButton> {
       child: InkWell(
         highlightColor: const Color(0xFF717173),
         splashColor: const Color(0xFF717173),
+        borderRadius: BorderRadius.circular(10),
         onTap: widget.onTap,
         child: Container(
           decoration: BoxDecoration(
