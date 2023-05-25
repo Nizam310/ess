@@ -24,11 +24,10 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 /* Image.asset(
-                    "assets/images/cloud_me.png",
-                    width: 300,
-                  ).paddingSymmetric(horizontal: 30),*/
-                  Image.network('https://blog.vantagecircle.com/content/images/size/w1000/2021/01/Employee-Management-Meaning-Importance-Tips-Tools---More.png'),
+                  Image.asset(
+                    "assets/images/employee_login.png",
+
+                  ),
                   CusTextField(
                     hintColor: const Color(0xFFD1C9EF),
                     borderColor:const Color(0xFFD1C9EF),

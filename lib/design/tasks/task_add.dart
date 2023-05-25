@@ -1,5 +1,4 @@
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
-import 'package:employee_self_service_flutter/design/tasks/location.dart';
 import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -14,9 +13,9 @@ class TaskAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return/* Scaffold(
       body: const LocationView(),
-      bottomSheet: Container(
+      bottomSheet:*/ Container(
         height: 300,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
@@ -24,7 +23,7 @@ class TaskAdd extends StatelessWidget {
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         ),
         child:const  _TaskAdd(),
-      ),
+     /* ),*/
     );
   }
 }
