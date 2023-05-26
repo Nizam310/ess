@@ -18,10 +18,10 @@ class LeaveChart extends StatelessWidget {
       MonthWidget(text: "Available Leaves", color: Colors.green),
     ];
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF3BBFC0))),
+          border: Border.all(color: ColorS.primary)),
       width: 300,
       child: Column(
         children: [
@@ -65,7 +65,7 @@ class LeaveGraphicalView extends StatelessWidget {
           toY: 10,
           color: ColorS.primary,
         ),
-        BarChartRodData(toY: 5, color: Colors.red),
+        BarChartRodData(toY: 5, color: ColorS.error),
         BarChartRodData(toY: 5, color: Colors.green),
       ]),
       BarChartGroupData(x: 20, barRods: [
@@ -73,7 +73,7 @@ class LeaveGraphicalView extends StatelessWidget {
           toY: 10,
           color: ColorS.primary,
         ),
-        BarChartRodData(toY: 8, color: Colors.red),
+        BarChartRodData(toY: 8, color: ColorS.error),
         BarChartRodData(toY: 2, color: Colors.green),
       ]),
       BarChartGroupData(x: 30, barRods: [
@@ -81,7 +81,7 @@ class LeaveGraphicalView extends StatelessWidget {
           toY: 5,
           color:ColorS.primary,
         ),
-        BarChartRodData(toY: 3, color: Colors.red),
+        BarChartRodData(toY: 3, color: ColorS.error),
         BarChartRodData(toY: 2, color: Colors.green),
       ]),
       BarChartGroupData(x: 40, barRods: [
@@ -89,7 +89,7 @@ class LeaveGraphicalView extends StatelessWidget {
           toY: 10,
           color: ColorS.primary,
         ),
-        BarChartRodData(toY: 5, color: Colors.red),
+        BarChartRodData(toY: 5, color: ColorS.error),
         BarChartRodData(toY: 5, color: Colors.green),
       ]),
       BarChartGroupData(x: 50, barRods: [
@@ -97,7 +97,7 @@ class LeaveGraphicalView extends StatelessWidget {
           toY: 10,
           color: ColorS.primary,
         ),
-        BarChartRodData(toY: 7, color: Colors.red),
+        BarChartRodData(toY: 7, color: ColorS.error),
         BarChartRodData(toY: 3, color: Colors.green),
       ]),
     ];
@@ -107,7 +107,7 @@ class LeaveGraphicalView extends StatelessWidget {
         BarChartData(
             maxY: 15,
             borderData: FlBorderData(
-                border: Border.all(color: const Color(0xFF5F6E86)),
+                border: Border.all(color: ColorS.secondary),
                 show: true),
             gridData: FlGridData(
               // verticalInterval: 1,
