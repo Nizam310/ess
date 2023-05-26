@@ -56,63 +56,6 @@ class Home extends StatelessWidget {
                     "Task Management",
                   ),
                   children: [
-                    /*  Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height: 200,
-                            child: ListView.builder(
-                                itemCount: 1,
-                                itemBuilder: (context, index) => Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    const Text("Task")
-                                                        .paddingBottom(5),
-                                                    const Text("21/12/23")
-                                                  ],
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Text(data.timerText),
-                                                    Center(
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          data.startStop();
-                                                          data.refresh();
-                                                        },
-                                                        icon: Icon(data.isRunning
-                                                            ? Icons.stop_circle
-                                                            : Icons.play_circle),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ).paddingRight(20),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                          ),
-                        ),
-                      ],
-                    ),*/
                     SizedBox(
                       height: 90,
                       child: Card(
@@ -184,13 +127,7 @@ class Home extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ).paddingSymmetric(horizontal: 5),
-                    /*CusButton(
-                        text: "Show More",
-                        onTap: () {
-                          context.read<DashBoardVm>().index = 5;
-                          context.read<DashBoardVm>().refresh();
-                        }).paddingSymmetric(horizontal: 15, vertical: 10)*/
+                    ).paddingSymmetric(horizontal: 5, vertical: 10),
                     Visibility(
                       visible: context
                               .select((HomeVm value) => value.taskManagement) ==
@@ -224,7 +161,7 @@ class Home extends StatelessWidget {
                                               .taskManagement = false;
                                           context.read<HomeVm>().refresh();
                                           context.read<DashBoardVm>().refresh();
-                                        })).paddingRight(10),
+                                        })).paddingRight(5),
                                 SizedBox(
                                     width: 150,
                                     child: CusButton(
@@ -234,7 +171,7 @@ class Home extends StatelessWidget {
                                               .read<HomeVm>()
                                               .taskManagement = false;
                                           context.read<HomeVm>().refresh();
-                                        })).paddingRight(10),
+                                        })).paddingRight(5),
                                 SizedBox(
                                     width: 150,
                                     child: CusButton(
@@ -249,27 +186,14 @@ class Home extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ),
+                      ).paddingSymmetric(horizontal: 7, vertical: 10),
                     ),
                   ],
                 ),
               ),
             ).paddingSymmetric(vertical: 5, horizontal: 10);
           }),
-          /*
-          const Signature(
-            link:
-                'https://i.pinimg.com/originals/6a/14/a2/6a14a2565834045849ddda1eba92f92c.jpg',
-            name: 'Attendee',
-            type: CusAttendeeType.attendee,
-          ),
-          const Signature(
-            link:
-                'https://www.cognidox.com/hubfs/Digital%20Signature%20MHRA%20Remote%20Working.jpg',
-            name: 'Customer',
-            type: CusAttendeeType.customer,
-          ),
-          const FeedBack(),*/
+
           Row(
             children: const [
               Expanded(child: CalendarPage()),
@@ -292,3 +216,18 @@ class Home extends StatelessWidget {
     });
   }
 }
+/// signature and feedback
+/*
+          const Signature(
+            link:
+                'https://i.pinimg.com/originals/6a/14/a2/6a14a2565834045849ddda1eba92f92c.jpg',
+            name: 'Attendee',
+            type: CusAttendeeType.attendee,
+          ),
+          const Signature(
+            link:
+                'https://www.cognidox.com/hubfs/Digital%20Signature%20MHRA%20Remote%20Working.jpg',
+            name: 'Customer',
+            type: CusAttendeeType.customer,
+          ),
+          const FeedBack(),*/
