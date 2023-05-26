@@ -9,16 +9,16 @@ class LeaveChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MonthWidget> monthList =  [
+    List<MonthWidget> monthList = [
       MonthWidget(
         text: "Total Leaves",
         color: ColorS.primary,
       ),
       MonthWidget(text: "Taken leaves", color: ColorS.error),
-      MonthWidget(text: "Available Leaves", color: Colors.green),
+      const MonthWidget(text: "Available Leaves", color: Colors.green),
     ];
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: ColorS.primary)),
@@ -42,16 +42,15 @@ class LeaveChart extends StatelessWidget {
           Row(
             children: const [
               Expanded(
-                  child: SizedBox(
-                      height: 200,
-                      child: LeaveGraphicalView())),
+                  child: SizedBox(height: 200, child: LeaveGraphicalView())),
             ],
           ).paddingBottom(20),
         ],
-      ).paddingSymmetric(vertical: 10,horizontal: 10),
+      ).paddingSymmetric(vertical: 10, horizontal: 10),
     );
   }
 }
+
 class LeaveGraphicalView extends StatelessWidget {
   const LeaveGraphicalView({Key? key}) : super(key: key);
 
@@ -79,7 +78,7 @@ class LeaveGraphicalView extends StatelessWidget {
       BarChartGroupData(x: 30, barRods: [
         BarChartRodData(
           toY: 5,
-          color:ColorS.primary,
+          color: ColorS.primary,
         ),
         BarChartRodData(toY: 3, color: ColorS.error),
         BarChartRodData(toY: 2, color: Colors.green),
@@ -102,70 +101,69 @@ class LeaveGraphicalView extends StatelessWidget {
       ]),
     ];
     return BarChart(
-        swapAnimationCurve: Curves.bounceIn,
-        swapAnimationDuration: const Duration(minutes: 1),
-        BarChartData(
-            maxY: 15,
-            borderData: FlBorderData(
-                border: Border.all(color: ColorS.secondary),
-                show: true),
-            gridData: FlGridData(
-              // verticalInterval: 1,
-              // horizontalInterval: 1,
-              show: true,
-            ),
-            titlesData: FlTitlesData(
-              bottomTitles: AxisTitles(
-                axisNameWidget: MediaQuery.of(context).size.width > 240
-                    ? Column(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            "Maternity",
-                            style: style,
-                          ),
-                          Text(
-                            "Haj",
-                            style: style,
-                          ),
-                          Text(
-                            "Sick",
-                            style: style,
-                          ),
-                          Text(
-                            "Annual",
-                            style: style,
-                          ),
-                          Text(
-                            "Paternity",
-                            style: style,
-                          ),
-                        ],
-                      ).paddingSymmetric(
-                          horizontal:
-                          MediaQuery.of(context).size.width < 500
-                              ? 30
-                              : 70),
-                    ),
-                  ],
-                )
-                    : const Text(""),
-              ),
-              topTitles: AxisTitles(axisNameWidget: const Text("")),
-              leftTitles: AxisTitles(axisNameWidget: const Text("")),
-              rightTitles: AxisTitles(axisNameWidget: const Text("")),
-            ),
-            rangeAnnotations: RangeAnnotations(horizontalRangeAnnotations: [
-              HorizontalRangeAnnotation(y1: 10, y2: 10)
-            ]),
-            alignment: BarChartAlignment.spaceEvenly,
-            // baselineY: 100,
-            barGroups: data,
-            barTouchData: BarTouchData(enabled: true)))
+            swapAnimationCurve: Curves.bounceIn,
+            swapAnimationDuration: const Duration(minutes: 1),
+            BarChartData(
+                maxY: 15,
+                borderData: FlBorderData(
+                    border: Border.all(color: ColorS.secondary), show: true),
+                gridData: FlGridData(
+                  // verticalInterval: 1,
+                  // horizontalInterval: 1,
+                  show: true,
+                ),
+                titlesData: FlTitlesData(
+                  bottomTitles: AxisTitles(
+                    axisNameWidget: MediaQuery.of(context).size.width > 240
+                        ? Column(
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      "Maternity",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Haj",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Sick",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Annual",
+                                      style: style,
+                                    ),
+                                    Text(
+                                      "Paternity",
+                                      style: style,
+                                    ),
+                                  ],
+                                ).paddingSymmetric(
+                                    horizontal:
+                                        MediaQuery.of(context).size.width < 500
+                                            ? 30
+                                            : 70),
+                              ),
+                            ],
+                          )
+                        : const Text(""),
+                  ),
+                  topTitles: AxisTitles(axisNameWidget: const Text("")),
+                  leftTitles: AxisTitles(axisNameWidget: const Text("")),
+                  rightTitles: AxisTitles(axisNameWidget: const Text("")),
+                ),
+                rangeAnnotations: RangeAnnotations(horizontalRangeAnnotations: [
+                  HorizontalRangeAnnotation(y1: 10, y2: 10)
+                ]),
+                alignment: BarChartAlignment.spaceEvenly,
+                // baselineY: 100,
+                barGroups: data,
+                barTouchData: BarTouchData(enabled: true)))
         .paddingSymmetric(vertical: 10);
   }
 }
@@ -191,10 +189,12 @@ class MonthWidget extends StatelessWidget {
               backgroundColor: color,
             ),
           ),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 12,
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
             ),
           )
         ],

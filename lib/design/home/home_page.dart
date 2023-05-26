@@ -66,24 +66,21 @@ class Home extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  SizedBox(
-                                    width: 100,
+                                  Expanded(
                                     child: Text('Completed Task',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
                                             ?.copyWith()),
                                   ),
                                   const VerticalDivider(),
-                                  SizedBox(
-                                    width: 80,
+                                  Expanded(
                                     child: Text('Updated Task',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
                                             ?.copyWith()),
                                   ),
                                   const VerticalDivider(),
-                                  SizedBox(
-                                    width: 75,
+                                  Expanded(
                                     child: Text('Created Task',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
@@ -98,24 +95,21 @@ class Home extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  SizedBox(
-                                    width: 100,
+                                  Expanded(
                                     child: Text('10',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
                                             ?.copyWith()),
                                   ),
                                   const VerticalDivider(),
-                                  SizedBox(
-                                    width: 80,
+                                  Expanded(
                                     child: Text('10',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
                                             ?.copyWith()),
                                   ),
                                   const VerticalDivider(),
-                                  SizedBox(
-                                    width: 75,
+                                  Expanded(
                                     child: Text('10',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
@@ -193,7 +187,6 @@ class Home extends StatelessWidget {
               ),
             ).paddingSymmetric(vertical: 5, horizontal: 10);
           }),
-
           Row(
             children: const [
               Expanded(child: CalendarPage()),
@@ -216,6 +209,7 @@ class Home extends StatelessWidget {
     });
   }
 }
+
 /// signature and feedback
 /*
           const Signature(

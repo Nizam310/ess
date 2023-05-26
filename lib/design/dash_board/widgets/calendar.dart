@@ -1,6 +1,7 @@
 import 'package:employee_self_service_flutter/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -119,6 +120,15 @@ class CalendarPageState extends State<CalendarPage> {
     final startIndex = firstDayOfMonth.weekday;
     final endIndex = startIndex + daysInMonth;
     final monthName = DateFormat.MMMM().format(_selectedDate);
+    final weekdayLabels = [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+    ];
     return Column(
       children: [
         Row(
@@ -151,6 +161,18 @@ class CalendarPageState extends State<CalendarPage> {
             ),
           ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: weekdayLabels
+              .map((label) => Center(
+                child: Text(
+                      label,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(fontSize: 13),
+                    ),
+              ))
+              .toList(),
+        ).paddingSymmetric(vertical: 10),
         GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
