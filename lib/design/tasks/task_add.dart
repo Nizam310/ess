@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../constant/colors.dart';
 import '../common_widgets/button.dart';
 import '../common_widgets/drop_down.dart';
 import '../common_widgets/text_field.dart';
@@ -75,7 +76,7 @@ class _TaskAdd extends StatelessWidget {
                 ListTile(
                   tileColor: data.isRunning
                       ? Colors.transparent
-                      : const Color(0xFF3BBFC0),
+                      :ColorS.primary,
                   leading: Icon(
                     data.isRunning ? Icons.stop_circle : Icons.play_circle,
                     color: data.isRunning ? Colors.black : Colors.white,

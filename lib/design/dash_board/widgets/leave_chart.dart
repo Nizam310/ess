@@ -2,17 +2,19 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../constant/colors.dart';
+
 class LeaveChart extends StatelessWidget {
   const LeaveChart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<MonthWidget> monthList = const [
+    List<MonthWidget> monthList =  [
       MonthWidget(
         text: "Total Leaves",
-        color: Color(0xFF3BBFC0),
+        color: ColorS.primary,
       ),
-      MonthWidget(text: "Taken leaves", color: Colors.red),
+      MonthWidget(text: "Taken leaves", color: ColorS.error),
       MonthWidget(text: "Available Leaves", color: Colors.green),
     ];
     return Container(
@@ -61,7 +63,7 @@ class LeaveGraphicalView extends StatelessWidget {
       BarChartGroupData(x: 10, barRods: [
         BarChartRodData(
           toY: 10,
-          color: const Color(0xFF3BBFC0),
+          color: ColorS.primary,
         ),
         BarChartRodData(toY: 5, color: Colors.red),
         BarChartRodData(toY: 5, color: Colors.green),
@@ -69,7 +71,7 @@ class LeaveGraphicalView extends StatelessWidget {
       BarChartGroupData(x: 20, barRods: [
         BarChartRodData(
           toY: 10,
-          color: const Color(0xFF3BBFC0),
+          color: ColorS.primary,
         ),
         BarChartRodData(toY: 8, color: Colors.red),
         BarChartRodData(toY: 2, color: Colors.green),
@@ -77,7 +79,7 @@ class LeaveGraphicalView extends StatelessWidget {
       BarChartGroupData(x: 30, barRods: [
         BarChartRodData(
           toY: 5,
-          color: const Color(0xFF3BBFC0),
+          color:ColorS.primary,
         ),
         BarChartRodData(toY: 3, color: Colors.red),
         BarChartRodData(toY: 2, color: Colors.green),
@@ -85,7 +87,7 @@ class LeaveGraphicalView extends StatelessWidget {
       BarChartGroupData(x: 40, barRods: [
         BarChartRodData(
           toY: 10,
-          color: const Color(0xFF3BBFC0),
+          color: ColorS.primary,
         ),
         BarChartRodData(toY: 5, color: Colors.red),
         BarChartRodData(toY: 5, color: Colors.green),
@@ -93,7 +95,7 @@ class LeaveGraphicalView extends StatelessWidget {
       BarChartGroupData(x: 50, barRods: [
         BarChartRodData(
           toY: 10,
-          color: const Color(0xFF3BBFC0),
+          color: ColorS.primary,
         ),
         BarChartRodData(toY: 7, color: Colors.red),
         BarChartRodData(toY: 3, color: Colors.green),

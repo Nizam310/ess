@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
         context,
       ) {
         return Scaffold(
-          backgroundColor: Color(0xFF7158CD),
+          backgroundColor: const Color(0xFF7158CD),
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -26,11 +26,10 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   Image.asset(
                     "assets/images/employee_login.png",
-
                   ),
                   CusTextField(
                     hintColor: const Color(0xFFD1C9EF),
-                    borderColor:const Color(0xFFD1C9EF),
+                    borderColor: const Color(0xFFD1C9EF),
                     controller:
                         context.select((LoginVm value) => value.userName),
                     onChanged: (val) {},

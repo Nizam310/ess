@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../constant/colors.dart';
+
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -16,7 +18,7 @@ class Settings extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             children: [
               ListTile(
-                leading: const Icon(Icons.help_outline_rounded,color: Color(0xFF5F6E86),),
+                leading:  Icon(Icons.help_outline_rounded,color: ColorS.secondary,),
                 title: const Text(
                   "Help center",
                   style: TextStyle(fontSize: 15, color: Colors.black),
@@ -24,7 +26,7 @@ class Settings extends StatelessWidget {
                 onTap: () {},
               ).paddingBottom(10),
               ListTile(
-                leading: const Icon(Icons.notifications_active_outlined,color: Color(0xFF5F6E86),),
+                leading:  Icon(Icons.notifications_active_outlined,color: ColorS.secondary,),
                 title: const Text(
                   "Notifications",
                   style: TextStyle(fontSize: 15, color: Colors.black),

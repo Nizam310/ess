@@ -1,4 +1,5 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:employee_self_service_flutter/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -26,7 +27,7 @@ class _MultiCalendarState extends State<MultiCalendar> {
   List<DateTime?> _multiDatePickerValueWithDefaultValue = [DateTime.now()];
   final config = CalendarDatePicker2Config(
     calendarType: CalendarDatePicker2Type.range,
-    selectedDayHighlightColor: const Color(0xFF3BBFC0),
+    selectedDayHighlightColor: ColorS.primary,
   );
 
   @override
@@ -62,8 +63,8 @@ class _MultiCalendarState extends State<MultiCalendar> {
                       holidayDecoration: BoxDecoration(
                           border: Border.all(color: Colors.red),
                           shape: BoxShape.circle),
-                      todayDecoration: const BoxDecoration(
-                        color: Color(0xFF3BBFC0),
+                      todayDecoration:  BoxDecoration(
+                        color: ColorS.primary,
                         shape: BoxShape.circle,
                       ),
                     ),

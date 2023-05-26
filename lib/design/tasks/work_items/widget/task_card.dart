@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../constant/colors.dart';
+
 class TaskCard extends StatelessWidget {
   const TaskCard({Key? key}) : super(key: key);
 
@@ -12,8 +14,8 @@ class TaskCard extends StatelessWidget {
     return Consumer<TaskVm>(builder: (context, data, _) {
       return Card(
         shape: RoundedRectangleBorder(
-            side: const BorderSide(
-              color: Color(0xFF3BBFC0),
+            side:  BorderSide(
+              color: ColorS.primary,
             ),
             borderRadius: BorderRadius.circular(10)),
         child: ListTileTheme(

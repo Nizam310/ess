@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../constant/colors.dart';
 import '../home/home_provider.dart';
 import '../tasks/task_provider.dart';
 import 'dash_board_provider.dart';
@@ -28,8 +29,8 @@ class DashBoard extends StatelessWidget {
               child: CusDrawer(),
             ),
             appBar: AppBar(
-              iconTheme: const IconThemeData(
-                color: Color(0xFF5F6E86),
+              iconTheme:  IconThemeData(
+                color: ColorS.secondary,
               ),
               backgroundColor: Colors.white,
               title: Text(
@@ -50,7 +51,7 @@ class DashBoard extends StatelessWidget {
                                           : data.index == 7
                                             ? "Notifications"
                                             : "",
-                style: const TextStyle(color: Color(0xFF5F6E86)),
+                style:  TextStyle(color: ColorS.secondary),
               ),
               actions: [
                 Visibility(
@@ -109,7 +110,7 @@ class DashBoard extends StatelessWidget {
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: Builder(builder: (context) {
               return FloatingActionButton(
-                      backgroundColor: const Color(0xFF3BBFC0),
+                      backgroundColor: ColorS.primary,
                       onPressed: () {
                         Scaffold.of(context).openDrawer();
                       },
@@ -145,7 +146,7 @@ class DashBoard extends StatelessWidget {
                           icon: Icon(
                             Icons.home,
                             color: data.index == 0
-                                ? const Color(0xFF3BBFC0)
+                                ? ColorS.primary
                                 : const Color(0xFF8F9FBC),
                           ),
                           onPressed: () {
@@ -157,7 +158,7 @@ class DashBoard extends StatelessWidget {
                           icon: Icon(
                             Icons.timer,
                             color: data.index == 5
-                                ? const Color(0xFF3BBFC0)
+                                ? ColorS.primary
                                 : const Color(0xFF8F9FBC),
                           ),
                           onPressed: () {
@@ -260,7 +261,7 @@ class CusDrawer extends StatelessWidget {
           CusCard(
             icon: Icons.logout,
             title: "Logout",
-            iconColor: Colors.red,
+            iconColor: ColorS.error,
             onTap: () {
               Navigator.pushNamed(context, "/");
             },
@@ -304,7 +305,7 @@ class CusCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: const Color(0xFF3BBFC0),
+                color: ColorS.primary,
               )),
           child: InkWell(
             splashColor: Colors.transparent,
@@ -318,11 +319,11 @@ class CusCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(color: Color(0xFF5F6E86)),
+                        style: TextStyle(color: ColorS.secondary),
                       ),
                       Icon(
                         icon,
-                        color: iconColor ?? const Color(0xFF5F6E86),
+                        color: iconColor ??  ColorS.secondary,
                       ),
                     ],
                   ),

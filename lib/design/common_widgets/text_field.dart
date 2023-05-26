@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constant/colors.dart';
+
 class CusTextField extends StatefulWidget {
   final String? hintText;
   final String? labelText;
@@ -36,27 +38,27 @@ class _CusTextFieldState extends State<CusTextField> {
           border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? const Color(0xFF3BBFC0))),
+                  color: widget.borderColor ?? ColorS.primary)),
         enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? const Color(0xFF3BBFC0))),
+                  color: widget.borderColor ?? ColorS.primary)),
         focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? const Color(0xFF3BBFC0))),
+                  color: widget.borderColor ?? ColorS.primary)),
         errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? Colors.red),),
+                  color: widget.borderColor ?? ColorS.error),),
         disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? const Color(0xFF3BBFC0))),
+                  color: widget.borderColor ?? ColorS.primary)),
         focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? const Color(0xFF3BBFC0))),
+                  color: widget.borderColor ?? ColorS.primary)),
           hintText: widget.hintText,
           hintStyle:  TextStyle(fontSize: 13, color: widget.hintColor??Colors.black),
           labelText: widget.labelText),
