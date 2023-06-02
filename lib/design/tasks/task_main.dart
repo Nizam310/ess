@@ -3,11 +3,11 @@ import 'package:employee_self_service_flutter/design/common_widgets/drop_down.da
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
 import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
 import 'package:employee_self_service_flutter/design/tasks/work_items/actitvity_screen.dart';
-import 'package:employee_self_service_flutter/enum/enum.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../../constant/enum.dart';
 
 class Tasks extends StatelessWidget {
   const Tasks({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class Tasks extends StatelessWidget {
           CusDropdown<ActivityType>(
             label: "Work Item",
             items: ActivityType.values,
-            itemBuilder: (c) => Text(c.name),
+            itemBuilder: (c) => Text(c.name,style: TextStyle(color: Theme.of(context).colorScheme.primary),),
             value: context.select((TaskVm value) => value.type),
             onChanged: (val) {
               if (val != null) {

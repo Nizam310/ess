@@ -40,7 +40,7 @@ dependencies:
   fab_circular_menu: ^1.0.2
   gradient_borders: ^1.0.0
   fl_chart: ^0.62.0
-  file_picker: ^5.3.0
+  file_picker: ^5.0.2
   table_calendar: ^3.0.9
   calendar_date_picker2: ^0.5.2
   geolocator: ^9.0.2
@@ -49,6 +49,8 @@ dependencies:
   latlong2: ^0.8.2
   geocoding: ^2.1.0
   intl: ^0.18.1
+  percent_indicator: ^4.2.3
+  flutter_meedu_videoplayer: ^4.2.10
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +77,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/videos/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

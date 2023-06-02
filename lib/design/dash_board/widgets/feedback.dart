@@ -1,4 +1,3 @@
-import 'package:employee_self_service_flutter/constant/colors.dart';
 import 'package:employee_self_service_flutter/design/common_widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -18,7 +17,7 @@ class FeedBack extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: ColorS.primary,
+            color:Theme.of(context).colorScheme.primary,
           )),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +54,7 @@ class FeedBack extends StatelessWidget {
             horizontal: 0,
           ),
           Slider(
-            activeColor: ColorS.primary,
+            activeColor:Theme.of(context).colorScheme.primary,
             value: context.select((HomeVm value) => value.sliderValue),
             onChanged: (onChanged) {
               context.read<HomeVm>().sliderValue = onChanged;

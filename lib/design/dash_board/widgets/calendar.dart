@@ -1,4 +1,3 @@
-import 'package:employee_self_service_flutter/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -64,7 +63,7 @@ class CalendarPageState extends State<CalendarPage> {
             color: clickedDate == date
                 ? Colors.black
                 : isCurrentDate
-                    ? ColorS.primary
+                    ? Theme.of(context).colorScheme.primary
                     : Colors.transparent,
           ),
           borderRadius: BorderRadius.circular(10),
@@ -199,7 +198,7 @@ class CalendarPageState extends State<CalendarPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                          color: ColorS.primary.withOpacity(0.6), width: 0.56),
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.6), width: 0.56),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
@@ -238,7 +237,7 @@ class CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Card(color: Colors.transparent,
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: _buildCalendar(),

@@ -24,20 +24,20 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  /*Image.asset(
-                    "assets/images/employee_login.png",
-                  ),*/Image.network('https://www.hawkhr.com/img/bg/feature-attendance.jpg'),
+                  Image.asset(
+                    "assets/images/login_image.jpg",height: 300,
+                  ),
                   CusTextField(
-                    hintColor: const Color(0xFF3D63A1),
-                    borderColor: const Color(0xFF3D63A1),
+                    hintColor: const Color(0xFF49CB8F),
+                    borderColor: const Color(0xFF49CB8F),
                     controller:
                         context.select((LoginVm value) => value.userName),
                     onChanged: (val) {},
                     hintText: "Username",
                   ).paddingSymmetric(horizontal: 30, vertical: 10),
                   CusTextField(
-                    hintColor: const Color(0xFF3D63A1),
-                    borderColor: const Color(0xFF3D63A1),
+                    hintColor: const Color(0xFF49CB8F),
+                    borderColor: const Color(0xFF49CB8F),
                     controller:
                         context.select((LoginVm value) => value.password),
                     onChanged: (val) {},
@@ -49,8 +49,8 @@ class LoginScreen extends StatelessWidget {
                           child: CusButton(
                         text: 'Login',
                         textColor: const Color(0xFFFFFFFF),
-                        color: const Color(0xFF3D63A1),
-                        hoverColor: const Color(0xFF3D63A1),
+                        color: const Color(0xFF49CB8F),
+                        hoverColor: const Color(0xFF49CB8F),
                         onTap: () {
                           Navigator.pushNamed(context, "/dash");
                         },

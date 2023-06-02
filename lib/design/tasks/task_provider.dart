@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 
-import '../../enum/enum.dart';
+import '../../constant/enum.dart';
 
 class TaskVm extends ChangeNotifier {
   ///Task

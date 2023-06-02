@@ -1,10 +1,9 @@
 import 'package:employee_self_service_flutter/design/tasks/task_provider.dart';
-import 'package:employee_self_service_flutter/enum/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../constant/colors.dart';
+import '../../../../constant/enum.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class TaskCard extends StatelessWidget {
       return Card(
         shape: RoundedRectangleBorder(
             side:  BorderSide(
-              color: ColorS.primary,
+              color: Theme.of(context).colorScheme.primary,
             ),
             borderRadius: BorderRadius.circular(10)),
         child: ListTileTheme(
@@ -34,7 +33,7 @@ class TaskCard extends StatelessWidget {
                     ? "Task Completed"
                     : data.type == ActivityType.RecentlyUpdated
                         ? "Task Updated"
-                        : "Task Created"),
+                        : "Task Created",style: TextStyle(color: Theme.of(context).colorScheme.primary),),
             trailing: const Text("00:02"),
             children: [
               Align(

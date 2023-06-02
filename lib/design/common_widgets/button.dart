@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../constant/colors.dart';
-
 class CusButton extends StatefulWidget {
   final String text;
   final Function() onTap;
@@ -45,8 +43,8 @@ class _CusButtonState extends State<CusButton> {
         child: Container(
           decoration: BoxDecoration(
             color: hover == false
-                ? (widget.color ?? ColorS.primary)
-                : (widget.hoverColor ?? ColorS.primary),
+                ? (widget.color ?? Theme.of(context).colorScheme.primary)
+                : (widget.hoverColor ?? Theme.of(context).colorScheme.primary),
             borderRadius: BorderRadius.circular(10),
           ),
           height: 40,
@@ -54,7 +52,7 @@ class _CusButtonState extends State<CusButton> {
               child: Text(
             widget.text,
             style: TextStyle(
-                color: widget.textColor ?? white, fontSize: widget.textSize),
+                color: widget.textColor ?? Theme.of(context).colorScheme.onPrimary, fontSize: widget.textSize),
           )).paddingSymmetric(
             horizontal: 10,
           ),

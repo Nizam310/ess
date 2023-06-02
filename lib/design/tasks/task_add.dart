@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-import '../../constant/colors.dart';
 import '../common_widgets/button.dart';
 import '../common_widgets/drop_down.dart';
 import '../common_widgets/text_field.dart';
@@ -14,17 +13,18 @@ class TaskAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return/* Scaffold(
+    return /* Scaffold(
       body: const LocationView(),
-      bottomSheet:*/ Container(
-        height: 300,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        ),
-        child:const  _TaskAdd(),
-     /* ),*/
+      bottomSheet:*/
+        Container(
+      height: 300,
+      width: MediaQuery.of(context).size.width,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      ),
+      child: const _TaskAdd(),
+      /* ),*/
     );
   }
 }
@@ -76,7 +76,7 @@ class _TaskAdd extends StatelessWidget {
                 ListTile(
                   tileColor: data.isRunning
                       ? Colors.transparent
-                      :ColorS.primary,
+                      : Theme.of(context).colorScheme.primary,
                   leading: Icon(
                     data.isRunning ? Icons.stop_circle : Icons.play_circle,
                     color: data.isRunning ? Colors.black : Colors.white,
@@ -102,7 +102,7 @@ class _TaskAdd extends StatelessWidget {
                 CusButton(
                     text: "Save",
                     onTap: () {
-                      context.read<DashBoardVm>().index = 5;
+                      context.read<DashBoardVm>().index = 8;
                       context.read<DashBoardVm>().refresh();
                     }).paddingSymmetric(vertical: 5),
               ],

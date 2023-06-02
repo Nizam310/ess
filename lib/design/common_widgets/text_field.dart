@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constant/colors.dart';
-
 class CusTextField extends StatefulWidget {
   final String? hintText;
   final String? labelText;
@@ -20,7 +18,8 @@ class CusTextField extends StatefulWidget {
       required this.onChanged,
       this.maxLines,
       this.enabled,
-      this.borderColor, this.hintColor})
+      this.borderColor,
+      this.hintColor})
       : super(key: key);
 
   @override
@@ -36,31 +35,40 @@ class _CusTextFieldState extends State<CusTextField> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
           border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                  color: widget.borderColor ?? ColorS.primary)),
-        enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? ColorS.primary)),
-        focusedBorder: OutlineInputBorder(
+                  color: widget.borderColor ??
+                      Theme.of(context).colorScheme.primary)),
+          enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? ColorS.primary)),
-        errorBorder: OutlineInputBorder(
+                  color: widget.borderColor ??
+                      Theme.of(context).colorScheme.primary)),
+          focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? ColorS.error),),
-        disabledBorder: OutlineInputBorder(
+                  color: widget.borderColor ??
+                      Theme.of(context).colorScheme.primary)),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+                color:
+                    widget.borderColor ?? Theme.of(context).colorScheme.error),
+          ),
+          disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? ColorS.primary)),
-        focusedErrorBorder: OutlineInputBorder(
+                  color: widget.borderColor ??
+                      Theme.of(context).colorScheme.primary)),
+          focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                  color: widget.borderColor ?? ColorS.primary)),
+                  color: widget.borderColor ??
+                      Theme.of(context).colorScheme.primary)),
           hintText: widget.hintText,
-          hintStyle:  TextStyle(fontSize: 13, color: widget.hintColor??Colors.black),
+          hintStyle: TextStyle(
+              fontSize: 13,
+              color: widget.hintColor ?? Theme.of(context).colorScheme.primary),
           labelText: widget.labelText),
       onChanged: widget.onChanged,
       controller: widget.controller,

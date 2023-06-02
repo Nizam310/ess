@@ -1,5 +1,6 @@
-import 'package:employee_self_service_flutter/enum/enum.dart';
 import 'package:flutter/material.dart';
+
+import '../../constant/enum.dart';
 
 class RequestFormVm extends ChangeNotifier {
   TextEditingController reason = TextEditingController();

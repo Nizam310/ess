@@ -1,5 +1,8 @@
+import 'package:employee_self_service_flutter/constant/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../../constant/enum.dart';
 
 typedef ItemBuilder<T> = Widget Function(T item);
 typedef OnChanged<T> = void Function(T? value);
@@ -26,6 +29,7 @@ class CusDropdown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themePro = ThemeNotifier.of(context, listen: false);
     return Row(
       children: [
         Expanded(
@@ -33,10 +37,40 @@ class CusDropdown<T> extends StatelessWidget {
             height: 71,
             child: InputDecorator(
               decoration: InputDecoration(
-                labelText: label??"",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide:
+                      BorderSide(color: Theme.of(context).colorScheme.error),
+                ),
+                disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary)),
+                labelText: label ?? "",
+                labelStyle:
+                    TextStyle(color: Theme.of(context).colorScheme.primary),
                 isDense: true,
               ),
               child: DropdownButton<T>(
+                dropdownColor: themePro.themeMode == ThemeModeType.light
+                    ? Colors.black
+                    : Colors.white,
                 key: UniqueKey(),
                 value: value,
                 items: items
@@ -48,15 +82,15 @@ class CusDropdown<T> extends StatelessWidget {
                 onChanged: onChanged,
                 underline: Container(
                   height: 0,
-                  color: Colors.transparent,
+                  // color: Colors.transparent,
                 ),
                 icon: const Icon(null),
-                focusColor: Colors.transparent,
+                // focusColor: Colors.transparent,
               ),
-            ).paddingSymmetric( horizontal: horPadding ?? 10, vertical: verPadding ?? 10),
+            ).paddingSymmetric(
+                horizontal: horPadding ?? 10, vertical: verPadding ?? 10),
           ),
         ),
-
       ],
     );
   }

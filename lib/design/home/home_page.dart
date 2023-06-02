@@ -1,14 +1,7 @@
-import 'package:employee_self_service_flutter/constant/colors.dart';
+import 'package:employee_self_service_flutter/design/home/widgets/monthly_capacity.dart';
+import 'package:employee_self_service_flutter/design/home/widgets/task_indicaters.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:provider/provider.dart';
-
-import '../common_widgets/button.dart';
-import '../dash_board/dash_board_provider.dart';
-import '../dash_board/widgets/calendar.dart';
-import '../dash_board/widgets/leave_chart.dart';
-import '../tasks/task_provider.dart';
-import 'home_provider.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -21,7 +14,7 @@ class Home extends StatelessWidget {
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-              side: BorderSide(color: ColorS.primary)),
+              side: BorderSide(color: Theme.of(context).colorScheme.primary)),
           dismissDirection: DismissDirection.horizontal,
           content: Align(
             alignment: Alignment.topCenter,
@@ -42,15 +35,24 @@ class Home extends StatelessWidget {
         );
         //ScaffoldMessenger.of(context).showSnackBar(snackBar);
       });
-
       return ListView(
+        padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+        children:  [
+          const Indicators(),
+          const MonthlyCapacity().paddingSymmetric(vertical: 20),
+
+        ],
+      );
+      /*   return ListView(
         children: [
           const LeaveChart(),
           Consumer<TaskVm>(builder: (context, data, _) {
-            return Card(
+            return Card(color: Colors.transparent,
               child: ListTileTheme(
+                tileColor: Colors.transparent,
                 shape: const RoundedRectangleBorder(),
                 child: ExpansionTile(
+                  backgroundColor: Colors.transparent,
                   initiallyExpanded: true,
                   title: const Text(
                     "Task Management",
@@ -59,6 +61,7 @@ class Home extends StatelessWidget {
                     SizedBox(
                       height: 90,
                       child: Card(
+                        color: Colors.transparent,
                         child: Column(
                           children: [
                             Expanded(
@@ -70,26 +73,26 @@ class Home extends StatelessWidget {
                                     child: Text('Completed Task',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
-                                            ?.copyWith()),
+                                            ?.copyWith(color: ColorS.primary)),
                                   ),
-                                  const VerticalDivider(),
+                                   VerticalDivider(color: ColorS.primary),
                                   Expanded(
                                     child: Text('Updated Task',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
-                                            ?.copyWith()),
+                                            ?.copyWith(color: ColorS.primary)),
                                   ),
-                                  const VerticalDivider(),
+                                   VerticalDivider(color: ColorS.primary),
                                   Expanded(
                                     child: Text('Created Task',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
-                                            ?.copyWith()),
+                                            ?.copyWith(color: ColorS.primary)),
                                   ),
                                 ],
                               ),
                             ),
-                            const Divider(),
+                             Divider(color: ColorS.primary),
                             Expanded(
                               child: Row(
                                 mainAxisAlignment:
@@ -99,21 +102,21 @@ class Home extends StatelessWidget {
                                     child: Text('10',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
-                                            ?.copyWith()),
+                                            ?.copyWith(color: ColorS.primary)),
                                   ),
-                                  const VerticalDivider(),
+                                   VerticalDivider(color: ColorS.primary),
                                   Expanded(
                                     child: Text('10',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
-                                            ?.copyWith()),
+                                            ?.copyWith(color: ColorS.primary)),
                                   ),
-                                  const VerticalDivider(),
+                                   VerticalDivider(color: ColorS.primary),
                                   Expanded(
                                     child: Text('10',
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.labelSmall
-                                            ?.copyWith()),
+                                            ?.copyWith(color: ColorS.primary)),
                                   ),
                                 ],
                               ),
@@ -149,6 +152,7 @@ class Home extends StatelessWidget {
                                     child: CusButton(
                                         text: "Recently Created",
                                         onTap: () {
+                                          ActivityType.RecentlyCreated;
                                           context.read<DashBoardVm>().index = 5;
                                           context
                                               .read<HomeVm>()
@@ -161,20 +165,26 @@ class Home extends StatelessWidget {
                                     child: CusButton(
                                         text: "Recently Updated",
                                         onTap: () {
+                                          ActivityType.RecentlyUpdated;
+                                           context.read<DashBoardVm>().index = 5;
                                           context
                                               .read<HomeVm>()
                                               .taskManagement = false;
                                           context.read<HomeVm>().refresh();
+                                          context.read<DashBoardVm>().refresh();
                                         })).paddingRight(5),
                                 SizedBox(
                                     width: 150,
                                     child: CusButton(
                                         text: "Recently Completed",
                                         onTap: () {
+                                          ActivityType.RecentlyCompleted;
+                                           context.read<DashBoardVm>().index = 5;
                                           context
                                               .read<HomeVm>()
                                               .taskManagement = false;
                                           context.read<HomeVm>().refresh();
+                                          context.read<DashBoardVm>().refresh();
                                         })),
                               ],
                             ),
@@ -205,7 +215,7 @@ class Home extends StatelessWidget {
             },
           ).paddingSymmetric(vertical: 5, horizontal: 15),
         ],
-      );
+      );*/
     });
   }
 }

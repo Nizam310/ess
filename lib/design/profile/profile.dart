@@ -17,9 +17,8 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     /// textStyle
 
-    const textStyle = TextStyle(
-      fontSize: 13,
-    );
+    final textStyle =
+        TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.primary);
 
     return SingleChildScrollView(
       child: Padding(
@@ -73,13 +72,13 @@ class Profile extends StatelessWidget {
               onChanged: (v) {},
               hintText: "Mobile",
             ).paddingAll(10),
-            const ListTile(
+            ListTile(
               title: Text(
                 "Date Of  join :   ${"21/12/23"}",
                 style: textStyle,
               ),
             ).paddingAll(10),
-            const ListTile(
+            ListTile(
               title: Text(
                 "Total years with company :  ${'5'}",
                 style: textStyle,

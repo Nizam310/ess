@@ -1,15 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../enum/enum.dart';
+import '../../../constant/enum.dart';
 
 class Signature extends StatelessWidget {
   final String link;
   final String name;
   final CusAttendeeType type;
+  final Function()? buttonOnTap;
+  final String? buttonText;
+  final Widget? button;
 
   const Signature(
-      {Key? key, required this.link, required this.name, required this.type})
+      {Key? key,
+      required this.link,
+      required this.name,
+      required this.type,
+      this.buttonOnTap,
+      this.buttonText,
+      this.button})
       : super(key: key);
 
   @override
@@ -33,8 +44,8 @@ class Signature extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: const BorderSide(color: Colors.black)),
-                  child: Image.network(
-                    link,
+                  child: Image.file(
+                    File(link),
                     height: 300,
                   ),
                 ).paddingSymmetric(

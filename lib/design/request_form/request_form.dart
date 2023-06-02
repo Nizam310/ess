@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-import '../../enum/enum.dart';
+import '../../constant/enum.dart';
 import '../common_widgets/button.dart';
 import '../common_widgets/drop_down.dart';
 import '../common_widgets/text_field.dart';

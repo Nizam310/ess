@@ -1,7 +1,6 @@
 
 import 'dart:developer';
 
-import 'package:employee_self_service_flutter/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
@@ -97,7 +96,7 @@ class LocationViewState extends State<LocationView> {
                   builder: (BuildContext context) {
                     return  Icon(
                       Icons.location_on,
-                      color: ColorS.error,
+                      color: Theme.of(context).colorScheme.error,
                       size: 50,
                     );
                   },
