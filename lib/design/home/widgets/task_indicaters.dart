@@ -3,16 +3,44 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import '../../../constant/enum.dart';
+import '../../../constant/themes/theme.dart';
+
 class Indicators extends StatelessWidget {
   const Indicators({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double percentage = 0.5;
+    final themePro = ThemeNotifier.of(context, listen: false);
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
+        gradient: themePro.themeMode == ThemeModeType.dark
+            ? LinearGradient(
+                begin: FractionalOffset.topCenter,
+                end: FractionalOffset.bottomCenter,
+                tileMode: TileMode.clamp,
+                colors: [
+                    Theme.of(context).colorScheme.primary.withOpacity(
+                          0.1,
+                        ),
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.transparent,
+                    Theme.of(context).colorScheme.primary.withOpacity(
+                          0.1,
+                        ),
+                  ])
+            : const LinearGradient(colors: [
+                Colors.transparent,
+                Colors.transparent,
+              ]),
         border: GradientBoxBorder(
           gradient: LinearGradient(colors: [
             Theme.of(context).colorScheme.primary,
@@ -35,13 +63,14 @@ class Indicators extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Icon(
+                  Icon(
                     Icons.battery_3_bar_rounded,
                     color: Theme.of(context).colorScheme.surface,
                   ).paddingBottom(5),
                   Text(
                     '${(percentage * 100).toStringAsFixed(0)} %',
-                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                 ],
               ),
@@ -53,7 +82,8 @@ class Indicators extends StatelessWidget {
               Expanded(
                 child: ProgressIndicator(
                   currentStep: 5,
-                  text: 'With ',
+                  value: '480 kwh',
+                  title: 'Weekly Charge',
                 ),
               ),
             ],
@@ -62,8 +92,9 @@ class Indicators extends StatelessWidget {
             children: const [
               Expanded(
                 child: ProgressIndicator(
-                  currentStep: 2,
-                  text: 'With ',
+                  currentStep: 8,
+                  value: '480 kwh',
+                  title: 'Monthly Charge',
                 ),
               ),
             ],
@@ -75,43 +106,58 @@ class Indicators extends StatelessWidget {
 }
 
 class ProgressIndicator extends StatelessWidget {
-  final String text;
+  final String value;
   final int currentStep;
+  final String title;
 
   const ProgressIndicator(
-      {Key? key, required this.text, required this.currentStep})
+      {Key? key,
+      required this.value,
+      required this.currentStep,
+      required this.title})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 400,
-      height: 20,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomStepProgressIndicator(
-            totalSteps: 20,
-            currentStep: currentStep,
-            stepWidth: 5,
-            stepHeight: 20,
-            stepPadding: 3,
-            selectedColor: Theme.of(context).colorScheme.surface,
-            unselectedColor: Colors.white24,
-            borderRadius: BorderRadius.circular(4),
-          ).paddingRight(10),
-          Text(
-            text,
-            style:  TextStyle(
-                color: Theme.of(context).colorScheme.surface, fontWeight: FontWeight.bold),
-          )
-        ],
-      ),
-    ).paddingSymmetric(vertical: 10, horizontal: 10);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.end
+      ,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start
+          ,
+          children: [
+            Text(
+              title,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w500),
+            ).paddingSymmetric(vertical: 10),
+            CustomStepProgressIndicator(
+              totalSteps: 20,
+              currentStep: currentStep,
+              stepWidth: 5,
+              stepHeight: 20,
+              stepPadding: 3,
+              selectedColor: Theme.of(context).colorScheme.surface,
+              unselectedColor: Colors.white24,
+              borderRadius: BorderRadius.circular(4),
+            ).paddingRight(10),
+          ],
+        ).paddingSymmetric(vertical: 10, horizontal: 10),
+        Text(
+          value,
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.surface,
+              fontWeight: FontWeight.bold),
+        ).paddingRight(20),
+      ],
+    );
   }
 }
 
-class CustomStepProgressIndicator extends StatelessWidget {
+class CustomStepProgressIndicator extends StatefulWidget {
   final int totalSteps;
   final int currentStep;
   final double stepWidth;
@@ -145,27 +191,70 @@ class CustomStepProgressIndicator extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final double totalWidth =
-        (stepWidth * totalSteps) + (stepPadding * (totalSteps - 1));
+  CustomStepProgressIndicatorState createState() =>
+      CustomStepProgressIndicatorState();
+}
 
+class CustomStepProgressIndicatorState
+    extends State<CustomStepProgressIndicator> with TickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double totalWidth = (widget.stepWidth * widget.totalSteps) +
+        (widget.stepPadding * (widget.totalSteps - 1));
     return SizedBox(
       width: totalWidth,
-      height: stepHeight,
+      height: widget.stepHeight,
       child: Stack(
         children: List.generate(
-          totalSteps,
+          widget.totalSteps,
           (index) {
-            final bool isSelected = index < currentStep;
+            final bool isSelected = index < widget.currentStep;
+            final bool isNextSelected = index == widget.currentStep;
+            final bool isRemainingUnselected = index > widget.currentStep;
             return Positioned(
-              left: (stepWidth + stepPadding) * index,
-              child: Container(
-                width: stepWidth,
-                height: stepHeight,
-                decoration: BoxDecoration(
-                  borderRadius: borderRadius,
-                  color: isSelected ? selectedColor : unselectedColor,
-                ),
+              left: (widget.stepWidth + widget.stepPadding) * index,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  final double opacity = isNextSelected
+                      ? _animationController.value
+                      : isSelected || isRemainingUnselected
+                          ? 1.0
+                          : 0.0;
+                  final Color color = isNextSelected
+                      ? Theme.of(context).colorScheme.surface
+                      : isSelected
+                          ? widget.selectedColor
+                          : widget.unselectedColor;
+                  return Opacity(
+                    opacity: opacity,
+                    child: Container(
+                      width: widget.stepWidth,
+                      height: widget.stepHeight,
+                      decoration: BoxDecoration(
+                        borderRadius: widget.borderRadius,
+                        color: color,
+                      ),
+                    ),
+                  );
+                },
               ),
             );
           },

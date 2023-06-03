@@ -1,5 +1,4 @@
 import 'package:employee_self_service_flutter/design/request_form/request_form_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +16,7 @@ class RequestForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style = TextStyle(color: Theme.of(context).colorScheme.primary);
     return ChangeNotifierProvider(
       create: (_) => RequestFormVm(),
       child: Consumer2<RequestFormVm, DashBoardVm>(
@@ -29,7 +29,7 @@ class RequestForm extends StatelessWidget {
                 verPadding: 5,
                 value: data.type,
                 items: RequestType.values,
-                itemBuilder: (type) => Text(type.name),
+                itemBuilder: (type) => Text(type.name,style: style,),
                 onChanged: (RequestType? value) {
                   if (value != null) data.type = value;
                   data.certifyType = null;
@@ -48,7 +48,7 @@ class RequestForm extends StatelessWidget {
                         verPadding: 5,
                         value: data.certifyType,
                         items: data.certificateTypeList,
-                        itemBuilder: (type) => Text(type),
+                        itemBuilder: (type) => Text(type,style: style,),
                         onChanged: (String? value) {
                           if (value != null) {
                             data.certifyType = value;
@@ -99,15 +99,18 @@ class RequestForm extends StatelessWidget {
                 visible: data.type == RequestType.Leave,
                 child: Column(
                   children: [
-                    Card(
+                    Card(shape:RoundedRectangleBorder(
+                      side: BorderSide(color: Theme.of(context).colorScheme.primary),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
                       child: Row(
                         children: [
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text("Available Leaves: 5"),
-                                Text("Leaves Taken: 5"),
+                              children:  [
+                                Text("Available Leaves: 5",style: style),
+                                Text("Leaves Taken: 5",style: style),
                               ],
                             ).paddingSymmetric(horizontal: 10, vertical: 10),
                           ),
@@ -121,7 +124,7 @@ class RequestForm extends StatelessWidget {
                         verPadding: 5,
                         value: data.leaveType,
                         items: data.leaveTypeList,
-                        itemBuilder: (type) => Text(type),
+                        itemBuilder: (type) => Text(type,style: style,),
                         onChanged: (String? value) {
                           if (value != null) {
                             data.leaveType = value;
@@ -174,7 +177,7 @@ class RequestForm extends StatelessWidget {
                   dashData.refresh();
                 },
                 // color: const red,
-                textColor: CupertinoColors.white,
+                // textColor: CupertinoColors.white,
                 textSize: 13,
               ).paddingSymmetric(horizontal: 10, vertical: 10),
             ],

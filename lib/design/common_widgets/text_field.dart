@@ -69,6 +69,8 @@ class _CusTextFieldState extends State<CusTextField> {
           hintStyle: TextStyle(
               fontSize: 13,
               color: widget.hintColor ?? Theme.of(context).colorScheme.primary),
+          labelStyle: TextStyle(
+              color: widget.hintColor ?? Theme.of(context).colorScheme.primary),
           labelText: widget.labelText),
       onChanged: widget.onChanged,
       controller: widget.controller,

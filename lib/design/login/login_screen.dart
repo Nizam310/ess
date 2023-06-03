@@ -25,7 +25,8 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/login_image.jpg",height: 300,
+                    "assets/images/login_image.jpg",
+                    height: 300,
                   ),
                   CusTextField(
                     hintColor: const Color(0xFF49CB8F),
@@ -56,7 +57,12 @@ class LoginScreen extends StatelessWidget {
                         },
                       ).paddingSymmetric(horizontal: 30, vertical: 10)),
                     ],
-                  )
+                  ),
+
+                  Image.asset(
+                    "assets/images/brand_logo.png",
+                    width: 80,
+                  ).paddingAll(20),
                 ],
               ),
             ),

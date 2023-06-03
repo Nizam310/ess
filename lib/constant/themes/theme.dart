@@ -9,6 +9,7 @@ class Themes {
     return ThemeData(
         colorScheme: ColorSchemes.light,
         cardTheme: CardTheme(
+          color: Colors.transparent,
           shape: RoundedRectangleBorder(
               side: BorderSide(
                 color: Theme.of(context).colorScheme.primary,
@@ -69,6 +70,7 @@ class Themes {
     return ThemeData(
         colorScheme: ColorSchemes.dark,
         cardTheme: CardTheme(
+          color: Colors.transparent,
           shape: RoundedRectangleBorder(
               side: BorderSide(
                 color: Theme.of(context).colorScheme.primary,

@@ -85,7 +85,7 @@ class CusDropdown<T> extends StatelessWidget {
                   // color: Colors.transparent,
                 ),
                 icon: const Icon(null),
-                // focusColor: Colors.transparent,
+
               ),
             ).paddingSymmetric(
                 horizontal: horPadding ?? 10, vertical: verPadding ?? 10),

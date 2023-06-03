@@ -25,8 +25,8 @@ class ColorSchemes {
     shadow: Color(0xFF000000),
   );
   static const ColorScheme dark = ColorScheme.dark(
-    primary: Color(0xFF2760A0),
-    primaryContainer: Color(0xFF386079),
+    primary: Color(0xFF3C89B9),
+    primaryContainer: Color(0xFF1B425D),
     onPrimary: Color(0xFF3C89B9),
     onPrimaryContainer: Color(0xFF485F70),
     secondary: Color(0xFF37E813),

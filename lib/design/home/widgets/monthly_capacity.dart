@@ -1,3 +1,5 @@
+import 'package:employee_self_service_flutter/constant/enum.dart';
+import 'package:employee_self_service_flutter/constant/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -9,23 +11,26 @@ class MonthProgress {
   MonthProgress({required this.month, this.isCurrentMonth = false});
 }
 
-class CustomStepProgressIndicator extends StatelessWidget {
+class CustomStepProgressIndicator extends StatefulWidget {
   final int totalSteps;
   final int currentStep;
   final double stepWidth;
   final double stepHeight;
   final double stepPadding;
+  final List<Color> stepColors;
   final Color selectedColor;
   final Color unselectedColor;
   final BorderRadius borderRadius;
+  final int currentMonth;
 
   const CustomStepProgressIndicator({
     Key? key,
     required this.totalSteps,
     required this.currentStep,
-    this.stepWidth = 30,
+    this.stepWidth = 50,
     this.stepHeight = 5,
     this.stepPadding = 4,
+    required this.stepColors,
     required this.selectedColor,
     required this.unselectedColor,
     this.borderRadius = const BorderRadius.only(
@@ -34,76 +39,76 @@ class CustomStepProgressIndicator extends StatelessWidget {
       topRight: Radius.circular(4),
       bottomRight: Radius.circular(4),
     ),
+    required this.currentMonth,
   }) : super(key: key);
+
+  @override
+  _CustomStepProgressIndicatorState createState() =>
+      _CustomStepProgressIndicatorState();
+}
+
+class _CustomStepProgressIndicatorState
+    extends State<CustomStepProgressIndicator>
+    with SingleTickerProviderStateMixin {
+  late AnimationController selectedAnimationController;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1000),
+    );
+    selectedAnimationController.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    selectedAnimationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: stepWidth,
+      width: widget.stepWidth,
       height: 85,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: List.generate(
-          totalSteps,
+          widget.totalSteps,
           (index) {
-            final bool isSelected = index < currentStep;
+            final bool isSelected = index < widget.currentStep;
+            final bool isFade =
+                index > widget.currentStep + 1; // Determine if step should fade
+            final Color stepColor = isSelected
+                ? widget.selectedColor
+                : widget.stepColors[index]; // Assign color based on selection
+
+            final double translateY =
+                isSelected ? selectedAnimationController.value * 10.0 : 0.0;
             return Expanded(
-              child: Container(
-                width: stepWidth,
-                height: stepHeight,
-                margin: EdgeInsets.only(bottom: stepPadding),
-                decoration: BoxDecoration(
-                  borderRadius: borderRadius,
-                  gradient: isSelected
-                      ? LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.9),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.8),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.7),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.6),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.5),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.4),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.3),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.2),
-                              Theme.of(context)
-                                  .colorScheme
-                                  .tertiary
-                                  .withOpacity(0.1),
-                            ])
-                      : LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                              unselectedColor,
-                              unselectedColor,
-                              unselectedColor
-                            ]),
+              child: AnimatedOpacity(
+                opacity: isFade
+                    ? (1 - selectedAnimationController.value)
+                    : 1.0, // Adjust opacity for fading effect
+                duration: const Duration(milliseconds: 500),
+                child: AnimatedBuilder(
+                  animation: selectedAnimationController,
+                  builder: (context, child) {
+                    return Transform.translate(
+                      offset: Offset(0, translateY),
+                      child: Container(
+                        width: widget.stepWidth,
+                        height: widget.stepHeight,
+                        margin: EdgeInsets.only(bottom: widget.stepPadding),
+                        decoration: BoxDecoration(
+                          borderRadius: widget.borderRadius,
+                          color: stepColor, // Set the color of the step
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             );
@@ -174,127 +179,203 @@ class ProgressIndicatorColumnState extends State<ProgressIndicatorColumn> {
     );
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
-
-    return Stack(
+    final themePro = ThemeNotifier.of(context, listen: false);
+    return Column(
       children: [
-        Container(
-          height: 300,
-          margin: const EdgeInsets.only(top: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-                color: Theme.of(context).colorScheme.primary, width: 0.2),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(20),
-                child: Text(
-                  'Today \n${DateFormat('EEEE dd').format(DateTime.now())}',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+        Text.rich(
+          TextSpan(
+              text: 'Today\n',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.surface),
+              children: [
+                TextSpan(
+                    text: DateFormat('EEEE, MMMM dd').format(DateTime.now()),
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        color: Theme.of(context).colorScheme.surface))
+              ]),
+          textAlign: TextAlign.center,
+        ).paddingAll(20),
+        Stack(
+          children: [
+            Container(
+              height: 300,
+              margin: const EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                gradient: themePro.themeMode == ThemeModeType.dark
+                    ? LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                            Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.1),
+                            Colors.transparent,
+                            Colors.transparent,
+                            Colors.transparent,
+                            Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.1),
+                          ])
+                    : const LinearGradient(colors: [
+                        Colors.transparent,
+                        Colors.transparent,
+                      ]),
+                border: Border.all(
+                    color: Theme.of(context).colorScheme.primary, width: 0.2),
               ),
-              SizedBox(
-                height: 190,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.monthProgressList.length,
-                  controller: scrollController,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, top: 10, bottom: 20),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: widget.monthProgressList[index].isCurrentMonth
-                              ? Theme.of(context).colorScheme.primary
-                              : Colors.transparent,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            '1500',
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary),
-                          ).paddingBottom(5),
-                          Transform.rotate(
-                            angle: 3.14,
-                            child: CustomStepProgressIndicator(
-                              selectedColor:
-                                  Theme.of(context).colorScheme.tertiary,
-                              unselectedColor: Colors.white24,
-                              totalSteps: 10,
-                              currentStep: index + 1,
-                            ),
-                          ),
-                          Divider(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          Text(
-                            widget.monthProgressList[index].month,
-                            style: TextStyle(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 190,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.monthProgressList.length,
+                      controller: scrollController,
+                      itemBuilder: (context, index) {
+                        final currentMonth =
+                            widget.monthProgressList[index].isCurrentMonth;
+                        return Container(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 20),
+                          decoration: BoxDecoration(
+                            gradient:
+                                widget.monthProgressList[index].isCurrentMonth
+                                    ? LinearGradient(
+                                        begin: FractionalOffset.topCenter,
+                                        end: FractionalOffset.bottomCenter,
+                                        colors: [
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.1),
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.1),
+                                          ])
+                                    : const LinearGradient(colors: [
+                                        Colors.transparent,
+                                        Colors.transparent,
+                                      ]),
+                            border: Border.all(
+                              width: 0.3,
                               color:
                                   widget.monthProgressList[index].isCurrentMonth
-                                      ? Theme.of(context).colorScheme.surface
-                                      : Theme.of(context).colorScheme.primary,
-                              fontWeight:
-                                  widget.monthProgressList[index].isCurrentMonth
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Colors.transparent,
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                '1500%',
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ).paddingBottom(5),
+                              Transform.rotate(
+                                angle: 3.14,
+                                child: CustomStepProgressIndicator(
+                                  selectedColor:
+                                      Theme.of(context).colorScheme.tertiary,
+                                  unselectedColor: Colors.white24,
+                                  totalSteps: 10,
+                                  currentStep: index + 1,
+                                  stepColors: const [
+                                    Colors.greenAccent,
+                                    Colors.red,
+                                    Colors.indigo,
+                                    Colors.black,
+                                    Colors.grey,
+                                    Colors.white24,
+                                    Colors.greenAccent,
+                                    Colors.yellow,
+                                    Colors.yellow,
+                                    Colors.yellow,
+                                  ],
+                                  currentMonth: currentMonth ? index : -1,
+                                ),
+                              ),
+                              Divider(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              Text(
+                                widget.monthProgressList[index].month,
+                                style: TextStyle(
+                                  color: widget.monthProgressList[index]
+                                          .isCurrentMonth
+                                      ? Theme.of(context).colorScheme.surface
+                                      : Theme.of(context).colorScheme.primary,
+                                  fontWeight: widget.monthProgressList[index]
+                                          .isCurrentMonth
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Container(
+                  height: 0.6,
+                  width: 120,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.background,
+                          ])),
                 ),
               ),
-            ],
-          ),
-        ),
-        Positioned(
-          top: 10,
-          left: 10,
-          child: Align(
-            alignment: AlignmentDirectional.topStart,
-            child: Container(
-              height: 0.6,
-              width: 120,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        Theme.of(context).colorScheme.background,
-                        Theme.of(context).colorScheme.background,
-                        Theme.of(context).colorScheme.background,
-                      ])),
             ),
-          ),
+            Positioned(
+                top: 0,
+                left: 20,
+                child: Text(
+                  'Monthly Capacity',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                )),
+          ],
         ),
-        Positioned(
-            top: 0,
-            left: 20,
-            child: Text(
-              'Monthly Capacity',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 13,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            )),
       ],
     );
   }

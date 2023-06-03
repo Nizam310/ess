@@ -6,6 +6,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../common_widgets/button.dart';
+import '../common_widgets/list_cus_card.dart';
 import '../common_widgets/text_field.dart';
 
 class Profile extends StatelessWidget {
@@ -15,11 +16,6 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// textStyle
-
-    final textStyle =
-        TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.primary);
-
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -33,21 +29,21 @@ class Profile extends StatelessWidget {
                   children: [
                     data.picked != null
                         ? Positioned.fill(
-                            child: ClipOval(
-                              child: Image.file(
-                                File(data.picked!.path),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
+                      child: ClipOval(
+                        child: Image.file(
+                          File(data.picked!.path),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
                         : SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(Icons.person),
-                            ).paddingBottom(10),
-                          ),
+                      height: 100,
+                      width: 100,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey[300],
+                        child: const Icon(Icons.person),
+                      ).paddingBottom(10),
+                    ),
                   ],
                 ),
               ).paddingBottom(10);
@@ -67,25 +63,19 @@ class Profile extends StatelessWidget {
             CusTextField(
               enabled: context.select((ProfileVm value) => value.enable),
               controller: context.select(
-                (ProfileVm value) => value.mob,
+                    (ProfileVm value) => value.mob,
               ),
               onChanged: (v) {},
               hintText: "Mobile",
             ).paddingAll(10),
-            ListTile(
-              title: Text(
-                "Date Of  join :   ${"21/12/23"}",
-                style: textStyle,
-              ),
-            ).paddingAll(10),
-            ListTile(
-              title: Text(
-                "Total years with company :  ${'5'}",
-                style: textStyle,
-              ),
-            ).paddingAll(10),
+            const ListCusCard(text: "Date Of  join :   ${"21/12/23"}",),
+            const ListCusCard(text: "Total years with company :  ${'5'}",),
+
+
             Visibility(
-              visible: context.read<ProfileVm>().enable == true,
+              visible: context
+                  .read<ProfileVm>()
+                  .enable == true,
               child: CusButton(
                   text: "Submit",
                   onTap: () {
@@ -98,3 +88,4 @@ class Profile extends StatelessWidget {
     );
   }
 }
+

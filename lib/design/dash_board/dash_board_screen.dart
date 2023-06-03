@@ -1,12 +1,11 @@
+import 'package:employee_self_service_flutter/design/dash_board/widgets/cus_card.dart';
+import 'package:employee_self_service_flutter/design/dash_board/widgets/toggle_button.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/video_player.dart';
 import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-import '../../constant/enum.dart';
-import '../../constant/themes/theme.dart';
 import '../home/home_provider.dart';
 import '../tasks/task_provider.dart';
 import 'dash_board_provider.dart';
@@ -128,7 +127,7 @@ class DashBoard extends StatelessWidget {
                                         },
                                         icon: const Icon(Icons.edit),
                                       )),
-                                  ToggleButton(),
+                                  const ToggleButton(),
                                   const NotificationMenu(),
                                 ],
                               )
@@ -140,79 +139,6 @@ class DashBoard extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                /// this was our bottom nav bar
-                /* floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
-                floatingActionButton: Builder(builder: (context) {
-                  return FloatingActionButton(
-                          backgroundColor: ColorS.nSecondary,
-                          onPressed: () {
-                            Scaffold.of(context).openDrawer();
-                          },
-                          child: const Icon(Icons.add))
-                      .paddingLeft(10);
-                }),
-                bottomNavigationBar: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  decoration: BoxDecoration(
-                    color: ColorS.nPrimary,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: BottomAppBar(
-                      color: ColorS.nPrimary,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      //  color:  const Color(0xFF000000),
-                      height: 50,
-                      shape: const CircularNotchedRectangle(),
-                      // elevation: 29.236,
-                      child: Consumer<DashBoardVm>(builder: (context, data, _) {
-                        return Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(
-                                Icons.home,
-                                color: data.index == 0
-                                    ? ColorS.primary
-                                    : const Color(0xFF8F9FBC),
-                              ),
-                              onPressed: () {
-                                data.index = 0;
-                                data.refresh();
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.timer,
-                                color: data.index == 5
-                                    ? ColorS.primary
-                                    : const Color(0xFF8F9FBC),
-                              ),
-                              onPressed: () {
-                                data.index = 5;
-
-                                data.refresh();
-                              },
-                            ),
-                          ],
-                        );
-                      }),
-                    ).paddingSymmetric(
-                      vertical: 5,
-                    ),
-                  ),
-                ),*/
               ),
             );
           }),
@@ -333,73 +259,6 @@ class CusDrawer extends StatelessWidget {
   }
 }
 
-class CusCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final Color? iconColor;
-  final Function() onTap;
-  final int index;
-
-  const CusCard({
-    Key? key,
-    required this.title,
-    required this.icon,
-    this.iconColor,
-    required this.onTap,
-    required this.index,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<DashBoardVm>(builder: (context, data, _) {
-      return MouseRegion(
-        onHover: (event) {
-          data.hover = true;
-          data.refresh();
-        },
-        onExit: (event) {
-          data.hover = false;
-          data.refresh();
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: onTap,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Wrap(
-                    alignment: WrapAlignment.start,
-                    children: [
-                      Icon(
-                        icon,
-                        color: data.index == index
-                            ? Colors.white
-                            : (iconColor ??
-                                Theme.of(context).colorScheme.primaryContainer),
-                      ).paddingRight(20),
-                      Text(
-                        title,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: data.index == index
-                                ? Colors.white
-                                : (Theme.of(context).colorScheme.primary)),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    });
-  }
-}
 
 class NotificationMenu extends StatelessWidget {
   const NotificationMenu({Key? key}) : super(key: key);
@@ -448,63 +307,3 @@ class NotificationMenu extends StatelessWidget {
   }
 }
 
-class ToggleButton extends StatelessWidget {
-  const ToggleButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final themeProvider = ThemeNotifier.of(context, listen: false);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 3,vertical: 1.5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(
-          color: themeProvider.themeMode == ThemeModeType.dark
-              ? Theme.of(context).colorScheme.primary
-              : Colors.white,
-        )
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: () => themeProvider.toggleThemeMode(),
-            child: Container(
-              height: 20,
-              width: 20,
-              decoration: BoxDecoration(
-                  border: Border.all(  color: themeProvider.themeMode == ThemeModeType.light
-                      ? Theme.of(context).colorScheme.primary
-                      : Colors.transparent,),
-                  shape: BoxShape.circle,
-                  ),
-              child: const Icon(
-                CupertinoIcons.sun_max,
-                color: Colors.white,
-                size: 11,
-              ),
-            ),
-          ).paddingRight(5),
-          InkWell(
-            onTap: () => themeProvider.toggleThemeMode(),
-            child: Container(
-              height: 20,
-              width: 20,
-              decoration: BoxDecoration(
-                  border: Border.all(color: themeProvider.themeMode == ThemeModeType.dark
-                      ? Theme.of(context).colorScheme.primary
-                      : Colors.transparent,),
-                  shape: BoxShape.circle,
-                  ),
-              child: const Icon(
-                CupertinoIcons.moon_fill,
-                color: Colors.white,
-                size: 10,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
