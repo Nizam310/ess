@@ -28,12 +28,13 @@ class ColorSchemes {
     onError: Color(0xFFF44336),
     onErrorContainer: Color(0xFFF44336),
     shadow: Color(0xFF000000),
+    outline: Color(0xFFFFFFFF)
   );
 
   /// Dark
   static const ColorScheme dark = ColorScheme.dark(
-    primary: Color(0xFF3C89B9),
-    primaryContainer: Color(0xFF1B425D),
+    primary: Color(0xFF34779D),
+    primaryContainer: Color(0xFF00cef5),
     onPrimary: Color(0xFF3C89B9),
     onPrimaryContainer: Color(0xFF485F70),
     secondary: Color(0xFF37E813),
@@ -53,5 +54,6 @@ class ColorSchemes {
     onError: Color(0xFFF44336),
     onErrorContainer: Color(0xFFF44336),
     shadow: Color(0xFF000000),
+    outline: Color(0xFF444242)
   );
 }

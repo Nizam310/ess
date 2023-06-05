@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-import '../../../constant/enum.dart';
-import '../../../constant/themes/theme.dart';
+import '../../../constant/decoration_card.dart';
 
 class Indicators extends StatelessWidget {
   const Indicators({Key? key}) : super(key: key);
@@ -12,43 +10,9 @@ class Indicators extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double percentage = 0.5;
-    final themePro = ThemeNotifier.of(context, listen: false);
-
-    return Container(
+    return DecorationCard(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        gradient: themePro.themeMode == ThemeModeType.dark
-            ? LinearGradient(
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-                tileMode: TileMode.clamp,
-                colors: [
-                    Theme.of(context).colorScheme.primary.withOpacity(
-                          0.1,
-                        ),
-                    Colors.transparent,
-                    Colors.transparent,
-                    Colors.transparent,
-                    Colors.transparent,
-                    Colors.transparent,
-                    Colors.transparent,
-                    Theme.of(context).colorScheme.primary.withOpacity(
-                          0.1,
-                        ),
-                  ])
-            : const LinearGradient(colors: [
-                Colors.transparent,
-                Colors.transparent,
-              ]),
-        border: GradientBoxBorder(
-          gradient: LinearGradient(colors: [
-            Theme.of(context).colorScheme.primary,
-            Theme.of(context).colorScheme.primary,
-          ]),
-          width: 0.2,
-        ),
-      ),
+
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

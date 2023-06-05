@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:employee_self_service_flutter/design/common_widgets/button.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/signature.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/enum.dart';
@@ -19,7 +22,12 @@ class FeedBackAndSignature extends StatelessWidget {
             return Column(
               children: [
                 Signature(
-                    link: data.picked!.path,
+                    image: data.picked != null
+                        ? Image.file(
+                            File(data.picked!.path),
+                            height: 300,
+                          )
+                        : const Text('Nothing Picked!'),
                     name: 'Customer',
                     type: CusAttendeeType.customer),
                 CusButton(
@@ -27,7 +35,7 @@ class FeedBackAndSignature extends StatelessWidget {
                     onTap: () {
                       data.pickFile();
                       data.refresh();
-                    }),
+                    }).paddingSymmetric(horizontal: 13),
               ],
             );
           }),

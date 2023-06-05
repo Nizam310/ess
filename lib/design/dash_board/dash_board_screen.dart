@@ -181,8 +181,8 @@ class CusDrawer extends StatelessWidget {
                     ],
                   ).paddingAll(10),
                 ).paddingSymmetric(horizontal: 8, vertical: 5),
-                const Divider(
-                  // color: Color(0xFFB3D452),
+                 Divider(
+                  color: Theme.of(context).colorScheme.outline,
                   thickness: 0.5,
                 ),
                 CusCard(

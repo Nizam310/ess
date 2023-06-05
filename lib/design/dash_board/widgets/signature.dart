@@ -1,55 +1,50 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../constant/decoration_card.dart';
 import '../../../constant/enum.dart';
 
 class Signature extends StatelessWidget {
-  final String link;
+
   final String name;
   final CusAttendeeType type;
   final Function()? buttonOnTap;
   final String? buttonText;
   final Widget? button;
-
+  final Widget image;
   const Signature(
       {Key? key,
-      required this.link,
+
       required this.name,
       required this.type,
       this.buttonOnTap,
       this.buttonText,
-      this.button})
+      this.button, required this.image})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    final color =Theme.of(context).colorScheme.surface;
+    return DecorationCard(
       child: Column(
         children: [
           Text(type == CusAttendeeType.attendee
               ? 'Attendee Name : $name'
-              : "Customer Name : $name"),
-          const Align(
+              : "Customer Name : $name",style: TextStyle(color: color),),
+          Align(
             alignment: Alignment.topLeft,
             child: Text(
-              "Signature",
+              "Signature",style: TextStyle(color: color),
             ),
-          ).paddingLeft(20),
-          Row(
+          ).paddingOnly( left :20,bottom: 5),
+          Row(mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: const BorderSide(color: Colors.black)),
-                  child: Image.file(
-                    File(link),
-                    height: 300,
+                child: Center(
+                  child: image.paddingSymmetric(
+                    horizontal: 10,
                   ),
-                ).paddingSymmetric(
-                  horizontal: 10,
                 ),
               ),
             ],

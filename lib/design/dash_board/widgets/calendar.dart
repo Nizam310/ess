@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../constant/enum.dart';
-import '../../../constant/themes/theme.dart';
+import '../../../constant/decoration_card.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -83,16 +82,16 @@ class CalendarPageState extends State<CalendarPage> {
                   radius: 0.0,
                   onTap: () => _addEvent(date),
                   child: Container(
-                    height: 15,
-                    width: 15,
+                    height: MediaQuery.of(context).size.width >287?15:10,
+                    width: MediaQuery.of(context).size.width >287?15:10,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.blue,
                     ),
-                    child: const Icon(
+                    child:  Icon(
                       Icons.add,
                       color: Colors.white,
-                      size: 15,
+                      size: MediaQuery.of(context).size.width >287?15:9,
                     ),
                   ),
                 ),
@@ -235,7 +234,6 @@ class CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final themePro = ThemeNotifier.of(context, listen: false);
 
     return Column(
       children: [
@@ -244,34 +242,8 @@ class CalendarPageState extends State<CalendarPage> {
           style: context.textTheme.titleMedium
               ?.copyWith(color: Theme.of(context).colorScheme.surface),
         ).paddingSymmetric(vertical: 10),
-        Container(
+        DecorationCard(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              gradient: themePro.themeMode == ThemeModeType.dark
-                  ? LinearGradient(
-                      begin: FractionalOffset.topCenter,
-                      end: FractionalOffset.bottomCenter,
-                      colors: [
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.1),
-                          Colors.transparent,
-                          Colors.transparent,
-                          Colors.transparent,
-                          Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.1),
-                        ])
-                  : const LinearGradient(colors: [
-                      Colors.transparent,
-                      Colors.transparent,
-                    ]),
-              border: Border.all(
-                  color: Theme.of(context).colorScheme.primary, width: 0.2),
-            ),
             child: _buildCalendar()),
       ],
     );

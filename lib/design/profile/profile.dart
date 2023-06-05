@@ -68,8 +68,8 @@ class Profile extends StatelessWidget {
               onChanged: (v) {},
               hintText: "Mobile",
             ).paddingAll(10),
-            const ListCusCard(text: "Date Of  join :   ${"21/12/23"}",),
-            const ListCusCard(text: "Total years with company :  ${'5'}",),
+            const ListCusCard(text: "Date Of  join :   ${"21/12/23"}",).paddingAll(10),
+            const ListCusCard(text: "Total years with company :  ${'5'}",).paddingAll(10),
 
 
             Visibility(
@@ -80,7 +80,7 @@ class Profile extends StatelessWidget {
                   text: "Submit",
                   onTap: () {
                     context.read<ProfileVm>().onSubmit();
-                  }).paddingSymmetric(horizontal: 10),
+                  }).paddingSymmetric(horizontal: 10,vertical: 10),
             ),
           ],
         ).paddingSymmetric(vertical: 10),
