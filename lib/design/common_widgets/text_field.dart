@@ -33,6 +33,7 @@ class _CusTextFieldState extends State<CusTextField> {
       enabled: widget.enabled ?? true,
       keyboardAppearance: Brightness.dark,
       textInputAction: TextInputAction.next,
+      style: TextStyle(color: Theme.of(context).colorScheme.surface),
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -65,12 +66,13 @@ class _CusTextFieldState extends State<CusTextField> {
               borderSide: BorderSide(
                   color: widget.borderColor ??
                       Theme.of(context).colorScheme.primary)),
+
           hintText: widget.hintText,
           hintStyle: TextStyle(
               fontSize: 13,
               color: widget.hintColor ?? Theme.of(context).colorScheme.primary),
           labelStyle: TextStyle(
-              color: widget.hintColor ?? Theme.of(context).colorScheme.primary),
+              color:  Theme.of(context).colorScheme.primary),
           labelText: widget.labelText),
       onChanged: widget.onChanged,
       controller: widget.controller,

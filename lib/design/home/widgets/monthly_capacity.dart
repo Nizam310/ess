@@ -17,7 +17,6 @@ class CustomStepProgressIndicator extends StatefulWidget {
   final double stepWidth;
   final double stepHeight;
   final double stepPadding;
-  final List<Color> stepColors;
   final Color selectedColor;
   final Color unselectedColor;
   final BorderRadius borderRadius;
@@ -30,7 +29,6 @@ class CustomStepProgressIndicator extends StatefulWidget {
     this.stepWidth = 50,
     this.stepHeight = 5,
     this.stepPadding = 4,
-    required this.stepColors,
     required this.selectedColor,
     required this.unselectedColor,
     this.borderRadius = const BorderRadius.only(
@@ -43,33 +41,36 @@ class CustomStepProgressIndicator extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomStepProgressIndicatorState createState() =>
-      _CustomStepProgressIndicatorState();
+  CustomStepProgressIndicatorState createState() =>
+      CustomStepProgressIndicatorState();
 }
 
-class _CustomStepProgressIndicatorState
+class CustomStepProgressIndicatorState
     extends State<CustomStepProgressIndicator>
     with SingleTickerProviderStateMixin {
-  late AnimationController selectedAnimationController;
+  late AnimationController fadeAnimationController;
 
   @override
   void initState() {
     super.initState();
-    selectedAnimationController = AnimationController(
+    fadeAnimationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
-    selectedAnimationController.repeat(reverse: true);
+    fadeAnimationController.repeat(reverse: false);
   }
 
   @override
   void dispose() {
-    selectedAnimationController.dispose();
+    fadeAnimationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final selectedColor = widget.selectedColor.withOpacity(0.5);
+    final unselectedColor = widget.unselectedColor.withOpacity(0.2);
+
     return SizedBox(
       width: widget.stepWidth,
       height: 85,
@@ -79,37 +80,32 @@ class _CustomStepProgressIndicatorState
           widget.totalSteps,
           (index) {
             final bool isSelected = index < widget.currentStep;
+            final bool isCurrentMonth = widget.currentMonth == index;
             final bool isFade =
-                index > widget.currentStep + 1; // Determine if step should fade
+                isCurrentMonth && index == widget.currentStep - 1;
             final Color stepColor = isSelected
-                ? widget.selectedColor
-                : widget.stepColors[index]; // Assign color based on selection
-
-            final double translateY =
-                isSelected ? selectedAnimationController.value * 10.0 : 0.0;
+                ? (isFade ? selectedColor : widget.selectedColor)
+                : unselectedColor;
             return Expanded(
-              child: AnimatedOpacity(
-                opacity: isFade
-                    ? (1 - selectedAnimationController.value)
-                    : 1.0, // Adjust opacity for fading effect
-                duration: const Duration(milliseconds: 500),
-                child: AnimatedBuilder(
-                  animation: selectedAnimationController,
-                  builder: (context, child) {
-                    return Transform.translate(
-                      offset: Offset(0, translateY),
-                      child: Container(
-                        width: widget.stepWidth,
-                        height: widget.stepHeight,
-                        margin: EdgeInsets.only(bottom: widget.stepPadding),
-                        decoration: BoxDecoration(
-                          borderRadius: widget.borderRadius,
-                          color: stepColor, // Set the color of the step
-                        ),
+              child: AnimatedBuilder(
+                animation: fadeAnimationController,
+                builder: (context, child) {
+                  final double opacity = isFade
+                      ? fadeAnimationController.value
+                      : 1.0; // Adjust opacity for fading effect
+                  return Opacity(
+                    opacity: opacity,
+                    child: Container(
+                      width: widget.stepWidth,
+                      height: widget.stepHeight,
+                      margin: EdgeInsets.only(bottom: widget.stepPadding),
+                      decoration: BoxDecoration(
+                        borderRadius: widget.borderRadius,
+                        color: stepColor, // Set the color of the step
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             );
           },
@@ -302,18 +298,6 @@ class ProgressIndicatorColumnState extends State<ProgressIndicatorColumn> {
                                   unselectedColor: Colors.white24,
                                   totalSteps: 10,
                                   currentStep: index + 1,
-                                  stepColors: const [
-                                    Colors.greenAccent,
-                                    Colors.red,
-                                    Colors.indigo,
-                                    Colors.black,
-                                    Colors.grey,
-                                    Colors.white24,
-                                    Colors.greenAccent,
-                                    Colors.yellow,
-                                    Colors.yellow,
-                                    Colors.yellow,
-                                  ],
                                   currentMonth: currentMonth ? index : -1,
                                 ),
                               ),

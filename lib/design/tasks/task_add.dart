@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../common_widgets/button.dart';
 import '../common_widgets/drop_down.dart';
+import '../common_widgets/list_cus_card.dart';
 import '../common_widgets/text_field.dart';
 
 class TaskAdd extends StatelessWidget {
@@ -13,10 +14,7 @@ class TaskAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return /* Scaffold(
-      body: const LocationView(),
-      bottomSheet:*/
-        Container(
+    return Container(
       height: 300,
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
@@ -34,6 +32,7 @@ class _TaskAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style = TextStyle(color: Theme.of(context).colorScheme.primary);
     return Consumer<TaskVm>(builder: (context, data, _) {
       return SingleChildScrollView(
         child: Column(
@@ -50,7 +49,10 @@ class _TaskAdd extends StatelessWidget {
                   verPadding: 5,
                   value: data.status,
                   items: data.statusList,
-                  itemBuilder: (type) => Text(type),
+                  itemBuilder: (type) => Text(
+                    type,
+                    style: style,
+                  ),
                   onChanged: (String? value) {
                     if (value != null) {
                       data.status = value;
@@ -64,7 +66,10 @@ class _TaskAdd extends StatelessWidget {
                   verPadding: 5,
                   value: data.assigned,
                   items: const ["You"],
-                  itemBuilder: (type) => Text(type),
+                  itemBuilder: (type) => Text(
+                    type,
+                    style: style,
+                  ),
                   onChanged: (String? value) {
                     if (value != null) {
                       data.assigned = value;
@@ -73,26 +78,24 @@ class _TaskAdd extends StatelessWidget {
                   },
                   horPadding: 0,
                 ),
-                ListTile(
-                  tileColor: data.isRunning
-                      ? Colors.transparent
-                      : Theme.of(context).colorScheme.primary,
-                  leading: Icon(
-                    data.isRunning ? Icons.stop_circle : Icons.play_circle,
-                    color: data.isRunning ? Colors.black : Colors.white,
+                ListCusCard(
+                   text: data.isRunning ? data.timerText : "Start Tracking",
+                  textStyle: TextStyle(
+                    color:  Theme.of(context)
+                        .colorScheme
+                        .primary,
                   ),
-                  title: Text(
-                    data.isRunning ? data.timerText : "Start Tracking",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: data.isRunning ? Colors.black : Colors.white,
-                    ),
-                  ).paddingRight(20),
+                  iconNeeded: true,
+                  icon: data.isRunning ? Icons.stop_circle : Icons.play_circle,
+                  iconColor: Theme.of(context)
+                      .colorScheme
+                      .primary /*data.isRunning ? Colors.black : Colors.white*/,
                   onTap: () {
                     data.startStop();
                     data.refresh();
                   },
-                ).paddingSymmetric(vertical: 5),
+                ).paddingSymmetric(vertical: 10),
+
                 CusTextField(
                         labelText: "Description",
                         controller: data.taskDesc,

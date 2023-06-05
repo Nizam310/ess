@@ -125,7 +125,7 @@ class DashBoard extends StatelessWidget {
                                                 );
                                               });
                                         },
-                                        icon: const Icon(Icons.edit),
+                                        icon: Icon(Icons.edit,color: Theme.of(context).colorScheme.surface,),
                                       )),
                                   const ToggleButton(),
                                   const NotificationMenu(),

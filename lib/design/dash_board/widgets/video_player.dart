@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu_videoplayer/meedu_player.dart';
 
@@ -18,18 +19,24 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.setDataSource(
-        looping: true,
-        DataSource(
-          type: DataSourceType.asset,
-          source: "assets/videos/cluster_turn_by_gleb.mp4",
-        ),
-        autoplay: true,
-      );
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.setDataSource(
+          looping: true,
+          DataSource(
+            type: DataSourceType.asset,
+            source: "assets/videos/cluster_turn_by_gleb.mp4",
+          ),
+          autoplay: true,
+        );
 
-      controller.setVolume(0);
-    });
+        controller.setVolume(0);
+      });
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print('Error $e');
+      }
+    }
   }
 
   @override
