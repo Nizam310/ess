@@ -3,13 +3,17 @@ import 'package:employee_self_service_flutter/design/home/widgets/task_indicater
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../dash_board/widgets/calendar.dart';
+
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    ///sample snackBar
+     /* WidgetsBinding.instance.addPostFrameCallback((_) {
         final snackBar = SnackBar(
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -34,15 +38,17 @@ class Home extends StatelessWidget {
           duration: const Duration(seconds: 3),
         );
         //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      });
+      });*/
+
       return ListView(
         padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
         children:  [
           const Indicators(),
           const MonthlyCapacity().paddingSymmetric(vertical: 20),
-
+          const CalendarPage(),
         ],
       );
+
       /*   return ListView(
         children: [
           const LeaveChart(),
@@ -216,6 +222,7 @@ class Home extends StatelessWidget {
           ).paddingSymmetric(vertical: 5, horizontal: 15),
         ],
       );*/
+
     });
   }
 }

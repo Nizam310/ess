@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../constant/enum.dart';
+import '../../../constant/themes/theme.dart';
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
 
@@ -58,12 +61,13 @@ class CalendarPageState extends State<CalendarPage> {
         });
       },
       child: Container(
+        margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
           border: Border.all(
-            color: clickedDate == date
-                ? Colors.black
+            color: (clickedDate == date)
+                ? Theme.of(context).colorScheme.tertiary
                 : isCurrentDate
-                    ? Theme.of(context).colorScheme.primary
+                    ? white
                     : Colors.transparent,
           ),
           borderRadius: BorderRadius.circular(10),
@@ -100,6 +104,8 @@ class CalendarPageState extends State<CalendarPage> {
                 Center(
                   child: Text(
                     date.day.toString(),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.surface),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -119,6 +125,7 @@ class CalendarPageState extends State<CalendarPage> {
     final startIndex = firstDayOfMonth.weekday;
     final endIndex = startIndex + daysInMonth;
     final monthName = DateFormat.MMMM().format(_selectedDate);
+    final color = Theme.of(context).colorScheme.surface;
     final weekdayLabels = [
       'Sun',
       'Mon',
@@ -134,9 +141,10 @@ class CalendarPageState extends State<CalendarPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 size: 20,
+                color: color,
               ),
               onPressed: () {
                 setState(() {
@@ -146,11 +154,13 @@ class CalendarPageState extends State<CalendarPage> {
             ),
             Text(
               '$monthName/$year',
+              style: TextStyle(color: color),
             ),
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_forward,
                 size: 20,
+                color: color,
               ),
               onPressed: () {
                 setState(() {
@@ -164,12 +174,12 @@ class CalendarPageState extends State<CalendarPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: weekdayLabels
               .map((label) => Center(
-                child: Text(
+                    child: Text(
                       label,
                       textAlign: TextAlign.start,
-                      style: const TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: 13, color: color),
                     ),
-              ))
+                  ))
               .toList(),
         ).paddingSymmetric(vertical: 10),
         GridView.builder(
@@ -195,35 +205,23 @@ class CalendarPageState extends State<CalendarPage> {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(16),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.6), width: 0.56),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurStyle: BlurStyle.outer,
-                          blurRadius: 0.5,
-                        ),
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurStyle: BlurStyle.outer,
-                          blurRadius: 0.5,
-                        ),
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurStyle: BlurStyle.outer,
-                          blurRadius: 0.5,
-                        ),
-                      ]),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.6),
+                        width: 0.56),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: events[clickedDate]!
                         .map((event) => Text(
                               '- $event',
-                              style: const TextStyle(
-                                fontSize: 14.0,
-                              ),
+                              style: TextStyle(fontSize: 14.0, color: color),
                             ))
                         .toList(),
                   ),
@@ -237,10 +235,45 @@ class CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(color: Colors.transparent,
-        child: Padding(
-      padding: const EdgeInsets.all(10),
-      child: _buildCalendar(),
-    ));
+    final themePro = ThemeNotifier.of(context, listen: false);
+
+    return Column(
+      children: [
+        Text(
+          'View and add task by clicking',
+          style: context.textTheme.titleMedium
+              ?.copyWith(color: Theme.of(context).colorScheme.surface),
+        ).paddingSymmetric(vertical: 10),
+        Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              gradient: themePro.themeMode == ThemeModeType.dark
+                  ? LinearGradient(
+                      begin: FractionalOffset.topCenter,
+                      end: FractionalOffset.bottomCenter,
+                      colors: [
+                          Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.1),
+                          Colors.transparent,
+                          Colors.transparent,
+                          Colors.transparent,
+                          Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.1),
+                        ])
+                  : const LinearGradient(colors: [
+                      Colors.transparent,
+                      Colors.transparent,
+                    ]),
+              border: Border.all(
+                  color: Theme.of(context).colorScheme.primary, width: 0.2),
+            ),
+            child: _buildCalendar()),
+      ],
+    );
   }
 }

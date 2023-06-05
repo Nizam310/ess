@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ColorSchemes {
+
+  /// The Light And Dark Color Schemes Are defines here if you want to change the theme of the ESS
+  /// simply change the color schemes
+
+  /// Light
   static const ColorScheme light = ColorScheme.light(
     primary: Color(0xFFFFFFFF),
     primaryContainer: Color(0xFFFFFFFF),
@@ -24,6 +29,8 @@ class ColorSchemes {
     onErrorContainer: Color(0xFFF44336),
     shadow: Color(0xFF000000),
   );
+
+  /// Dark
   static const ColorScheme dark = ColorScheme.dark(
     primary: Color(0xFF3C89B9),
     primaryContainer: Color(0xFF1B425D),
