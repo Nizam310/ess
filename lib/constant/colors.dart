@@ -28,7 +28,7 @@ class ColorSchemes {
     onError: Color(0xFFF44336),
     onErrorContainer: Color(0xFFF44336),
     shadow: Color(0xFF000000),
-    outline: Color(0xFFFFFFFF)
+    outline: Color(0xFF444242)
   );
 
   /// Dark

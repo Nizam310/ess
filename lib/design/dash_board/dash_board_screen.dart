@@ -44,128 +44,205 @@ class DashBoard extends StatelessWidget {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Builder(builder: (context) {
-                                return IconButton(
-                                    onPressed: () {
-                                      Scaffold.of(context).openDrawer();
-                                    },
-                                    icon: Icon(
-                                      Icons.menu,
-                                      color: colorScheme.primary,
-                                    ));
-                              }),
-                              Text(
-                                data.index == 0
-                                    ? "Dash Board"
-                                    : data.index == 1
-                                        ? "Profile"
-                                        : data.index == 2
-                                            ? "Request Form"
-                                            : data.index == 3
-                                                ? "Settings"
-                                                : data.index == 4
-                                                    ? "Chat With HR"
-                                                    : data.index == 5
-                                                        ? "Task"
-                                                        : data.index == 6
-                                                            ? "Task Add"
-                                                            : data.index == 7
-                                                                ? "Notifications"
-                                                                : "",
-                                style: TextStyle(color: colorScheme.primary),
-                              ),
-                              Row(
-                                children: [
-                                  Visibility(
-                                      visible: data.index == 1,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (m) {
-                                                final data =
-                                                    Provider.of<ProfileVm>(
-                                                        context);
-                                                return AlertDialog(
-                                                  title: const Text("Edit"),
-                                                  content: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      ListTile(
-                                                        leading: const Icon(
-                                                            Icons.photo),
-                                                        title: Text(
-                                                            data.picked != null
-                                                                ? "Edit Image"
-                                                                : "Add Image"),
-                                                        onTap: () {
-                                                          data.pickFile();
-                                                          data.refresh();
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ).paddingBottom(10),
-                                                      ListTile(
-                                                        leading: const Icon(
-                                                            Icons.receipt),
-                                                        title: const Text(
-                                                            "Edit Info"),
-                                                        onTap: () {
-                                                          data.enable = true;
-                                                          data.refresh();
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              });
-                                        },
-                                        icon: Icon(
-                                          Icons.edit,
+                        Visibility(
+                          visible: !(data.index == 0),
+                          child: SizedBox(
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Builder(builder: (context) {
+                                  return IconButton(
+                                      onPressed: () {
+                                        Scaffold.of(context).openDrawer();
+                                      },
+                                      icon: Icon(
+                                        Icons.menu,
+                                        color: colorScheme.primary,
+                                      ));
+                                }),
+                                Text(
+                                  data.index == 0
+                                      ? "Dash Board"
+                                      : data.index == 1
+                                          ? "Profile"
+                                          : data.index == 2
+                                              ? "Request Form"
+                                              : data.index == 3
+                                                  ? "Settings"
+                                                  : data.index == 4
+                                                      ? "Chat With HR"
+                                                      : data.index == 5
+                                                          ? "Task"
+                                                          : data.index == 6
+                                                              ? "Task Add"
+                                                              : data.index == 7
+                                                                  ? "Notifications"
+                                                                  : "",
+                                  style: TextStyle(color: colorScheme.primary),
+                                ),
+                                Row(
+                                  children: [
+                                    Visibility(
+                                        visible: data.index == 1,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (m) {
+                                                  final data =
+                                                      Provider.of<ProfileVm>(
+                                                          context);
+                                                  return AlertDialog(
+                                                    title: const Text("Edit"),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        ListTile(
+                                                          leading: const Icon(
+                                                              Icons.photo),
+                                                          title: Text(data
+                                                                      .picked !=
+                                                                  null
+                                                              ? "Edit Image"
+                                                              : "Add Image"),
+                                                          onTap: () {
+                                                            data.pickFile();
+                                                            data.refresh();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                        ).paddingBottom(10),
+                                                        ListTile(
+                                                          leading: const Icon(
+                                                              Icons.receipt),
+                                                          title: const Text(
+                                                              "Edit Info"),
+                                                          onTap: () {
+                                                            data.enable = true;
+                                                            data.refresh();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          icon: Icon(
+                                            Icons.edit,
+                                            color: colorScheme.surface,
+                                          ),
+                                        )),
+                                    InkWell(
+                                      onTap: () {
+                                        data.index = 4;
+                                        data.refresh();
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                color: colorScheme.primary)),
+                                        child: Icon(
+                                          CupertinoIcons.chat_bubble,
                                           color: colorScheme.surface,
+                                          size: 12,
                                         ),
-                                      )),
-                                  InkWell(
-                                    onTap: () {
-                                      data.index = 4;
-                                      data.refresh();
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      padding: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: colorScheme.primary)),
-                                      child: Icon(
-                                        CupertinoIcons.chat_bubble,
-                                        color: colorScheme.surface,
-                                        size: 12,
                                       ),
                                     ),
-                                  ),
-                                   Visibility(
-                                    //  visible: data.index==0,
-                                      child: const ToggleButton()),
-                                  const NotificationMenu(),
-                                ],
-                              )
-                            ],
-                          ).paddingSymmetric(horizontal: 9),
+                                    const ToggleButton(),
+                                    const NotificationMenu(),
+                                  ],
+                                )
+                              ],
+                            ).paddingSymmetric(horizontal: 9),
+                          ),
                         ),
                         Expanded(child: data.screen.elementAt(data.index))
                       ],
                     ),
                   ],
+                ),
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerDocked,
+                floatingActionButton: Builder(builder: (context) {
+                  return /*InkWell(
+                    onTap: (){},
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: colorScheme.primary),
+                        shape: BoxShape.circle
+                      ),
+                      child: Icon(Icons.add,color: colorScheme.primary,),
+                    ));*/
+                      Visibility(
+                        visible: data.index==0,
+                        child: FloatingActionButton(
+                            backgroundColor: colorScheme.primary.withOpacity(0.5),
+                            onPressed: () {
+                              Scaffold.of(context).openDrawer();
+                            },
+                            child: Icon(
+                              Icons.add,
+                              color: colorScheme.surface,
+                            )),
+                      );
+                }),
+                bottomNavigationBar: Visibility(
+                  visible: (data.index==0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: BottomAppBar(
+                     color: colorScheme.primaryContainer.withOpacity(0.2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      height: 50,
+                      elevation: 0.0,
+                      shape:  const CircularNotchedRectangle(),
+                      child: Consumer<DashBoardVm>(builder: (context, data, _) {
+                        return Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                Icons.home,
+                                color: data.index == 0
+                                    ? colorScheme.primaryContainer
+                                    : colorScheme.outline,
+                              ),
+                              onPressed: () {
+                                data.index = 0;
+                                data.refresh();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.timer,
+                                color: data.index == 5
+                                    ? colorScheme.primaryContainer
+                                    : colorScheme.outline,
+                              ),
+                              onPressed: () {
+                                data.index = 5;
+
+                                data.refresh();
+                              },
+                            ),
+                          ],
+                        );
+                      }),
+                    ).paddingSymmetric(
+                      vertical: 5,
+                    ),
+                  ),
                 ),
               ),
             );
@@ -175,6 +252,25 @@ class DashBoard extends StatelessWidget {
     );
   }
 }
+
+class CustomNotchedShape extends CircularNotchedRectangle {
+  final Color borderColor;
+
+  CustomNotchedShape({required this.borderColor});
+
+  @override
+  Path getOuterPath(Rect host, Rect? guest) {
+    final path = super.getOuterPath(host, guest);
+    final borderPath = Path.combine(
+      PathOperation.difference,
+      path,
+      Path()..addRect(host),
+    );
+
+    return borderPath;
+  }
+}
+
 
 class CusDrawer extends StatelessWidget {
   const CusDrawer({Key? key}) : super(key: key);
@@ -252,6 +348,16 @@ class CusDrawer extends StatelessWidget {
                     data.refresh();
                   },
                 ),
+                CusCard(
+                  index: 5,
+                  icon: Icons.chat_bubble_outline,
+                  title: "Chat",
+                  onTap: () {
+                    data.index = 5;
+                    Navigator.of(context).pop();
+                    data.refresh();
+                  },
+                ),
               ],
             ),
           ),
@@ -317,14 +423,14 @@ class NotificationMenu extends StatelessWidget {
               size: 15,
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 3,
             left: 0,
             child: SizedBox(
               height: 5,
               width: 5,
               child: CircleAvatar(
-                backgroundColor: Colors.red,
+                backgroundColor: colorScheme.error,
               ),
             ),
           ),

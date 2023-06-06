@@ -8,8 +8,9 @@ class DecorationCard extends StatelessWidget {
   final double? height;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final BorderRadius? radius;
   const DecorationCard(
-      {Key? key, required this.child, this.padding, this.margin, this.height})
+      {Key? key, required this.child, this.padding, this.margin, this.height, this.radius})
       : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class DecorationCard extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: radius??BorderRadius.circular(5),
         gradient: themePro.themeMode == ThemeModeType.dark
             ? LinearGradient(
                 begin: FractionalOffset.topCenter,

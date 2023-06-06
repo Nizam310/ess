@@ -1,6 +1,7 @@
 import 'package:employee_self_service_flutter/design/common_widgets/list_cus_card.dart';
 import 'package:employee_self_service_flutter/design/settings/settings_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
@@ -17,7 +18,7 @@ class Settings extends StatelessWidget {
             const ListCusCard(
                 iconNeeded: true,
                 icon: Icons.help_outline_rounded,
-                text: 'Help Center'),
+                text: 'Help Center').paddingSymmetric(vertical: 10),
             ListCusCard(iconNeeded: true,
                 icon: Icons.help_outline_rounded,
                 text: 'Notifications',
@@ -28,7 +29,7 @@ class Settings extends StatelessWidget {
                   onChanged: (val) {
                     context.read<SettingsVm>().switchOn = val;
                     context.read<SettingsVm>().refresh();
-                  }),),
+                  }),).paddingSymmetric(vertical: 10),
           ],
         );
       }),

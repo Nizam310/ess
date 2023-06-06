@@ -14,3 +14,8 @@ enum ThemeModeType {
   light,
   dark,
 }
+
+enum Request{
+  pending,
+  verified
+}
