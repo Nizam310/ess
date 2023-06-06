@@ -6,26 +6,40 @@ class Notifications extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style = TextStyle(color: Theme.of(context).colorScheme.primary);
     return Column(
       children: [
         Expanded(
             child: ListView.builder(
           itemCount: 6,
-          itemBuilder: (context, index) =>  Card(
+          itemBuilder: (context, index) => Card(
             child: ListTileTheme(
               child: ExpansionTile(
                 shape: const RoundedRectangleBorder(),
                 leading: CircleAvatar(
                   backgroundColor: Colors.grey[300],
-                  child: const Center(child: Icon(Icons.person,size: 15,)),
+                  child: const Center(
+                      child: Icon(
+                    Icons.person,
+                    size: 15,
+                  )),
                 ),
-                title: const Text("Task Assigned to you"),
-                subtitle: const Text("From : ${"HR"}"),
-                children: const [
-                  Divider(),
+                title: Text(
+                  "Task Assigned to you",
+                  style: style,
+                ),
+                subtitle: Text(
+                  "From : ${"HR"}",
+                  style: style,
+                ),
+                children: [
+                  const Divider(),
                   SizedBox(
                       height: 100,
-                      child: Text('More Details!'))
+                      child: Text(
+                        'More Details!',
+                        style: style,
+                      ))
                 ],
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:employee_self_service_flutter/design/dash_board/widgets/cus_card
 import 'package:employee_self_service_flutter/design/dash_board/widgets/toggle_button.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/video_player.dart';
 import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,8 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DashBoardVm()),
@@ -53,8 +56,7 @@ class DashBoard extends StatelessWidget {
                                     },
                                     icon: Icon(
                                       Icons.menu,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
+                                      color: colorScheme.primary,
                                     ));
                               }),
                               Text(
@@ -75,8 +77,7 @@ class DashBoard extends StatelessWidget {
                                                             : data.index == 7
                                                                 ? "Notifications"
                                                                 : "",
-                                style: TextStyle(
-                                    color: Theme.of(context).colorScheme.primary),
+                                style: TextStyle(color: colorScheme.primary),
                               ),
                               Row(
                                 children: [
@@ -106,7 +107,8 @@ class DashBoard extends StatelessWidget {
                                                         onTap: () {
                                                           data.pickFile();
                                                           data.refresh();
-                                                          Navigator.pop(context);
+                                                          Navigator.pop(
+                                                              context);
                                                         },
                                                       ).paddingBottom(10),
                                                       ListTile(
@@ -117,7 +119,8 @@ class DashBoard extends StatelessWidget {
                                                         onTap: () {
                                                           data.enable = true;
                                                           data.refresh();
-                                                          Navigator.pop(context);
+                                                          Navigator.pop(
+                                                              context);
                                                         },
                                                       ),
                                                     ],
@@ -125,9 +128,34 @@ class DashBoard extends StatelessWidget {
                                                 );
                                               });
                                         },
-                                        icon: Icon(Icons.edit,color: Theme.of(context).colorScheme.surface,),
+                                        icon: Icon(
+                                          Icons.edit,
+                                          color: colorScheme.surface,
+                                        ),
                                       )),
-                                  const ToggleButton(),
+                                  InkWell(
+                                    onTap: () {
+                                      data.index = 4;
+                                      data.refresh();
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: colorScheme.primary)),
+                                      child: Icon(
+                                        CupertinoIcons.chat_bubble,
+                                        color: colorScheme.surface,
+                                        size: 12,
+                                      ),
+                                    ),
+                                  ),
+                                   Visibility(
+                                    //  visible: data.index==0,
+                                      child: const ToggleButton()),
                                   const NotificationMenu(),
                                 ],
                               )
@@ -153,6 +181,7 @@ class CusDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Consumer<DashBoardVm>(builder: (context, data, _) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,21 +197,19 @@ class CusDrawer extends StatelessWidget {
                     children: [
                       Text(
                         "Name",
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: Theme.of(context).colorScheme.primary),
+                        style:
+                            TextStyle(fontSize: 17, color: colorScheme.primary),
                       ).paddingTop(10),
                       Text(
                         "Role",
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Theme.of(context).colorScheme.primary),
+                        style:
+                            TextStyle(fontSize: 12, color: colorScheme.primary),
                       ).paddingTop(10),
                     ],
                   ).paddingAll(10),
                 ).paddingSymmetric(horizontal: 8, vertical: 5),
-                 Divider(
-                  color: Theme.of(context).colorScheme.outline,
+                Divider(
+                  color: colorScheme.outline,
                   thickness: 0.5,
                 ),
                 CusCard(
@@ -245,7 +272,7 @@ class CusDrawer extends StatelessWidget {
                   index: -1,
                   icon: Icons.power_settings_new,
                   title: "Logout",
-                  iconColor: Theme.of(context).colorScheme.error,
+                  iconColor: colorScheme.error,
                   onTap: () {
                     Navigator.pushNamed(context, "/");
                   },
@@ -259,12 +286,12 @@ class CusDrawer extends StatelessWidget {
   }
 }
 
-
 class NotificationMenu extends StatelessWidget {
   const NotificationMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return PopupMenuButton(
       itemBuilder: (BuildContext context) => [
         PopupMenuItem(
@@ -282,11 +309,11 @@ class NotificationMenu extends StatelessWidget {
             width: 30,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Theme.of(context).colorScheme.primary),
+              border: Border.all(color: colorScheme.primary),
             ),
             child: Icon(
               Icons.notifications_none,
-              color: Theme.of(context).colorScheme.error,
+              color: colorScheme.error,
               size: 15,
             ),
           ),
@@ -306,4 +333,3 @@ class NotificationMenu extends StatelessWidget {
     );
   }
 }
-

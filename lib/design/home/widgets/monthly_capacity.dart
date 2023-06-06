@@ -300,23 +300,14 @@ class ProgressIndicatorColumnState extends State<ProgressIndicatorColumn> {
               ),
             ),
             Positioned(
-              top: 10,
-              left: 10,
+              top: 9.8,
+              left: 17,
               child: Align(
                 alignment: AlignmentDirectional.topStart,
                 child: Container(
-                  height: 0.6,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            Theme.of(context).colorScheme.background,
-                            Theme.of(context).colorScheme.background,
-                            Theme.of(context).colorScheme.background,
-                          ])),
+                  height: 0.8,
+                  width: 110,
+                  color: Theme.of(context).colorScheme.background.withOpacity(0.9),
                 ),
               ),
             ),
