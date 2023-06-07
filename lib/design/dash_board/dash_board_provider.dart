@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import '../attendance/attendance.dart';
 import '../chat_page/chat_page.dart';
 import '../feedback_and_signature/feedback_and_signature.dart';
-import '../home/home_page.dart';
 import '../home/new_home.dart';
 import '../profile/profile.dart';
 import '../request_form/request_form.dart';
@@ -18,19 +17,18 @@ class DashBoardVm extends ChangeNotifier {
   int index = 0;
 
   final List screen = const [
-
-    TeamApprovals(),
-    Attendance(),
     NewHome(),
-    Home(),
+    // Home(),
     Profile(),
-    RequestForm(),
-    Settings(),
-    ChatPage(),
     Tasks(),
+    RequestForm(),
+    ChatPage(),
+    Settings(),
     TaskAdd(),
     Notifications(),
     FeedBackAndSignature(),
+    TeamApprovals(),
+    Attendance(),
   ];
 
   refresh() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../constant/decoration_card.dart';
+import '../tasks/location.dart';
 
 class Attendance extends StatelessWidget {
   const Attendance({Key? key}) : super(key: key);
@@ -28,49 +29,75 @@ class Attendance extends StatelessWidget {
       },
     ];
 
-    return ListView(
-      padding: const EdgeInsets.all(10),
+    return Stack(
       children: [
-        Text(
-          'Clocking',
-          style: context.textTheme.titleLarge
-              ?.copyWith(color: colorScheme.primary),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        const LocationView(),
+        ListView(
+          padding: const EdgeInsets.all(10),
           children: [
-            Text(
-              '7 Jul,2021',
-              style: context.textTheme.labelMedium
-                  ?.copyWith(color: colorScheme.primary),
-            ),
-            Text(
-              '09:41:22 AM',
-              style: context.textTheme.titleMedium
-                  ?.copyWith(color: colorScheme.primary),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: DecorationCard(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '7 Jul,2021',
+                              style: context.textTheme.labelMedium
+                                  ?.copyWith(color: colorScheme.primary),
+                            ),
+                            Text(
+                              '09:41:22 AM',
+                              style: context.textTheme.titleLarge
+                                  ?.copyWith(color: colorScheme.primary),
+                            ),
+                            Text(
+                              'UTC/GMT +3 hours',
+                              style: context.textTheme.bodySmall
+                                  ?.copyWith(color: colorScheme.primary),
+                              textAlign: TextAlign.center,
+                            ).paddingSymmetric(vertical: 5),
+                            Text(
+                              '4,Yackoub Muanmer St Yaish Commercial\n Center Amman',
+                              style: context.textTheme.bodySmall
+                                  ?.copyWith(color: colorScheme.primary),
+                              textAlign: TextAlign.center,
+                            ).paddingSymmetric(vertical: 5),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: SizedBox(
+                      height: 270,
+                      child: GridView.builder(
+                          itemCount: list.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1.5),
+                          itemBuilder: (context, index) => SizedBox(
+                              height: 10,
+                              child: _CustomCard(
+                                  title: list[index]['title'],
+                                  value: list[index]['value']))),
+                    ))
+                  ],
+                ).paddingSymmetric(vertical: 10),
+              ],
             ),
           ],
         ),
-        Row(
-          children: [
-            Expanded(
-                child: SizedBox(
-              height: 350,
-              child: GridView.builder(
-                  itemCount: list.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.5),
-                  itemBuilder: (context, index) => SizedBox(
-                      height: 10,
-                      child: _CustomCard(
-                          title: list[index]['title'],
-                          value: list[index]['value']))),
-            ))
-          ],
-        ).paddingSymmetric(vertical: 10)
       ],
     );
   }

@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -65,9 +64,9 @@ class LocationViewState extends State<LocationView> {
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      mapController: _mapController,
+     // mapController: _mapController,
       options: MapOptions(
-        center: LatLng(0, 0),
+        center: _markerPosition,
         zoom: 5.0,
       ),
       children: [
@@ -75,7 +74,7 @@ class LocationViewState extends State<LocationView> {
           urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           subdomains: const ['a', 'b', 'c'],
         ),
-        if (_markerPosition != LatLng(0, 0))
+       /* if (_markerPosition != LatLng(0, 0))
           MarkerClusterLayerWidget(
             options: MarkerClusterLayerOptions(
               maxClusterRadius: 45,
@@ -117,7 +116,7 @@ class LocationViewState extends State<LocationView> {
                 );
               },
             ),
-          ),
+          ),*/
       ],
     );
   }

@@ -66,19 +66,25 @@ class DashBoard extends StatelessWidget {
                                       ? "Dash Board"
                                       : data.index == 1
                                           ? "Profile"
-                                          : data.index == 2
+                                          : data.index == 3
                                               ? "Request Form"
-                                              : data.index == 3
+                                              : data.index == 5
                                                   ? "Settings"
                                                   : data.index == 4
                                                       ? "Chat With HR"
-                                                      : data.index == 5
+                                                      : data.index == 2
                                                           ? "Task"
                                                           : data.index == 6
                                                               ? "Task Add"
                                                               : data.index == 7
                                                                   ? "Notifications"
-                                                                  : "",
+                                                                  : data.index ==
+                                                                          9
+                                                                      ? "Team Approvals"
+                                                                      : data.index ==
+                                                                              10
+                                                                          ? "Clocking"
+                                                                          : "",
                                   style: TextStyle(color: colorScheme.primary),
                                 ),
                                 Row(
@@ -172,40 +178,30 @@ class DashBoard extends StatelessWidget {
                 floatingActionButtonLocation:
                     FloatingActionButtonLocation.centerDocked,
                 floatingActionButton: Builder(builder: (context) {
-                  return /*InkWell(
-                    onTap: (){},
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: colorScheme.primary),
-                        shape: BoxShape.circle
-                      ),
-                      child: Icon(Icons.add,color: colorScheme.primary,),
-                    ));*/
-                      Visibility(
-                        visible: data.index==0,
-                        child: FloatingActionButton(
-                            backgroundColor: colorScheme.primary.withOpacity(0.5),
-                            onPressed: () {
-                              Scaffold.of(context).openDrawer();
-                            },
-                            child: Icon(
-                              Icons.add,
-                              color: colorScheme.surface,
-                            )),
-                      );
+                  return Visibility(
+                    visible: data.index == 0,
+                    child: FloatingActionButton(
+                        backgroundColor: colorScheme.primary.withOpacity(0.5),
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: Icon(
+                          Icons.add,
+                          color: colorScheme.surface,
+                        )),
+                  );
                 }),
                 bottomNavigationBar: Visibility(
-                  visible: (data.index==0),
+                  visible: (data.index == 0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: BottomAppBar(
-                     color: colorScheme.primaryContainer.withOpacity(0.2),
+                      color: colorScheme.primary.withOpacity(0.5),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       height: 50,
                       elevation: 0.0,
-                      shape:  const CircularNotchedRectangle(),
+                      shape: const CircularNotchedRectangle(),
                       child: Consumer<DashBoardVm>(builder: (context, data, _) {
                         return Row(
                           mainAxisSize: MainAxisSize.max,
@@ -226,12 +222,12 @@ class DashBoard extends StatelessWidget {
                             IconButton(
                               icon: Icon(
                                 Icons.timer,
-                                color: data.index == 5
+                                color: data.index == 10
                                     ? colorScheme.primaryContainer
                                     : colorScheme.outline,
                               ),
                               onPressed: () {
-                                data.index = 5;
+                                data.index = 10;
 
                                 data.refresh();
                               },
@@ -270,7 +266,6 @@ class CustomNotchedShape extends CircularNotchedRectangle {
     return borderPath;
   }
 }
-
 
 class CusDrawer extends StatelessWidget {
   const CusDrawer({Key? key}) : super(key: key);
@@ -329,19 +324,9 @@ class CusDrawer extends StatelessWidget {
                   },
                 ),
                 CusCard(
-                  index: 5,
+                  index: 2,
                   icon: Icons.add_task,
                   title: "Tasks",
-                  onTap: () {
-                    data.index = 5;
-                    Navigator.of(context).pop();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 2,
-                  icon: Icons.receipt_long,
-                  title: "Request Form",
                   onTap: () {
                     data.index = 2;
                     Navigator.of(context).pop();
@@ -349,11 +334,41 @@ class CusDrawer extends StatelessWidget {
                   },
                 ),
                 CusCard(
-                  index: 5,
+                  index: 3,
+                  icon: Icons.receipt_long,
+                  title: "Request Form",
+                  onTap: () {
+                    data.index = 3;
+                    Navigator.of(context).pop();
+                    data.refresh();
+                  },
+                ),
+                CusCard(
+                  index: 4,
                   icon: Icons.chat_bubble_outline,
                   title: "Chat",
                   onTap: () {
-                    data.index = 5;
+                    data.index = 4;
+                    Navigator.of(context).pop();
+                    data.refresh();
+                  },
+                ),
+                CusCard(
+                  index: 9,
+                  icon: Icons.approval,
+                  title: "Approvals",
+                  onTap: () {
+                    data.index = 9;
+                    Navigator.of(context).pop();
+                    data.refresh();
+                  },
+                ),
+                CusCard(
+                  index: 10,
+                  icon: Icons.fact_check,
+                  title: "Clocking",
+                  onTap: () {
+                    data.index = 10;
                     Navigator.of(context).pop();
                     data.refresh();
                   },
@@ -363,13 +378,14 @@ class CusDrawer extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 CusCard(
-                  index: 3,
+                  index: 5,
                   icon: Icons.settings,
                   title: "Settings",
                   onTap: () {
-                    data.index = 3;
+                    data.index = 5;
                     data.refresh();
                     Navigator.of(context).pop();
                   },

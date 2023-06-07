@@ -1,6 +1,8 @@
+import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 import '../../constant/decoration_card.dart';
 import '../dash_board/dash_board_screen.dart';
@@ -13,6 +15,7 @@ class NewHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return ListView(
+      padding: const EdgeInsets.all(2),
       children: [
         Row(
           mainAxisSize: MainAxisSize.max,
@@ -63,7 +66,7 @@ class NewHome extends StatelessWidget {
               'Welcome,  Sarah',
               style: context.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w400, color: colorScheme.surface),
-            ).paddingTop(10),
+            ).paddingTop(10).paddingLeft(5),
           ],
         ),
         Row(
@@ -86,93 +89,128 @@ class NewHome extends StatelessWidget {
           ],
         ).paddingSymmetric(horizontal: 10),
         Row(
+          /*      crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
+          spacing: 10.0,
+          runSpacing: 5.0,*/
           children: [
             Expanded(
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                alignment: WrapAlignment.center,
-                spacing: 10.0,
-                runSpacing: 10.0,
-                children: const [
-                  _DayDetailsCard(
-                    title: 'Annual Vacation for',
-                    value: '18.34',
-                    subValue: '21.00',
-                  ),
-                  _DayDetailsCard(
-                    title: 'Sick Days',
-                    value: '12.00',
-                    subValue: '14.00',
-                  ),
-                ],
-              ),
+              child: const _DayDetailsCard(
+                title: 'Annual Vacation',
+                value: '18',
+                subValue: '21',
+              ).paddingSymmetric(horizontal: 5),
+            ),
+            Expanded(
+              child: const _DayDetailsCard(
+                title: 'Sick Days',
+                value: '12',
+                subValue: '14',
+              ).paddingSymmetric(horizontal: 5),
             ),
           ],
         ).paddingSymmetric(vertical: 10),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
-          child: Text(
-            'What  would you like to do?',
-            style: context.textTheme.bodyMedium
-                ?.copyWith(color: colorScheme.primary),
-          ),
-        ),
-        SizedBox(
-          height: 240,
-          child: Column(
-            children: [
-              Expanded(
-                child: GridView(
-                  padding: EdgeInsets.zero,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 10.0,
-                    childAspectRatio: 1,
-                  ),
-                  scrollDirection: Axis.vertical,
-                  children: const [
-                    _CustomCardGrid(
-                      icon: CupertinoIcons.hourglass,
-                      title: 'Requests',
-                      iconColor: Color(0xFF3CD6D4),
-                    ),
-                    _CustomCardGrid(
-                      icon: Icons.wallet_outlined,
-                      title: 'Payroll',
-                      iconColor: Color(0xFFEF9D87),
-                    ),
-                    _CustomCardGrid(
-                      icon: Icons.file_copy_outlined,
-                      title: 'Documents',
-                      iconColor: Color(0xFF8CD0FB),
-                    ),
-                    _CustomCardGrid(
-                      icon: CupertinoIcons.calendar,
-                      title: 'Attendance',
-                      iconColor: Color(0xFFEB4E3F),
-                    ),
-                    _CustomCardGrid(
-                      icon: CupertinoIcons.timer_fill,
-                      title: 'Schedule',
-                      iconColor: Color(0xFFFA9E3A),
-                    ),
-                    _CustomCardGrid(
-                      icon: CupertinoIcons.person_solid,
-                      title: 'Profile',
-                      iconColor: Color(0xFFA06CF7),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
         Text(
-          'Pending requests',
-          style:
-              context.textTheme.bodySmall?.copyWith(color: colorScheme.primary),
-        ).paddingSymmetric(vertical: 5),
+          'What  would you like to do?',
+          style: context.textTheme.bodyMedium
+              ?.copyWith(color: colorScheme.primary),
+        ).paddingSymmetric(vertical: 10),
+        Consumer<DashBoardVm>(builder: (context, data, _) {
+          return SizedBox(
+            height: 240,
+            child: Column(
+              children: [
+                Expanded(
+                  child: GridView(
+                    padding: EdgeInsets.zero,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0,
+                      childAspectRatio: 1,
+                    ),
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      _CustomCardGrid(
+                        onTap: () {
+                          data.index = 3;
+                          data.refresh();
+                        },
+                        icon: CupertinoIcons.hourglass,
+                        title: 'Requests',
+                        iconColor: const Color(0xFF3CD6D4),
+                      ),
+                      _CustomCardGrid(
+                        onTap: () {
+                          //data.index=3;
+                          // data.refresh();
+                        },
+                        icon: Icons.wallet_outlined,
+                        title: 'Payroll',
+                        iconColor: const Color(0xFFEF9D87),
+                      ),
+                      _CustomCardGrid(
+                        onTap: () {},
+                        icon: Icons.file_copy_outlined,
+                        title: 'Documents',
+                        iconColor: const Color(0xFF8CD0FB),
+                      ),
+                      _CustomCardGrid(
+                        onTap: () {
+                          data.index = 10;
+                          data.refresh();
+                        },
+                        icon: CupertinoIcons.calendar,
+                        title: 'Attendance',
+                        iconColor: const Color(0xFFEB4E3F),
+                      ),
+                      _CustomCardGrid(
+                        onTap: () {
+                          data.index = 2;
+                          data.refresh();
+                        },
+                        icon: CupertinoIcons.timer_fill,
+                        title: 'Tasks',
+                        iconColor: const Color(0xFFFA9E3A),
+                      ),
+                      _CustomCardGrid(
+                        onTap: () {
+                          data.index = 1;
+                          data.refresh();
+                        },
+                        icon: CupertinoIcons.person_solid,
+                        title: 'Profile',
+                        iconColor: const Color(0xFFA06CF7),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Pending requests',
+              style: context.textTheme.bodySmall
+                  ?.copyWith(color: colorScheme.primary),
+            ).paddingSymmetric(vertical: 5),
+            InkWell(
+              onTap: () {
+                context.read<DashBoardVm>().index = 9;
+                context.read<DashBoardVm>().refresh();
+              },
+              child: Text(
+                'Show All',
+                style: context.textTheme.bodySmall
+                    ?.copyWith(color: colorScheme.primary),
+              ).paddingSymmetric(vertical: 5),
+            ),
+          ],
+        ),
         Row(
           children: const [
             Expanded(child: _RequestWidget()),
@@ -187,17 +225,20 @@ class _CustomCardGrid extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
+  final Function() onTap;
 
   const _CustomCardGrid(
       {Key? key,
       required this.title,
       required this.icon,
-      required this.iconColor})
+      required this.iconColor,
+      required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DecorationCard(
+      onTap: onTap,
       radius: BorderRadius.circular(20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -234,42 +275,49 @@ class _DayDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return DecorationCard(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            title,
-            style: context.textTheme.bodyMedium
-                ?.copyWith(color: colorScheme.primary),
-          ),
-          RichText(
-            text: TextSpan(
+    return Row(
+      children: [
+        Expanded(
+          child: DecorationCard(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextSpan(
-                  text: '$value/',
-                  style: context.textTheme.titleMedium?.copyWith(
-                      color: colorScheme.primary, fontWeight: FontWeight.bold),
+                Text(
+                  title,
+                  style: context.textTheme.bodyMedium
+                      ?.copyWith(color: colorScheme.primary),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                TextSpan(
-                  text: subValue,
-                  style: const TextStyle(),
-                )
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '$value/',
+                        style: context.textTheme.titleMedium?.copyWith(
+                            color: colorScheme.primary,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: subValue,
+                        style: const TextStyle(),
+                      )
+                    ],
+                    style: context.textTheme.bodySmall
+                        ?.copyWith(color: colorScheme.primary),
+                  ),
+                ).paddingSymmetric(vertical: 10),
+                Text(
+                  'Days',
+                  style: context.textTheme.bodySmall
+                      ?.copyWith(color: colorScheme.primary),
+                ),
               ],
-              style: context.textTheme.bodySmall
-                  ?.copyWith(color: colorScheme.primary),
             ),
-          ).paddingSymmetric(vertical: 10),
-          Text(
-            'Days',
-            style: context.textTheme.bodySmall
-                ?.copyWith(color: colorScheme.primary),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -314,15 +362,16 @@ class _RequestCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: colorScheme.primary)),
                 Text('Going on vacation',
-                    style: context.textTheme.bodySmall
-                        ?.copyWith(color: colorScheme.outline)),
+                        style: context.textTheme.bodySmall
+                            ?.copyWith(color: colorScheme.outline))
+                    .paddingSymmetric(vertical: 5),
                 Row(
                   children: [
                     Text(
                       'Annual leave',
                       style: context.textTheme.bodySmall
                           ?.copyWith(color: colorScheme.outline),
-                    ),
+                    ).paddingRight(10),
                     Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -330,14 +379,17 @@ class _RequestCard extends StatelessWidget {
                       child: Text('pending',
                               style: context.textTheme.labelMedium
                                   ?.copyWith(color: colorScheme.tertiary))
-                          .paddingAll(5),
+                          .paddingAll(6),
                     )
                   ],
                 ),
               ],
             ),
             InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<DashBoardVm>().index = 9;
+                  context.read<DashBoardVm>().refresh();
+                },
                 child: Icon(
                   Icons.more_vert,
                   color: colorScheme.primary,
