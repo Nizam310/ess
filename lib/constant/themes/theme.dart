@@ -17,6 +17,7 @@ class Themes {
               borderRadius: BorderRadius.circular(10)),
         ),
         bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: Colors.transparent,
             shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -78,6 +79,7 @@ class Themes {
               borderRadius: BorderRadius.circular(10)),
         ),
         bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: Colors.transparent,
             shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),

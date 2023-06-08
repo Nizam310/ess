@@ -9,7 +9,7 @@ class CusCard extends StatelessWidget {
   final IconData icon;
   final Color? iconColor;
   final Function() onTap;
-  final int index;
+  final int? index;
 
   const CusCard({
     Key? key,
@@ -17,7 +17,7 @@ class CusCard extends StatelessWidget {
     required this.icon,
     this.iconColor,
     required this.onTap,
-    required this.index,
+     this.index,
   }) : super(key: key);
 
   @override

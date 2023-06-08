@@ -1,5 +1,6 @@
+import 'package:employee_self_service_flutter/constant/enum.dart';
+import 'package:employee_self_service_flutter/constant/themes/theme.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/cus_card.dart';
-import 'package:employee_self_service_flutter/design/dash_board/widgets/toggle_button.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/video_player.dart';
 import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -88,6 +89,7 @@ class DashBoard extends StatelessWidget {
                                   style: TextStyle(color: colorScheme.primary),
                                 ),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Visibility(
                                         visible: data.index == 1,
@@ -162,8 +164,8 @@ class DashBoard extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const ToggleButton(),
                                     const NotificationMenu(),
+                                    const SortCalendar()
                                   ],
                                 )
                               ],
@@ -228,7 +230,6 @@ class DashBoard extends StatelessWidget {
                               ),
                               onPressed: () {
                                 data.index = 10;
-
                                 data.refresh();
                               },
                             ),
@@ -309,7 +310,7 @@ class CusDrawer extends StatelessWidget {
                   title: "DashBoard",
                   onTap: () {
                     data.index = 0;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
@@ -319,7 +320,7 @@ class CusDrawer extends StatelessWidget {
                   title: "Profile",
                   onTap: () {
                     data.index = 1;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
@@ -329,7 +330,7 @@ class CusDrawer extends StatelessWidget {
                   title: "Tasks",
                   onTap: () {
                     data.index = 2;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
@@ -339,7 +340,7 @@ class CusDrawer extends StatelessWidget {
                   title: "Request Form",
                   onTap: () {
                     data.index = 3;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
@@ -349,7 +350,7 @@ class CusDrawer extends StatelessWidget {
                   title: "Chat",
                   onTap: () {
                     data.index = 4;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
@@ -359,17 +360,16 @@ class CusDrawer extends StatelessWidget {
                   title: "Approvals",
                   onTap: () {
                     data.index = 9;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
                 CusCard(
-                  index: 10,
                   icon: Icons.fact_check,
                   title: "Clocking",
                   onTap: () {
                     data.index = 10;
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
                 ),
@@ -387,11 +387,10 @@ class CusDrawer extends StatelessWidget {
                   onTap: () {
                     data.index = 5;
                     data.refresh();
-                    Navigator.of(context).pop();
+                    Scaffold.of(context).closeDrawer();
                   },
                 ),
                 CusCard(
-                  index: -1,
                   icon: Icons.power_settings_new,
                   title: "Logout",
                   iconColor: colorScheme.error,
@@ -450,6 +449,82 @@ class NotificationMenu extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class SortCalendar extends StatelessWidget {
+  const SortCalendar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ThemeNotifier.of(context, listen: false);
+    final colorScheme = Theme.of(context).colorScheme;
+    final style = TextStyle(
+        color: theme.themeMode == ThemeModeType.dark
+            ? colorScheme.primary
+            : colorScheme.shadow);
+    return Visibility(
+      visible: context.select((DashBoardVm value) => value.index == 9),
+      child: PopupMenuButton(
+        icon: Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: colorScheme.primary)),
+            child: Icon(
+              CupertinoIcons.calendar,
+              color: colorScheme.primary,
+              size: 14,
+            )),
+        itemBuilder: (BuildContext context) => [
+          PopupMenuItem(
+              child: Text(
+            'Today',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'Yesterday',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'This Week',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'Last 7 Days',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'This Month',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'Last 30 Days',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'Last 3 Months',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'This Year',
+            style: style,
+          )),
+          PopupMenuItem(
+              child: Text(
+            'Custom',
+            style: style,
+          )),
         ],
       ),
     );
