@@ -92,7 +92,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             ),
             Positioned.fill(
               child: Container(
-                color: Colors.black.withOpacity(0.6),
+                color: kIsWeb?Colors.black.withOpacity(0.9):Colors.black.withOpacity(0.6),
               ),
             ),
           ],

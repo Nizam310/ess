@@ -6,127 +6,108 @@ import '../colors.dart';
 
 class Themes {
   static ThemeData lightTheme(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ThemeData(
-        colorScheme: ColorSchemes.light,
-        cardTheme: CardTheme(
-          color: Colors.transparent,
+      colorScheme: ColorSchemes.light,
+      cardTheme: CardTheme(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+            side: BorderSide( width: 0.3
+,color: Colors.transparent
+                //  color: colorScheme.primary,
+                ),
+            borderRadius: BorderRadius.circular(10)),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.transparent,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: BorderRadius.circular(10)),
-        ),
-        bottomSheetTheme: const BottomSheetThemeData(
-            backgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        )),
-        listTileTheme: ListTileThemeData(
-          iconColor: Theme.of(context).colorScheme.primary,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(
-                width: 1,
-                color: Theme.of(context).colorScheme.primary,
-              )),
-        ),
-      inputDecorationTheme:  InputDecorationTheme(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          )),
+      listTileTheme: ListTileThemeData(
+        iconColor: colorScheme.primary,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              width: 1,
+              color: colorScheme.primary,
+            )),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-              color:
-              Theme.of(context).colorScheme.error),
+          borderSide: BorderSide(color: colorScheme.error),
         ),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                Theme.of(context).colorScheme.primary)),
-
-      ),);
+            borderSide: BorderSide(color: colorScheme.primary)),
+      ),
+    );
   }
 
   static ThemeData darkTheme(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ThemeData(
-        colorScheme: ColorSchemes.dark,
-        cardTheme: CardTheme(
-          color: Colors.transparent,
-          shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: BorderRadius.circular(10)),
-        ),
-        bottomSheetTheme: const BottomSheetThemeData(
+      colorScheme: ColorSchemes.dark,
+      cardTheme: CardTheme(
+
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10)),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: colorScheme.background,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
           backgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        )),
-        listTileTheme: ListTileThemeData(
-          iconColor: Theme.of(context).colorScheme.primary,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(
-                width: 1,
-                color: Theme.of(context).colorScheme.primary,
-              )),
-        ),
-    inputDecorationTheme:  InputDecorationTheme(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          )),
+      listTileTheme: ListTileThemeData(
+        iconColor: colorScheme.primary,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              width: 1,
+              color: colorScheme.primary,
+            )),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                    Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                    Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                    Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-              color:
-              Theme.of(context).colorScheme.error),
+          borderSide: BorderSide(color: colorScheme.error),
         ),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                    Theme.of(context).colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.primary)),
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color:
-                    Theme.of(context).colorScheme.primary)),
-
-    ),
+            borderSide: BorderSide(color: colorScheme.primary)),
+      ),
     );
   }
 }

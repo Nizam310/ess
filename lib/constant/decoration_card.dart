@@ -11,6 +11,7 @@ class DecorationCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final BorderRadius? radius;
   final Function()? onTap;
+  final  Color?  color;
   const DecorationCard(
       {Key? key,
       required this.child,
@@ -18,7 +19,7 @@ class DecorationCard extends StatelessWidget {
       this.margin,
       this.height,
       this.radius,
-      this.onTap, this.width})
+      this.onTap, this.width, this.color})
       : super(key: key);
 
   @override

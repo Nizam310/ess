@@ -16,9 +16,9 @@ class ToggleButton extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
-            color: themeProvider.themeMode == ThemeModeType.dark
-                ? Theme.of(context).colorScheme.primary
-                : Colors.white,
+            color: Theme.of(context).colorScheme.primaryContainer/*themeProvider.themeMode == ThemeModeType.dark
+                ? Theme.of(context).colorScheme.onPrimary
+                : Colors.white*/,
           )
       ),
       child: Row(
@@ -35,9 +35,9 @@ class ToggleButton extends StatelessWidget {
                     : Colors.transparent,),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child:  Icon(
                 CupertinoIcons.sun_max,
-                color: Colors.white,
+                color:Theme.of(context).colorScheme.onPrimary,
                 size: 11,
               ),
             ),
@@ -49,13 +49,13 @@ class ToggleButton extends StatelessWidget {
               width: 20,
               decoration: BoxDecoration(
                 border: Border.all(color: themeProvider.themeMode == ThemeModeType.dark
-                    ? Theme.of(context).colorScheme.primary
+                    ? Theme.of(context).colorScheme.onPrimary
                     : Colors.transparent,),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child:  Icon(
                 CupertinoIcons.moon_fill,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 size: 10,
               ),
             ),

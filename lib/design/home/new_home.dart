@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-import '../../constant/decoration_card.dart';
 import '../dash_board/dash_board_screen.dart';
 import '../dash_board/widgets/toggle_button.dart';
 
@@ -26,14 +25,16 @@ class NewHome extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: 'CloudMe',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.primaryContainer),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.onPrimary),
                   ),
                   TextSpan(
                     text: 'HR',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
+                        fontSize: 30,
                         color: colorScheme.primary),
                   )
                 ],
@@ -65,7 +66,7 @@ class NewHome extends StatelessWidget {
             Text(
               'Welcome,  Sarah',
               style: context.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w400, color: colorScheme.surface),
+                  fontWeight: FontWeight.w700, color: colorScheme.onPrimary),
             ).paddingTop(10).paddingLeft(5),
           ],
         ),
@@ -76,7 +77,7 @@ class NewHome extends StatelessWidget {
             Text(
               'Your remaining balance',
               style: context.textTheme.bodySmall
-                  ?.copyWith(color: colorScheme.primary),
+                  ?.copyWith(color: colorScheme.onPrimary),
             ),
             InkWell(
               onTap: () {},
@@ -113,7 +114,7 @@ class NewHome extends StatelessWidget {
         Text(
           'What  would you like to do?',
           style: context.textTheme.bodyMedium
-              ?.copyWith(color: colorScheme.primary),
+              ?.copyWith(color: colorScheme.onPrimary),
         ).paddingSymmetric(vertical: 10),
         Consumer<DashBoardVm>(builder: (context, data, _) {
           return SizedBox(
@@ -126,8 +127,7 @@ class NewHome extends StatelessWidget {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0,
+                      mainAxisSpacing: 6.0,
                       childAspectRatio: 1,
                     ),
                     scrollDirection: Axis.vertical,
@@ -196,7 +196,7 @@ class NewHome extends StatelessWidget {
             Text(
               'Pending requests',
               style: context.textTheme.bodySmall
-                  ?.copyWith(color: colorScheme.primary),
+                  ?.copyWith(color: colorScheme.onPrimary),
             ).paddingSymmetric(vertical: 5),
             InkWell(
               onTap: () {
@@ -237,24 +237,30 @@ class _CustomCardGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecorationCard(
-      onTap: onTap,
-      radius: BorderRadius.circular(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 20,
-            color: iconColor,
-          ),
-          Text(
-            title,
-            style: context.textTheme.bodySmall
-                ?.copyWith(color: Theme.of(context).colorScheme.primary),
-          ),
-        ],
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(23)
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(23),
+        radius: 0.0,
+        onTap: onTap,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: iconColor,
+            ),
+            Text(
+              title,
+              style: context.textTheme.bodySmall
+                  ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -278,8 +284,7 @@ class _DayDetailsCard extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: DecorationCard(
-            padding: const EdgeInsets.all(20),
+          child: Card(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -287,7 +292,7 @@ class _DayDetailsCard extends StatelessWidget {
                 Text(
                   title,
                   style: context.textTheme.bodyMedium
-                      ?.copyWith(color: colorScheme.primary),
+                      ?.copyWith(color: colorScheme.onPrimary),
                   overflow: TextOverflow.ellipsis,
                 ),
                 RichText(
@@ -296,7 +301,7 @@ class _DayDetailsCard extends StatelessWidget {
                       TextSpan(
                         text: '$value/',
                         style: context.textTheme.titleMedium?.copyWith(
-                            color: colorScheme.primary,
+                            color: colorScheme.onPrimary,
                             fontWeight: FontWeight.bold),
                       ),
                       TextSpan(
@@ -305,16 +310,16 @@ class _DayDetailsCard extends StatelessWidget {
                       )
                     ],
                     style: context.textTheme.bodySmall
-                        ?.copyWith(color: colorScheme.primary),
+                        ?.copyWith(color: colorScheme.onPrimary),
                   ),
                 ).paddingSymmetric(vertical: 10),
                 Text(
                   'Days',
                   style: context.textTheme.bodySmall
-                      ?.copyWith(color: colorScheme.primary),
+                      ?.copyWith(color: colorScheme.onPrimary),
                 ),
               ],
-            ),
+            ).paddingAll(15),
           ),
         ),
       ],
@@ -348,8 +353,7 @@ class _RequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return DecorationCard(
-        padding: const EdgeInsets.all(20),
+    return Card(
         margin: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -360,25 +364,25 @@ class _RequestCard extends StatelessWidget {
                 Text('Jun 16,2023-Jun 18,2023',
                     style: context.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.primary)),
+                        color: colorScheme.onPrimary)),
                 Text('Going on vacation',
                         style: context.textTheme.bodySmall
-                            ?.copyWith(color: colorScheme.outline))
+                            ?.copyWith(color: colorScheme.onPrimary))
                     .paddingSymmetric(vertical: 5),
                 Row(
                   children: [
                     Text(
                       'Annual leave',
                       style: context.textTheme.bodySmall
-                          ?.copyWith(color: colorScheme.outline),
+                          ?.copyWith(color: colorScheme.onPrimary),
                     ).paddingRight(10),
                     Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(color: colorScheme.primary)),
+                          side: BorderSide(color: colorScheme.onPrimary)),
                       child: Text('pending',
                               style: context.textTheme.labelMedium
-                                  ?.copyWith(color: colorScheme.tertiary))
+                                  ?.copyWith(color: colorScheme.onPrimary))
                           .paddingAll(6),
                     )
                   ],
@@ -395,6 +399,6 @@ class _RequestCard extends StatelessWidget {
                   color: colorScheme.primary,
                 )),
           ],
-        ));
+        ).paddingAll(20));
   }
 }
