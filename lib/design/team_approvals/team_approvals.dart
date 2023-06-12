@@ -143,125 +143,118 @@ class _TeamApprovalsCard extends StatelessWidget {
           side: BorderSide(color: colorScheme.outline)),
       child: ListTileTheme(
         child: ExpansionTile(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: colorScheme.onPrimary),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    Icons.person,
-                    color: colorScheme.onPrimary,
-                    size: 15,
-                  ),
-                ),
-              ).paddingRight(20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: context.textTheme.bodyLarge
-                        ?.copyWith(color: colorScheme.onPrimary),
-                  ),
-                  Text(
-                    position,
-                    style: context.textTheme.bodyLarge
-                        ?.copyWith(color: colorScheme.onPrimary),
-                  ),
-                ],
+          leading:  SizedBox(
+            height: 50,
+            width: 50,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: colorScheme.onPrimary),
+                borderRadius: BorderRadius.circular(10),
               ),
-            ],
+              child: Icon(
+                Icons.person,
+                color: colorScheme.onPrimary,
+                size: 15,
+              ),
+            ),
+          ).paddingRight(20),
+          title: Text(
+            name,
+            style: context.textTheme.bodyLarge
+                ?.copyWith(color: colorScheme.onPrimary),
           ),
-          // expandedAlignment: Alignment.topRight,
+          subtitle: Text(
+            position,
+            style: context.textTheme.bodyLarge
+                ?.copyWith(color: colorScheme.onPrimary),
+          ),          // expandedAlignment: Alignment.topRight,
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            Text(
-              '$dateFrom - $dateTo ($totalDays)',
-              style: context.textTheme.bodyLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
-            ).paddingSymmetric(vertical: 10),
-            Text(
-              content,
-              style: context.textTheme.bodyLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
-              maxLines: 5,
-            ).paddingSymmetric(vertical: 10),
-            Row(
+            Column(
               children: [
                 Text(
-                  leaveType,
+                  '$dateFrom - $dateTo ($totalDays)',
                   style: context.textTheme.bodyLarge
                       ?.copyWith(color: colorScheme.onPrimary),
-                ).paddingRight(10),
-                DecorationCard(
-                  padding: const EdgeInsets.all(5),
-                  radius: BorderRadius.circular(30),
-                  child: Text(
-                    status.toString(),
-                    style: context.textTheme.bodyLarge
-                        ?.copyWith(color: colorScheme.onPrimary, fontSize: 12),
-                  ),
-                )
+                ).paddingSymmetric(vertical: 10),
+                Text(
+                  content,
+                  style: context.textTheme.bodyLarge
+                      ?.copyWith(color: colorScheme.onPrimary),
+                  maxLines: 5,
+                ).paddingSymmetric(vertical: 10),
+                Row(
+                  children: [
+                    Text(
+                      leaveType,
+                      style: context.textTheme.bodyLarge
+                          ?.copyWith(color: colorScheme.onPrimary),
+                    ).paddingRight(10),
+                    DecorationCard(
+                      padding: const EdgeInsets.all(5),
+                      radius: BorderRadius.circular(30),
+                      child: Text(
+                        status.toString(),
+                        style: context.textTheme.bodyLarge
+                            ?.copyWith(color: colorScheme.onPrimary, fontSize: 12),
+                      ),
+                    )
+                  ],
+                ).paddingSymmetric(vertical: 10),
+                Text(
+                  'Balance to date',
+                  style: context.textTheme.bodyLarge
+                      ?.copyWith(color: colorScheme.onPrimary),
+                ).paddingSymmetric(vertical: 5),
+                Text(
+                  balanceToDate,
+                  style: context.textTheme.bodyLarge
+                      ?.copyWith(color: colorScheme.onPrimary),
+                ).paddingSymmetric(vertical: 5),
+                Text(
+                  'Balance to end of year',
+                  style: context.textTheme.bodyLarge
+                      ?.copyWith(color: colorScheme.onPrimary),
+                ).paddingSymmetric(vertical: 5),
+                Text(
+                  balanceToYear,
+                  style: context.textTheme.bodyLarge
+                      ?.copyWith(color: colorScheme.onPrimary),
+                ).paddingSymmetric(vertical: 5),
+                Row(
+                  children: [
+                    Transform.scale(
+                      scale: 0.6,
+                      child: CupertinoSwitch(
+                          activeColor: colorScheme.tertiary,
+                          value: deductBalance ?? true,
+                          onChanged: (val) {}),
+                    ),
+                    Text('Deduct balance',
+                        style: context.textTheme.bodyLarge
+                            ?.copyWith(color: colorScheme.onPrimary))
+                  ],
+                ).paddingSymmetric(vertical: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: CusButton(
+                      text: 'Reject',
+                      onTap: () {},
+                      color: colorScheme.outlineVariant,
+                      hoverColor: colorScheme.outlineVariant,
+                    ).paddingSymmetric(horizontal: 10)),
+                    Expanded(
+                        child: CusButton(text: 'Approve', onTap: () {})
+                            .paddingSymmetric(horizontal: 10)),
+                  ],
+                ).paddingSymmetric(vertical: 5),
               ],
-            ).paddingSymmetric(vertical: 10),
-            Text(
-              'Balance to date',
-              style: context.textTheme.bodyLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
-            ).paddingSymmetric(vertical: 5),
-            Text(
-              balanceToDate,
-              style: context.textTheme.bodyLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
-            ).paddingSymmetric(vertical: 5),
-            Text(
-              'Balance to end of year',
-              style: context.textTheme.bodyLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
-            ).paddingSymmetric(vertical: 5),
-            Text(
-              balanceToYear,
-              style: context.textTheme.bodyLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
-            ).paddingSymmetric(vertical: 5),
-            Row(
-              children: [
-                Transform.scale(
-                  scale: 0.6,
-                  child: CupertinoSwitch(
-                      activeColor: colorScheme.tertiary,
-                      value: deductBalance ?? true,
-                      onChanged: (val) {}),
-                ),
-                Text('Deduct balance',
-                    style: context.textTheme.bodyLarge
-                        ?.copyWith(color: colorScheme.onPrimary))
-              ],
-            ).paddingSymmetric(vertical: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                    child: CusButton(
-                  text: 'Reject',
-                  onTap: () {},
-                  color: colorScheme.outlineVariant,
-                  hoverColor: colorScheme.outlineVariant,
-                ).paddingSymmetric(horizontal: 10)),
-                Expanded(
-                    child: CusButton(text: 'Approve', onTap: () {})
-                        .paddingSymmetric(horizontal: 10)),
-              ],
-            ).paddingSymmetric(vertical: 5)
+            ).paddingSymmetric(horizontal: 10,vertical: 10),
           ],
-        ).paddingSymmetric(horizontal: 10),
+        ),
       ),
     );
   }

@@ -8,10 +8,23 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
-class LocationView extends StatelessWidget {
+class LocationView extends StatefulWidget {
   const LocationView({
     super.key,
   });
+
+  @override
+  State<LocationView> createState() => _LocationViewState();
+}
+
+class _LocationViewState extends State<LocationView> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<LocationVm>().getCurrentLocation();
+  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -28,7 +28,6 @@ class LocationVm extends ChangeNotifier {
           latitude: currentPosition.latitude,
           longitude: currentPosition.longitude);
       address = location.displayName;
-      log(location.displayName);
       notifyListeners();
     } catch (e) {
       log(e.toString());
@@ -41,5 +40,6 @@ class LocationVm extends ChangeNotifier {
 
   Future<void> _initialize() async {
     await getCurrentLocation();
+    notifyListeners();
   }
 }
