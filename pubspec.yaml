@@ -51,7 +51,7 @@ dependencies:
   intl: ^0.18.1
   percent_indicator: ^4.2.3
   flutter_meedu_videoplayer: ^4.2.10
-
+  geocoding_resolver:
 dev_dependencies:
   flutter_test:
     sdk: flutter

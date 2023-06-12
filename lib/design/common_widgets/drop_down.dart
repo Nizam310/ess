@@ -40,15 +40,15 @@ class CusDropdown<T> extends StatelessWidget {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.outline)),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.outline)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.outline)),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide:
@@ -57,20 +57,20 @@ class CusDropdown<T> extends StatelessWidget {
                 disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.outline)),
                 focusedErrorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.outline)),
                 labelText: label ?? "",
                 labelStyle:
-                    TextStyle(color: Theme.of(context).colorScheme.primary),
+                    TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                 isDense: true,
               ),
               child: DropdownButton<T>(
                 dropdownColor: themePro.themeMode == ThemeModeType.light
-                    ? Colors.black
-                    : Colors.white,
+                    ? Colors.white
+                    : Colors.black,
                 key: UniqueKey(),
                 value: value,
                 items: items

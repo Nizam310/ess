@@ -19,29 +19,30 @@ class _CalendarRangePickerState extends State<CalendarRangePicker> {
     final config = CalendarDatePicker2WithActionButtonsConfig(
       customModePickerIcon: Icon(
         Icons.arrow_drop_down_outlined,
-        color: colorScheme.primaryContainer,
+        color: colorScheme.outline,
       ),
       cancelButton: const Text(''),
       okButton: const Text(''),
-      selectedDayTextStyle: TextStyle(color: colorScheme.shadow),
-      dayTextStyle: TextStyle(color: colorScheme.surface),
-      selectedDayHighlightColor: colorScheme.primaryContainer,
+      selectedDayTextStyle: TextStyle(color: colorScheme.surface),
+      dayTextStyle: TextStyle(color: colorScheme.onPrimary),
+      selectedDayHighlightColor: colorScheme.primary,
       selectedRangeHighlightColor:
-          colorScheme.primaryContainer.withOpacity(0.5),
+          colorScheme.primary.withOpacity(0.5),
       calendarType: CalendarDatePicker2Type.range,
       disableModePicker: false,
-      yearTextStyle: TextStyle(color: colorScheme.primaryContainer),
-      selectedYearTextStyle: TextStyle(color: colorScheme.shadow),
+      yearTextStyle: TextStyle(color: colorScheme.onPrimary),
+      selectedYearTextStyle: TextStyle(color: colorScheme.surface),
       firstDate: DateTime(DateTime.now().year - 10),
       lastDate: DateTime(DateTime.now().year + 10),
-      weekdayLabelTextStyle: TextStyle(color: colorScheme.primaryContainer),
+      weekdayLabelTextStyle: TextStyle(color: colorScheme.onPrimary),
       nextMonthIcon: Icon(
         Icons.arrow_forward_ios_rounded,
-        color: colorScheme.primaryContainer,
+        color: colorScheme.outline,
       ),
+      controlsTextStyle: TextStyle(color: colorScheme.outline),
       lastMonthIcon: Icon(
         Icons.arrow_back_ios_new_rounded,
-        color: colorScheme.primaryContainer,
+        color: colorScheme.outline,
       ),
     );
 

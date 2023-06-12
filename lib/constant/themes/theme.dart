@@ -12,9 +12,8 @@ class Themes {
       cardTheme: CardTheme(
         elevation: 2,
         shape: RoundedRectangleBorder(
-            side: BorderSide( width: 0.3
-,color: Colors.transparent
-                //  color: colorScheme.primary,
+            side: const BorderSide(width: 0.3, color: Colors.transparent
+                //  color: colorScheme.outline,
                 ),
             borderRadius: BorderRadius.circular(10)),
       ),
@@ -28,34 +27,35 @@ class Themes {
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           )),
       listTileTheme: ListTileThemeData(
-        iconColor: colorScheme.primary,
+        textColor: colorScheme.onPrimary,
+        iconColor: colorScheme.outline,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(
               width: 1,
-              color: colorScheme.primary,
+              color: colorScheme.onPrimary,
             )),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: colorScheme.error),
         ),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
       ),
     );
   }
@@ -65,12 +65,10 @@ class Themes {
     return ThemeData(
       colorScheme: ColorSchemes.dark,
       cardTheme: CardTheme(
-
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorScheme.background,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.transparent,
       ),
       bottomSheetTheme: const BottomSheetThemeData(
           backgroundColor: Colors.transparent,
@@ -79,34 +77,34 @@ class Themes {
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           )),
       listTileTheme: ListTileThemeData(
-        iconColor: colorScheme.primary,
+        iconColor: colorScheme.outline,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(
               width: 1,
-              color: colorScheme.primary,
+              color: colorScheme.outline,
             )),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: colorScheme.error),
         ),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorScheme.primary)),
+            borderSide: BorderSide(color: colorScheme.outline)),
       ),
     );
   }

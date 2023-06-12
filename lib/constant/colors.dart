@@ -7,7 +7,7 @@ class ColorSchemes {
   /// Light
   static const ColorScheme light = ColorScheme.light(
       primary: Color(0xFF00CDCA),
-      onPrimary: Color(0xFF000000),
+      onPrimary: Color(0xFF3F3F41),
       primaryContainer: Color(0xFF00CDCA),
       onPrimaryContainer: Color(0xFFFFFFFF),
       secondary: Color(0xFFFFFFFF),
@@ -27,7 +27,8 @@ class ColorSchemes {
       onError: Color(0xFFF44336),
       onErrorContainer: Color(0xFFF44336),
       shadow: Color(0xFF000000),
-      outline: Color(0xFF444242),
+      outline: Color(0xFF00CDCA),
+      outlineVariant: Color(0xFF3A3434),
       inversePrimary: Color(0xFF000000),
       inverseSurface:  Color(0xFFFFFFFF),
   );
@@ -36,7 +37,7 @@ class ColorSchemes {
   static const ColorScheme dark = ColorScheme.dark(
       primary: Color(0xFF00CDCA),
       onPrimary: Color(0xFFFFFFFF),
-      primaryContainer: Color(0xFFFFFFFF),
+      primaryContainer: Color(0xFF000000),
       onPrimaryContainer: Color(0xFF485F70),
       secondary: Color(0xFF303030),
       secondaryContainer: Color(0xFF24561B),
@@ -55,7 +56,8 @@ class ColorSchemes {
       onError: Color(0xFFF44336),
       onErrorContainer: Color(0xFFF44336),
       shadow: Color(0xFF000000),
-      outline: Color(0xFF444242),
+      outline: Color(0xFFFFFFFF),
+      outlineVariant: Color(0xFF9F9898),
       inversePrimary: Color(0xFF34779D),
       inverseSurface: Color(0xFF000000),
 

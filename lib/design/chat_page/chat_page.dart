@@ -55,19 +55,26 @@ class ChatPage extends StatelessWidget {
                     child: CusTextField(
                       controller: context.read<ChatVm>().chatController,
                       hintText: 'Enter your message...',
-                      hintColor: Theme.of(context).colorScheme.primary,
                       onChanged: (v) {},
-                      /*  hintStyle: TextStyle(
-                          color:
-
-                        //border: const OutlineInputBorder(),
-                      ),*/
                     ),
                   ),
-                  IconButton(
-                    icon:  Icon(Icons.send,color: Theme.of(context).colorScheme.primary,),
-                    onPressed: context.read<ChatVm>().sendMessage,
-                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.outline)),
+                    height: 50,
+                    width: 50,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(100),
+                      onTap: context.read<ChatVm>().sendMessage,
+                      child: Icon(
+                        Icons.send,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

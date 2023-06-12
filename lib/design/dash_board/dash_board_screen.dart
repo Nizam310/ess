@@ -1,8 +1,9 @@
-import 'package:employee_self_service_flutter/constant/enum.dart';
-import 'package:employee_self_service_flutter/constant/themes/theme.dart';
+import 'package:employee_self_service_flutter/design/common_widgets/list_cus_card.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/cus_card.dart';
+import 'package:employee_self_service_flutter/design/dash_board/widgets/sorted_calendar.dart';
+import 'package:employee_self_service_flutter/design/dash_board/widgets/toggle_button.dart';
 import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:employee_self_service_flutter/design/tasks/location/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class DashBoard extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TaskVm()),
         ChangeNotifierProvider(create: (context) => HomeVm()),
         ChangeNotifierProvider(create: (context) => ProfileVm()),
+        ChangeNotifierProvider(create: (context) => LocationVm()),
       ],
       child: ChangeNotifierProvider.value(
         value: HomeVm(),
@@ -34,7 +36,7 @@ class DashBoard extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: colorScheme.background,
                 drawer: Drawer(
-                  backgroundColor: Colors.transparent.withOpacity(0.8),
+                  backgroundColor: colorScheme.background,
                   width: 250,
                   child: const CusDrawer(),
                 ),
@@ -75,8 +77,7 @@ class DashBoard extends StatelessWidget {
                                                           ? "Task Add"
                                                           : data.index == 7
                                                               ? "Notifications"
-                                                              : data.index ==
-                                                                      9
+                                                              : data.index == 9
                                                                   ? "Team Approvals"
                                                                   : data.index ==
                                                                           10
@@ -103,31 +104,26 @@ class DashBoard extends StatelessWidget {
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
-                                                    ListTile(
-                                                      leading: const Icon(
-                                                          Icons.photo),
-                                                      title: Text(data
-                                                                  .picked !=
-                                                              null
+                                                    ListCusCard(
+                                                      iconNeeded: true,
+                                                      icon: Icons.photo,
+                                                      text: data.picked != null
                                                           ? "Edit Image"
-                                                          : "Add Image"),
+                                                          : "Add Image",
                                                       onTap: () {
                                                         data.pickFile();
                                                         data.refresh();
-                                                        Navigator.pop(
-                                                            context);
+                                                        Navigator.pop(context);
                                                       },
                                                     ).paddingBottom(10),
-                                                    ListTile(
-                                                      leading: const Icon(
-                                                          Icons.receipt),
-                                                      title: const Text(
-                                                          "Edit Info"),
+                                                    ListCusCard(
+                                                      iconNeeded: true,
+                                                      icon: Icons.receipt,
+                                                      text: "Edit Info",
                                                       onTap: () {
                                                         data.enable = true;
                                                         data.refresh();
-                                                        Navigator.pop(
-                                                            context);
+                                                        Navigator.pop(context);
                                                       },
                                                     ),
                                                   ],
@@ -140,26 +136,28 @@ class DashBoard extends StatelessWidget {
                                         color: colorScheme.onPrimary,
                                       ),
                                     )),
-                                InkWell(
-                                  onTap: () {
-                                    data.index = 4;
-                                    data.refresh();
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: colorScheme.onPrimary)),
+                                /*  Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 3),
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: colorScheme.outline)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      data.index = 4;
+                                      data.refresh();
+                                    },
                                     child: Icon(
                                       CupertinoIcons.chat_bubble,
                                       color: colorScheme.onPrimary,
                                       size: 12,
                                     ),
                                   ),
-                                ),
+                                ),*/
+                                const ToggleButton()
+                                    .paddingSymmetric(horizontal: 8),
                                 const NotificationMenu(),
                                 const SortCalendar()
                               ],
@@ -177,7 +175,7 @@ class DashBoard extends StatelessWidget {
                   return Visibility(
                     visible: (data.index == 0 || data.index == 10),
                     child: FloatingActionButton(
-                        backgroundColor:  colorScheme.primary,
+                        backgroundColor: colorScheme.primary,
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
@@ -190,15 +188,13 @@ class DashBoard extends StatelessWidget {
                 bottomNavigationBar: Visibility(
                   visible: ((data.index == 0) || (data.index == 10)),
                   child: BottomAppBar(
-                    color:/*data.index == 10
-                        ? colorScheme.surface:*/ colorScheme.secondary,
+                    color: colorScheme.secondary,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     height: 50,
                     elevation: 13,
                     shape: const CircularNotchedRectangle(),
-                    child:
-                        Consumer<DashBoardVm>(builder: (context, data, _) {
+                    child: Consumer<DashBoardVm>(builder: (context, data, _) {
                       return Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -206,8 +202,9 @@ class DashBoard extends StatelessWidget {
                           IconButton(
                             icon: Icon(
                               Icons.home,
-                              color: data.index == 0?colorScheme.primary:colorScheme.outline,
-
+                              color: data.index == 0
+                                  ? colorScheme.primary
+                                  : colorScheme.outlineVariant,
                             ),
                             onPressed: () {
                               data.index = 0;
@@ -217,8 +214,9 @@ class DashBoard extends StatelessWidget {
                           IconButton(
                             icon: Icon(
                               Icons.timer,
-                              color:  data.index == 10?colorScheme.primary:colorScheme.outline,
-
+                              color: data.index == 10
+                                  ? colorScheme.primary
+                                  : colorScheme.outlineVariant,
                             ),
                             onPressed: () {
                               data.index = 10;
@@ -278,13 +276,13 @@ class CusDrawer extends StatelessWidget {
                     children: [
                       Text(
                         "Name",
-                        style:
-                            TextStyle(fontSize: 17, color: colorScheme.primary),
+                        style: TextStyle(
+                            fontSize: 17, color: colorScheme.onPrimary),
                       ).paddingTop(10),
                       Text(
                         "Role",
-                        style:
-                            TextStyle(fontSize: 12, color: colorScheme.primary),
+                        style: TextStyle(
+                            fontSize: 12, color: colorScheme.onPrimary),
                       ).paddingTop(10),
                     ],
                   ).paddingAll(10),
@@ -354,6 +352,7 @@ class CusDrawer extends StatelessWidget {
                   },
                 ),
                 CusCard(
+                  index: 10,
                   icon: Icons.fact_check,
                   title: "Clocking",
                   onTap: () {
@@ -402,120 +401,41 @@ class NotificationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return PopupMenuButton(
-      itemBuilder: (BuildContext context) => [
-        PopupMenuItem(
-          child: const Text('One Notification'),
-          onTap: () {
-            context.read<DashBoardVm>().index = 7;
-            context.read<DashBoardVm>().refresh();
-          },
-        ),
-      ],
-      icon: Stack(
-        children: [
-          Container(
-            height: 30,
-            width: 30,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: colorScheme.primaryContainer),
-            ),
+    return Stack(
+      children: [
+        Container(
+          height: 25,
+          width: 25,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: colorScheme.outline),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () {
+              context.read<DashBoardVm>().index = 7;
+              context.read<DashBoardVm>().refresh();
+            },
             child: Icon(
               Icons.notifications_none,
               color: colorScheme.error,
               size: 15,
             ),
           ),
-          Positioned(
-            top: 3,
-            left: 0,
-            child: SizedBox(
-              height: 5,
-              width: 5,
-              child: CircleAvatar(
-                backgroundColor: colorScheme.error,
-              ),
+        ),
+        Positioned(
+          top: 3,
+          left: 0,
+          child: SizedBox(
+            height: 5,
+            width: 5,
+            child: CircleAvatar(
+              backgroundColor: colorScheme.error,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class SortCalendar extends StatelessWidget {
-  const SortCalendar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = ThemeNotifier.of(context, listen: false);
-    final colorScheme = Theme.of(context).colorScheme;
-    final style = TextStyle(
-        color: theme.themeMode == ThemeModeType.dark
-            ? colorScheme.primary
-            : colorScheme.shadow);
-    return Visibility(
-      visible: context.select((DashBoardVm value) => value.index == 9),
-      child: PopupMenuButton(
-        icon: Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: colorScheme.primary)),
-            child: Icon(
-              CupertinoIcons.calendar,
-              color: colorScheme.primary,
-              size: 14,
-            )),
-        itemBuilder: (BuildContext context) => [
-          PopupMenuItem(
-              child: Text(
-            'Today',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Yesterday',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'This Week',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Last 7 Days',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'This Month',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Last 30 Days',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Last 3 Months',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'This Year',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Custom',
-            style: style,
-          )),
-        ],
-      ),
-    );
-  }
-}

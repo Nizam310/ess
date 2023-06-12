@@ -25,17 +25,27 @@ class NewHome extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: 'CloudMe',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                        color: colorScheme.onPrimary),
+                    style: MediaQuery.of(context).size.width < 300
+                        ? Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: colorScheme.onPrimary)
+                        : Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            color: colorScheme.onPrimary),
                   ),
                   TextSpan(
                     text: 'HR',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: colorScheme.primary),
+                    style: MediaQuery.of(context).size.width < 300
+                        ? Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.primary)
+                        : Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.primary),
                   )
                 ],
                 style: context.textTheme.labelSmall,
@@ -46,7 +56,7 @@ class NewHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const ToggleButton(),
-                const NotificationMenu(),
+                const NotificationMenu().paddingSymmetric(horizontal: 5),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
@@ -65,8 +75,12 @@ class NewHome extends StatelessWidget {
           children: [
             Text(
               'Welcome,  Sarah',
-              style: context.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w700, color: colorScheme.onPrimary),
+              style: MediaQuery.of(context).size.width < 300
+                  ? Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w700, color: colorScheme.onPrimary)
+                  : context.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: colorScheme.onPrimary),
             ).paddingTop(10).paddingLeft(5),
           ],
         ),
@@ -90,10 +104,7 @@ class NewHome extends StatelessWidget {
           ],
         ).paddingSymmetric(horizontal: 10),
         Row(
-          /*      crossAxisAlignment: WrapCrossAlignment.center,
-          alignment: WrapAlignment.center,
-          spacing: 10.0,
-          runSpacing: 5.0,*/
+        
           children: [
             Expanded(
               child: const _DayDetailsCard(
@@ -116,80 +127,84 @@ class NewHome extends StatelessWidget {
           style: context.textTheme.bodyMedium
               ?.copyWith(color: colorScheme.onPrimary),
         ).paddingSymmetric(vertical: 10),
+        
+        
         Consumer<DashBoardVm>(builder: (context, data, _) {
-          return SizedBox(
-            height: 240,
-            child: Column(
-              children: [
-                Expanded(
-                  child: GridView(
-                    padding: EdgeInsets.zero,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 6.0,
-                      childAspectRatio: 1,
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: _CustomCardGrid(
+                      onTap: () {
+                        data.index = 3;
+                        data.refresh();
+                      },
+                      icon: CupertinoIcons.hourglass,
+                      title: 'Requests',
+                      iconColor: const Color(0xFF3CD6D4),
                     ),
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      _CustomCardGrid(
-                        onTap: () {
-                          data.index = 3;
-                          data.refresh();
-                        },
-                        icon: CupertinoIcons.hourglass,
-                        title: 'Requests',
-                        iconColor: const Color(0xFF3CD6D4),
-                      ),
-                      _CustomCardGrid(
-                        onTap: () {
-                          //data.index=3;
-                          // data.refresh();
-                        },
-                        icon: Icons.wallet_outlined,
-                        title: 'Payroll',
-                        iconColor: const Color(0xFFEF9D87),
-                      ),
-                      _CustomCardGrid(
-                        onTap: () {},
-                        icon: Icons.file_copy_outlined,
-                        title: 'Documents',
-                        iconColor: const Color(0xFF8CD0FB),
-                      ),
-                      _CustomCardGrid(
-                        onTap: () {
-                          data.index = 10;
-                          data.refresh();
-                        },
-                        icon: CupertinoIcons.calendar,
-                        title: 'Attendance',
-                        iconColor: const Color(0xFFEB4E3F),
-                      ),
-                      _CustomCardGrid(
-                        onTap: () {
-                          data.index = 2;
-                          data.refresh();
-                        },
-                        icon: CupertinoIcons.timer_fill,
-                        title: 'Tasks',
-                        iconColor: const Color(0xFFFA9E3A),
-                      ),
-                      _CustomCardGrid(
-                        onTap: () {
-                          data.index = 1;
-                          data.refresh();
-                        },
-                        icon: CupertinoIcons.person_solid,
-                        title: 'Profile',
-                        iconColor: const Color(0xFFA06CF7),
-                      ),
-                    ],
+                  ),
+                  Expanded(
+                    child: _CustomCardGrid(
+                      onTap: () {
+                        //data.index=3;
+                        // data.refresh();
+                      },
+                      icon: Icons.wallet_outlined,
+                      title: 'Payroll',
+                      iconColor: const Color(0xFFEF9D87),
+                    ),
+                  ),
+                  Expanded(
+                    child: _CustomCardGrid(
+                      onTap: () {},
+                      icon: Icons.file_copy_outlined,
+                      title: 'Documents',
+                      iconColor: const Color(0xFF8CD0FB),
+                    ),
+                  ),
+                ],
+              ).paddingBottom(6),
+              Row(children: [
+                Expanded(
+                  child: _CustomCardGrid(
+                    onTap: () {
+                      data.index = 10;
+                      data.refresh();
+                    },
+                    icon: CupertinoIcons.calendar,
+                    title: 'Attendance',
+                    iconColor: const Color(0xFFEB4E3F),
                   ),
                 ),
-              ],
-            ),
-          );
+                Expanded(
+                  child: _CustomCardGrid(
+                    onTap: () {
+                      data.index = 2;
+                      data.refresh();
+                    },
+                    icon: CupertinoIcons.timer_fill,
+                    title: 'Tasks',
+                    iconColor: const Color(0xFFFA9E3A),
+                  ),
+                ),
+                Expanded(
+                  child: _CustomCardGrid(
+                    onTap: () {
+                      data.index = 1;
+                      data.refresh();
+                    },
+                    icon: CupertinoIcons.person_solid,
+                    title: 'Profile',
+                    iconColor: const Color(0xFFA06CF7),
+                  ),
+                ),
+              ],),
+            ],
+          ).paddingSymmetric(vertical: 10);
         }),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -199,6 +214,7 @@ class NewHome extends StatelessWidget {
                   ?.copyWith(color: colorScheme.onPrimary),
             ).paddingSymmetric(vertical: 5),
             InkWell(
+              borderRadius: BorderRadius.circular(100),
               onTap: () {
                 context.read<DashBoardVm>().index = 9;
                 context.read<DashBoardVm>().refresh();
@@ -237,31 +253,38 @@ class _CustomCardGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(23)
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(23),
-        radius: 0.0,
-        onTap: onTap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 20,
-              color: iconColor,
+    return Row(
+      children: [
+        Expanded(
+          child: SizedBox(
+            height: 90,
+            child: Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(18),
+                radius: 0.0,
+                onTap: onTap,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icon,
+                      size: 20,
+                      color: iconColor,
+                    ).paddingBottom(5),
+                    Text(
+                      title,
+                      style: context.textTheme.bodySmall?.copyWith(
+                          fontSize: 10, color: Theme.of(context).colorScheme.onPrimary),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            Text(
-              title,
-              style: context.textTheme.bodySmall
-                  ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -361,9 +384,9 @@ class _RequestCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Jun 16,2023-Jun 18,2023',
+                Text('Jun 16, 2023 - Jun 18, 2023',
                     style: context.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w300,
                         color: colorScheme.onPrimary)),
                 Text('Going on vacation',
                         style: context.textTheme.bodySmall
@@ -379,7 +402,7 @@ class _RequestCard extends StatelessWidget {
                     Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(color: colorScheme.onPrimary)),
+                          side: BorderSide(color: colorScheme.outline)),
                       child: Text('pending',
                               style: context.textTheme.labelMedium
                                   ?.copyWith(color: colorScheme.onPrimary))
@@ -390,6 +413,8 @@ class _RequestCard extends StatelessWidget {
               ],
             ),
             InkWell(
+              radius: 0.0,
+                borderRadius:  BorderRadius.circular(100),
                 onTap: () {
                   context.read<DashBoardVm>().index = 9;
                   context.read<DashBoardVm>().refresh();

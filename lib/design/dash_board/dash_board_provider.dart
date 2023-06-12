@@ -1,8 +1,8 @@
 import 'package:employee_self_service_flutter/design/notification/notification.dart';
 import 'package:flutter/foundation.dart';
 
-import '../attendance/attendance.dart';
 import '../chat_page/chat_page.dart';
+import '../clocking/clocking.dart';
 import '../feedback_and_signature/feedback_and_signature.dart';
 import '../home/new_home.dart';
 import '../profile/profile.dart';
@@ -28,7 +28,7 @@ class DashBoardVm extends ChangeNotifier {
     Notifications(),
     FeedBackAndSignature(),
     TeamApprovals(),
-    Attendance(),
+    Clocking(),
   ];
 
   refresh() {

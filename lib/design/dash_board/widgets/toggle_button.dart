@@ -12,11 +12,12 @@ class ToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = ThemeNotifier.of(context, listen: false);
     return Container(
+
       padding: const EdgeInsets.symmetric(horizontal: 3,vertical: 1.5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
-            color: Theme.of(context).colorScheme.primaryContainer/*themeProvider.themeMode == ThemeModeType.dark
+            color: Theme.of(context).colorScheme.outline/*themeProvider.themeMode == ThemeModeType.dark
                 ? Theme.of(context).colorScheme.onPrimary
                 : Colors.white*/,
           )
@@ -31,7 +32,7 @@ class ToggleButton extends StatelessWidget {
               width: 20,
               decoration: BoxDecoration(
                 border: Border.all(  color: themeProvider.themeMode == ThemeModeType.light
-                    ? Theme.of(context).colorScheme.primary
+                    ? Theme.of(context).colorScheme.outline
                     : Colors.transparent,),
                 shape: BoxShape.circle,
               ),
@@ -41,7 +42,7 @@ class ToggleButton extends StatelessWidget {
                 size: 11,
               ),
             ),
-          ).paddingRight(5),
+          ).paddingRight(1),
           InkWell(
             onTap: () => themeProvider.toggleThemeMode(),
             child: Container(

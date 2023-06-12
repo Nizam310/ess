@@ -22,6 +22,7 @@ class CusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Consumer<DashBoardVm>(builder: (context, data, _) {
       return MouseRegion(
         onHover: (event) {
@@ -48,17 +49,17 @@ class CusCard extends StatelessWidget {
                       Icon(
                         icon,
                         color: data.index == index
-                            ? Colors.white
+                            ? colorScheme.primary
                             : (iconColor ??
-                            Theme.of(context).colorScheme.primaryContainer),
+                            colorScheme.onPrimary),
                       ).paddingRight(20),
                       Text(
                         title,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             color: data.index == index
-                                ? Colors.white
-                                : (Theme.of(context).colorScheme.primary)),
+                                ? colorScheme.primary
+                                : (colorScheme.onPrimary)),
                       ),
                     ],
                   ),

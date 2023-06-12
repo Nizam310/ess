@@ -15,7 +15,7 @@ enum ThemeModeType {
   dark,
 }
 
-enum Request{
-  pending,
-  verified
+enum AttendanceRequest{
+  Pending,
+  Verified
 }

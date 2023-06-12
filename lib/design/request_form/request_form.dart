@@ -1,4 +1,3 @@
-import 'package:employee_self_service_flutter/constant/decoration_card.dart';
 import 'package:employee_self_service_flutter/design/request_form/request_form_provider.dart';
 import 'package:employee_self_service_flutter/design/request_form/widgets/range_picker_calendar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class RequestForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(color: Theme.of(context).colorScheme.primary);
+    final style = TextStyle(color: Theme.of(context).colorScheme.onPrimary);
     return ChangeNotifierProvider(
       create: (_) => RequestFormVm(),
       child: Builder(builder: (
@@ -25,108 +24,95 @@ class RequestForm extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: const SingleChildScrollView(child: CalendarRangePicker()),
-
-          bottomSheet: SizedBox(
-            height: 260,
-            child: ListView(
-              children: [
-                /* const Expanded(child: SizedBox(
-                    height: 320,
-                    child: SingleChildScrollView(child: CalendarRangePicker()))),
-         */
-                DecorationCard(
-                  radius: BorderRadius.circular(30),
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Visibility(
-                        visible: !(context.select(
-                                (RequestFormVm value) => value.leaveType) ==
-                            "Other"),
-                        child: CusDropdown<String>(
-                          label: "Leave Type",
-                          verPadding: 5,
-                          value: context
-                              .select((RequestFormVm value) => value.leaveType),
-                          items: context.select(
-                              (RequestFormVm value) => value.leaveTypeList),
-                          itemBuilder: (type) => Text(
-                            type,
-                            style: style,
-                          ),
-                          onChanged: (String? value) {
-                            if (value != null) {
-                              context.read<RequestFormVm>().leaveType = value;
-                            }
-                            context.read<RequestFormVm>().refresh();
-                          },
-                        ),
+          bottomNavigationBar: Card(
+            child: SizedBox(
+              height: 250,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                children: [
+                  Visibility(
+                    visible: !(context
+                            .select((RequestFormVm value) => value.leaveType) ==
+                        "Other"),
+                    child: CusDropdown<String>(
+                      label: "Leave Type",
+                      verPadding: 5,
+                      value: context
+                          .select((RequestFormVm value) => value.leaveType),
+                      items: context
+                          .select((RequestFormVm value) => value.leaveTypeList),
+                      itemBuilder: (type) => Text(
+                        type,
+                        style: style,
                       ),
-                      Visibility(
-                        visible: (context.select(
-                                (RequestFormVm value) => value.leaveType) ==
-                            "Other"),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                                child: CusTextField(
-                                        hintText: "Leave type",
-                                        controller: context.select(
-                                            (RequestFormVm value) =>
-                                                value.other),
-                                        onChanged: (val) {})
-                                    .paddingSymmetric(horizontal: 10)),
-                            CusButton(
-                                text: "Add",
-                                onTap: () {
-                                  context.read<RequestFormVm>().other.text == ""
-                                      ? null
-                                      : context
-                                          .read<RequestFormVm>()
-                                          .leaveTypeList
-                                          .add(context
-                                              .read<RequestFormVm>()
-                                              .other
-                                              .text);
-                                  context.read<RequestFormVm>().leaveType =
-                                      context
-                                          .read<RequestFormVm>()
-                                          .leaveTypeList
-                                          .last;
-                                  context.read<RequestFormVm>().other.clear();
-                                  context.read<RequestFormVm>().refresh();
-                                }).paddingRight(11)
-                          ],
-                        ).paddingSymmetric(vertical: 5),
-                      ),
-                      CusTextField(
-                        controller: context
-                            .select((RequestFormVm value) => value.reason),
-                        onChanged: (val) {},
-                        hintText: "Reason",
-                      ).paddingSymmetric(horizontal: 10, vertical: 5),
-                      Align(
-                        alignment: AlignmentDirectional.topStart,
-                        child: SizedBox(
-                          width: 110,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Attach Document',
-                                textAlign: TextAlign.start,
-                                style: context.textTheme.bodySmall?.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              )),
-                        ),
-                      ),
-                      CusButton(text: 'Submit', onTap: () {})
-                          .paddingSymmetric(horizontal: 10, vertical: 5)
-                    ],
+                      onChanged: (String? value) {
+                        if (value != null) {
+                          context.read<RequestFormVm>().leaveType = value;
+                        }
+                        context.read<RequestFormVm>().refresh();
+                      },
+                    ),
                   ),
-                ),
-              ],
+                  Visibility(
+                    visible: (context
+                            .select((RequestFormVm value) => value.leaveType) ==
+                        "Other"),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            child: CusTextField(
+                                    hintText: "Leave type",
+                                    controller: context.select(
+                                        (RequestFormVm value) => value.other),
+                                    onChanged: (val) {})
+                                .paddingSymmetric(horizontal: 10)),
+                        CusButton(
+                            text: "Add",
+                            onTap: () {
+                              context.read<RequestFormVm>().other.text == ""
+                                  ? null
+                                  : context
+                                      .read<RequestFormVm>()
+                                      .leaveTypeList
+                                      .add(context
+                                          .read<RequestFormVm>()
+                                          .other
+                                          .text);
+                              context.read<RequestFormVm>().leaveType = context
+                                  .read<RequestFormVm>()
+                                  .leaveTypeList
+                                  .last;
+                              context.read<RequestFormVm>().other.clear();
+                              context.read<RequestFormVm>().refresh();
+                            }).paddingRight(11)
+                      ],
+                    ).paddingSymmetric(vertical: 5),
+                  ),
+                  CusTextField(
+                    controller:
+                        context.select((RequestFormVm value) => value.reason),
+                    onChanged: (val) {},
+                    hintText: "Reason",
+                  ).paddingSymmetric(horizontal: 10, vertical: 5),
+                  Align(
+                    alignment: AlignmentDirectional.topStart,
+                    child: SizedBox(
+                      width: 110,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Attach Document',
+                            textAlign: TextAlign.start,
+                            style: context.textTheme.bodySmall?.copyWith(
+                                color: Theme.of(context).colorScheme.primary),
+                          )),
+                    ),
+                  ),
+                  CusButton(text: 'Submit', onTap: () {})
+                      .paddingSymmetric(horizontal: 10, vertical: 5),
+                ],
+              ),
             ),
           ),
         );

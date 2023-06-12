@@ -11,16 +11,14 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final style = TextStyle(color: colorScheme.primary);
+    const  style =  TextStyle();
     return Consumer<TaskVm>(builder: (context, data, _) {
       return Card(
-        shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: colorScheme.primary,
-            ),
-            borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: colorScheme.outline)
+          ),
         child: ListTileTheme(
-          shape: const RoundedRectangleBorder(),
           child: ExpansionTile(
             leading: Icon(
               data.type == ActivityType.RecentlyCreated
@@ -30,7 +28,7 @@ class TaskCard extends StatelessWidget {
                       : data.type == ActivityType.RecentlyCompleted
                           ? null
                           : Icons.stop_circle,
-              color: colorScheme.primary,
+             // color: colorScheme.primary,
             ),
             title: Text(
               data.type == ActivityType.RecentlyCreated

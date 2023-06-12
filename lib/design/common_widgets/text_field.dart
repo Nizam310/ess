@@ -33,23 +33,23 @@ class _CusTextFieldState extends State<CusTextField> {
       enabled: widget.enabled ?? true,
       keyboardAppearance: Brightness.dark,
       textInputAction: TextInputAction.next,
-      style: TextStyle(color: Theme.of(context).colorScheme.surface),
+      //style: TextStyle(color: Theme.of(context).colorScheme.surface),
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                   color: widget.borderColor ??
-                      Theme.of(context).colorScheme.primary)),
+                      Theme.of(context).colorScheme.outline)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                   color: widget.borderColor ??
-                      Theme.of(context).colorScheme.primary)),
+                      Theme.of(context).colorScheme.outline)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                   color: widget.borderColor ??
-                      Theme.of(context).colorScheme.primary)),
+                      Theme.of(context).colorScheme.outline)),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
@@ -60,19 +60,19 @@ class _CusTextFieldState extends State<CusTextField> {
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                   color: widget.borderColor ??
-                      Theme.of(context).colorScheme.primary)),
+                      Theme.of(context).colorScheme.outline)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                   color: widget.borderColor ??
-                      Theme.of(context).colorScheme.primary)),
+                      Theme.of(context).colorScheme.outline)),
 
           hintText: widget.hintText,
           hintStyle: TextStyle(
               fontSize: 13,
-              color: widget.hintColor ?? Theme.of(context).colorScheme.primary),
+              color: widget.hintColor ?? Theme.of(context).colorScheme.onPrimary),
           labelStyle: TextStyle(
-              color:  Theme.of(context).colorScheme.primary),
+              color:  Theme.of(context).colorScheme.onPrimary),
           labelText: widget.labelText),
       onChanged: widget.onChanged,
       controller: widget.controller,

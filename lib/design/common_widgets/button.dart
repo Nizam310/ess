@@ -52,7 +52,7 @@ class _CusButtonState extends State<CusButton> {
               child: Text(
             widget.text,
             style: TextStyle(
-                color: widget.textColor, fontSize: widget.textSize),
+                color: widget.textColor??Theme.of(context).colorScheme.surface, fontSize: widget.textSize),
           )).paddingSymmetric(
             horizontal: 10,
           ),

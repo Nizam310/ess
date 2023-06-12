@@ -37,7 +37,7 @@ class ListCusCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                       color:
-                          tileColor ?? Theme.of(context).colorScheme.primary)),
+                          tileColor ?? Theme.of(context).colorScheme.outline)),
               padding: const EdgeInsets.all(15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,14 +49,14 @@ class ListCusCard extends StatelessWidget {
                           child: Icon(
                             icon,
                             color: iconColor ??
-                                Theme.of(context).colorScheme.primary,
+                                Theme.of(context).colorScheme.onPrimary,
                           )).paddingRight(10),
                       Text(
                         text,
                         style: textStyle ??
                             TextStyle(
                                 fontSize: 13,
-                                color: Theme.of(context).colorScheme.primary),
+                                color: Theme.of(context).colorScheme.onPrimary),
                       ),
                     ],
                   ),

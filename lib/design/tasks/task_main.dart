@@ -21,7 +21,7 @@ class Tasks extends StatelessWidget {
           CusDropdown<ActivityType>(
             label: "Work Item",
             items: ActivityType.values,
-            itemBuilder: (c) => Text(c.name,style: TextStyle(color: Theme.of(context).colorScheme.primary),),
+            itemBuilder: (c) => Text(c.name,style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
             value: context.select((TaskVm value) => value.type),
             onChanged: (val) {
               if (val != null) {
