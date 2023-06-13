@@ -165,13 +165,15 @@ class _TeamApprovalsCard extends StatelessWidget {
           ),
           subtitle: Text(
             position,
-            style: context.textTheme.bodyLarge
-                ?.copyWith(color: colorScheme.onPrimary),
+            style: context.textTheme.bodySmall
+                ?.copyWith(
+                fontSize: 10,
+                color: colorScheme.onPrimary),
           ),          // expandedAlignment: Alignment.topRight,
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            Column(
+            Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   '$dateFrom - $dateTo ($totalDays)',

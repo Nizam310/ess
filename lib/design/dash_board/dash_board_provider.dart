@@ -11,6 +11,7 @@ import '../settings/settings.dart';
 import '../tasks/task_add.dart';
 import '../tasks/task_main.dart';
 import '../team_approvals/team_approvals.dart';
+import '../who_iS_off/who_is_off.dart';
 
 class DashBoardVm extends ChangeNotifier {
   bool hover = false;
@@ -18,7 +19,6 @@ class DashBoardVm extends ChangeNotifier {
 
   final List screen = const [
     NewHome(),
-    // Home(),
     Profile(),
     Tasks(),
     RequestForm(),
@@ -29,6 +29,7 @@ class DashBoardVm extends ChangeNotifier {
     FeedBackAndSignature(),
     TeamApprovals(),
     Clocking(),
+    WhoIsOff(),
   ];
 
   refresh() {

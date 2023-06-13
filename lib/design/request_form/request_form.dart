@@ -25,10 +25,16 @@ class RequestForm extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: const SingleChildScrollView(child: CalendarRangePicker()),
           bottomNavigationBar: Card(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20))),
+            margin: const EdgeInsets.all(0),
             child: SizedBox(
               height: 250,
               child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 children: [
                   Visibility(
                     visible: !(context
@@ -93,21 +99,18 @@ class RequestForm extends StatelessWidget {
                     controller:
                         context.select((RequestFormVm value) => value.reason),
                     onChanged: (val) {},
-                    hintText: "Reason",
+                    labelText: "Notes",
                   ).paddingSymmetric(horizontal: 10, vertical: 5),
                   Align(
                     alignment: AlignmentDirectional.topStart,
-                    child: SizedBox(
-                      width: 110,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Attach Document',
-                            textAlign: TextAlign.start,
-                            style: context.textTheme.bodySmall?.copyWith(
-                                color: Theme.of(context).colorScheme.primary),
-                          )),
-                    ),
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Attach Document',
+                          textAlign: TextAlign.start,
+                          style: context.textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.primary),
+                        )).paddingLeft(5),
                   ),
                   CusButton(text: 'Submit', onTap: () {})
                       .paddingSymmetric(horizontal: 10, vertical: 5),

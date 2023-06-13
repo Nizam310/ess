@@ -4,6 +4,7 @@ import 'package:employee_self_service_flutter/design/dash_board/widgets/sorted_c
 import 'package:employee_self_service_flutter/design/dash_board/widgets/toggle_button.dart';
 import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
 import 'package:employee_self_service_flutter/design/tasks/location/location_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +67,7 @@ class DashBoard extends StatelessWidget {
                                   : data.index == 1
                                       ? "Profile"
                                       : data.index == 3
-                                          ? "Request Form"
+                                          ? "Request Leave"
                                           : data.index == 5
                                               ? "Settings"
                                               : data.index == 4
@@ -82,6 +83,9 @@ class DashBoard extends StatelessWidget {
                                                                   : data.index ==
                                                                           10
                                                                       ? "Clocking"
+                                                                      :data.index ==
+                                                                          11
+                                                                      ? "Who\'s off"
                                                                       : "",
                               style: TextStyle(color: colorScheme.onPrimary),
                             ),
@@ -323,8 +327,8 @@ class CusDrawer extends StatelessWidget {
                 ),
                 CusCard(
                   index: 3,
-                  icon: Icons.receipt_long,
-                  title: "Request Form",
+                  icon: CupertinoIcons.calendar_badge_minus,
+                  title: "Request leave",
                   onTap: () {
                     data.index = 3;
                     Scaffold.of(context).closeDrawer();
@@ -357,6 +361,26 @@ class CusDrawer extends StatelessWidget {
                   title: "Clocking",
                   onTap: () {
                     data.index = 10;
+                    Scaffold.of(context).closeDrawer();
+                    data.refresh();
+                  },
+                ),
+                CusCard(
+                  index: 11,
+                  icon: Icons.group_off,
+                  title: "Who\'s off",
+                  onTap: () {
+                    data.index = 11;
+                    Scaffold.of(context).closeDrawer();
+                    data.refresh();
+                  },
+                ),
+                CusCard(
+                  index: 7,
+                  icon: Icons.notifications_active_outlined,
+                  title: "Notifications",
+                  onTap: () {
+                    data.index = 7;
                     Scaffold.of(context).closeDrawer();
                     data.refresh();
                   },
@@ -438,4 +462,3 @@ class NotificationMenu extends StatelessWidget {
     );
   }
 }
-

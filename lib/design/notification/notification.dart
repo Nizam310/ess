@@ -6,7 +6,7 @@ class Notifications extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(color: Theme.of(context).colorScheme.primary);
+    final style = TextStyle(color: Theme.of(context).colorScheme.onPrimary);
     return Column(
       children: [
         Expanded(

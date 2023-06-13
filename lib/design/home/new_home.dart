@@ -1,9 +1,13 @@
+import 'package:employee_self_service_flutter/constant/themes/theme.dart';
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../constant/enum.dart';
 import '../dash_board/dash_board_screen.dart';
 import '../dash_board/widgets/toggle_button.dart';
 
@@ -25,26 +29,26 @@ class NewHome extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: 'CloudMe',
-                    style: MediaQuery.of(context).size.width < 300
+                    style: MediaQuery.of(context).size.width < 330
                         ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w800,
                             color: colorScheme.onPrimary)
                         : Theme.of(context).textTheme.headlineMedium?.copyWith(
                             fontSize: 30,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w900,
                             color: colorScheme.onPrimary),
                   ),
                   TextSpan(
                     text: 'HR',
-                    style: MediaQuery.of(context).size.width < 300
+                    style: MediaQuery.of(context).size.width < 330
                         ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontSize: 20,
+                            fontSize: 25,
                             fontWeight: FontWeight.bold,
                             color: colorScheme.primary)
                         : Theme.of(context).textTheme.headlineMedium?.copyWith(
                             fontSize: 30,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w900,
                             color: colorScheme.primary),
                   )
                 ],
@@ -59,29 +63,37 @@ class NewHome extends StatelessWidget {
                 const NotificationMenu().paddingSymmetric(horizontal: 5),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    'https://picsum.photos/seed/540/600',
-                    width: 25.0,
-                    height: 25.0,
-                    fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      context.read<DashBoardVm>().index = 1;
+                      context.read<DashBoardVm>().refresh();
+                    },
+                    child: Image.network(
+                      'https://picsum.photos/seed/540/600',
+                      width: 25.0,
+                      height: 25.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],
             ),
           ],
-        ).paddingSymmetric(vertical: 10),
+        ),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
               'Welcome,  Sarah',
-              style: MediaQuery.of(context).size.width < 300
+              style: MediaQuery.of(context).size.width < 360
                   ? Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700, color: colorScheme.onPrimary)
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                      color: colorScheme.onPrimary)
                   : context.textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                       color: colorScheme.onPrimary),
-            ).paddingTop(10).paddingLeft(5),
+            ).paddingOnly(top: 10, left: 5),
           ],
         ),
         Row(
@@ -104,22 +116,8 @@ class NewHome extends StatelessWidget {
           ],
         ).paddingSymmetric(horizontal: 10),
         Row(
-        
-          children: [
-            Expanded(
-              child: const _DayDetailsCard(
-                title: 'Annual Vacation',
-                value: '18',
-                subValue: '21',
-              ).paddingSymmetric(horizontal: 5),
-            ),
-            Expanded(
-              child: const _DayDetailsCard(
-                title: 'Sick Days',
-                value: '12',
-                subValue: '14',
-              ).paddingSymmetric(horizontal: 5),
-            ),
+          children: const [
+            Expanded(child: _LeaveTypesCarousel()),
           ],
         ).paddingSymmetric(vertical: 10),
         Text(
@@ -127,8 +125,6 @@ class NewHome extends StatelessWidget {
           style: context.textTheme.bodyMedium
               ?.copyWith(color: colorScheme.onPrimary),
         ).paddingSymmetric(vertical: 10),
-        
-        
         Consumer<DashBoardVm>(builder: (context, data, _) {
           return Column(
             children: [
@@ -148,63 +144,67 @@ class NewHome extends StatelessWidget {
                   Expanded(
                     child: _CustomCardGrid(
                       onTap: () {
-                        //data.index=3;
-                        // data.refresh();
+                        data.index = 11;
+                        data.refresh();
                       },
-                      icon: Icons.wallet_outlined,
-                      title: 'Payroll',
+                      icon: Icons.group_off,
+                      title: 'Who\'s off',
                       iconColor: const Color(0xFFEF9D87),
                     ),
                   ),
                   Expanded(
                     child: _CustomCardGrid(
-                      onTap: () {},
-                      icon: Icons.file_copy_outlined,
-                      title: 'Documents',
+                      onTap: () {
+                        data.index = 3;
+                        data.refresh();
+                      },
+                      icon: CupertinoIcons.calendar_badge_minus,
+                      title: 'Request leave',
                       iconColor: const Color(0xFF8CD0FB),
                     ),
                   ),
                 ],
               ).paddingBottom(6),
-              Row(children: [
-                Expanded(
-                  child: _CustomCardGrid(
-                    onTap: () {
-                      data.index = 10;
-                      data.refresh();
-                    },
-                    icon: CupertinoIcons.calendar,
-                    title: 'Attendance',
-                    iconColor: const Color(0xFFEB4E3F),
+              Row(
+                children: [
+                  Expanded(
+                    child: _CustomCardGrid(
+                      onTap: () {
+                        data.index = 10;
+                        data.refresh();
+                      },
+                      icon: CupertinoIcons.calendar,
+                      title: 'Attendance',
+                      iconColor: const Color(0xFFEB4E3F),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: _CustomCardGrid(
-                    onTap: () {
-                      data.index = 2;
-                      data.refresh();
-                    },
-                    icon: CupertinoIcons.timer_fill,
-                    title: 'Tasks',
-                    iconColor: const Color(0xFFFA9E3A),
+                  Expanded(
+                    child: _CustomCardGrid(
+                      onTap: () {
+                        data.index = 2;
+                        data.refresh();
+                      },
+                      icon: CupertinoIcons.timer_fill,
+                      title: 'Tasks',
+                      iconColor: const Color(0xFFFA9E3A),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: _CustomCardGrid(
-                    onTap: () {
-                      data.index = 1;
-                      data.refresh();
-                    },
-                    icon: CupertinoIcons.person_solid,
-                    title: 'Profile',
-                    iconColor: const Color(0xFFA06CF7),
+                  Expanded(
+                    child: _CustomCardGrid(
+                      onTap: () {
+                        data.index = 1;
+                        data.refresh();
+                      },
+                      icon: CupertinoIcons.person_solid,
+                      title: 'Profile',
+                      iconColor: const Color(0xFFA06CF7),
+                    ),
                   ),
-                ),
-              ],),
+                ],
+              ),
             ],
           ).paddingSymmetric(vertical: 10);
         }),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -237,6 +237,26 @@ class NewHome extends StatelessWidget {
   }
 }
 
+class _RequestWidget extends StatelessWidget {
+  const _RequestWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: ListView.builder(
+                itemCount: 2,
+                itemBuilder: (context, index) => const _RequestCard()),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _CustomCardGrid extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -257,11 +277,12 @@ class _CustomCardGrid extends StatelessWidget {
       children: [
         Expanded(
           child: SizedBox(
-            height: 90,
+            height: 110,
             child: Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(23)),
               child: InkWell(
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(23),
                 radius: 0.0,
                 onTap: onTap,
                 child: Column(
@@ -276,7 +297,8 @@ class _CustomCardGrid extends StatelessWidget {
                     Text(
                       title,
                       style: context.textTheme.bodySmall?.copyWith(
-                          fontSize: 10, color: Theme.of(context).colorScheme.onPrimary),
+                          fontSize: 10,
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ],
                 ),
@@ -290,82 +312,61 @@ class _CustomCardGrid extends StatelessWidget {
 }
 
 class _DayDetailsCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final String subValue;
+  final String leaveType;
+  final String takenLeaves;
+  final String totalLeaves;
+  final String emoji;
+  final double emojiSize;
 
-  const _DayDetailsCard(
-      {Key? key,
-      required this.title,
-      required this.value,
-      required this.subValue})
-      : super(key: key);
+  const _DayDetailsCard({
+    Key? key,
+    required this.leaveType,
+    required this.takenLeaves,
+    required this.totalLeaves,
+    required this.emoji,
+    required this.emojiSize,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Expanded(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  title,
-                  style: context.textTheme.bodyMedium
-                      ?.copyWith(color: colorScheme.onPrimary),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '$value/',
-                        style: context.textTheme.titleMedium?.copyWith(
-                            color: colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(
-                        text: subValue,
-                        style: const TextStyle(),
-                      )
-                    ],
-                    style: context.textTheme.bodySmall
-                        ?.copyWith(color: colorScheme.onPrimary),
-                  ),
-                ).paddingSymmetric(vertical: 10),
-                Text(
-                  'Days',
-                  style: context.textTheme.bodySmall
-                      ?.copyWith(color: colorScheme.onPrimary),
-                ),
-              ],
-            ).paddingAll(15),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _RequestWidget extends StatelessWidget {
-  const _RequestWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: SizedBox(
-            height: 200,
-            child: ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) => const _RequestCard()),
-          ),
-        ),
-      ],
+    return Card(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Lottie.network(emoji, height: emojiSize, width: emojiSize),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    takenLeaves,
+                    style: context.textTheme.headlineMedium?.copyWith(
+                        color: colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold),
+                  ).paddingRight(10),
+                  Text(
+                    '/ $totalLeaves',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onPrimary,
+                    ),
+                  )
+                ],
+              ),
+              Text(
+                leaveType,
+                style: context.textTheme.bodySmall
+                    ?.copyWith(color: colorScheme.onPrimary),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ).paddingAll(15),
+        ],
+      ),
     );
   }
 }
@@ -413,8 +414,8 @@ class _RequestCard extends StatelessWidget {
               ],
             ),
             InkWell(
-              radius: 0.0,
-                borderRadius:  BorderRadius.circular(100),
+                radius: 0.0,
+                borderRadius: BorderRadius.circular(100),
                 onTap: () {
                   context.read<DashBoardVm>().index = 9;
                   context.read<DashBoardVm>().refresh();
@@ -425,5 +426,77 @@ class _RequestCard extends StatelessWidget {
                 )),
           ],
         ).paddingAll(20));
+  }
+}
+
+class _LeaveTypesCarousel extends StatelessWidget {
+  const _LeaveTypesCarousel({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ThemeNotifier.of(context, listen: false);
+    final List<Map<String, dynamic>> list = [
+      {
+        'leaveType': 'Casual leave',
+        'takenLeaves': '18',
+        'totalLeaves': '20',
+        'emoji':
+            'https://assets1.lottiefiles.com/private_files/lf30_bb9bkg1h.json',
+        'emojiSize': 100.0,
+      },
+      {
+        'leaveType': 'Annual leave',
+        'takenLeaves': '18',
+        'totalLeaves': '20',
+        'emoji': 'https://assets7.lottiefiles.com/packages/lf20_xlz4hb.json',
+        'emojiSize': 60.0,
+      },
+      {
+        'leaveType': 'Sick leave',
+        'takenLeaves': '18',
+        'totalLeaves': '20',
+        'emoji': 'https://assets5.lottiefiles.com/packages/lf20_5Gqhew.json',
+        'emojiSize': 60.0,
+      },
+      {
+        'leaveType': 'Emergency leave',
+        'takenLeaves': '18',
+        'totalLeaves': '20',
+        'emoji':  'https://assets9.lottiefiles.com/packages/lf20_jol43osd.json',
+        'emojiSize': 90.0,
+      },
+    ];
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 120,
+          child: Row(
+            children: [
+              Expanded(
+                child: CarouselSlider(
+                  items: list.map((item) {
+                    return _DayDetailsCard(
+                      leaveType: item['leaveType'],
+                      takenLeaves: item['takenLeaves'],
+                      totalLeaves: item['totalLeaves'],
+                      emoji: item['emoji'],
+                      emojiSize: item['emojiSize'],
+                    );
+                  }).toList(),
+                  options: CarouselOptions(
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    animateToClosest: true,
+                    aspectRatio: 0.1 / 8,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

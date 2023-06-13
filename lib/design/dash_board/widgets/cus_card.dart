@@ -17,7 +17,7 @@ class CusCard extends StatelessWidget {
     required this.icon,
     this.iconColor,
     required this.onTap,
-     this.index,
+    this.index,
   }) : super(key: key);
 
   @override
@@ -45,22 +45,21 @@ class CusCard extends StatelessWidget {
                 Expanded(
                   child: Wrap(
                     alignment: WrapAlignment.start,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Icon(
                         icon,
                         color: data.index == index
                             ? colorScheme.primary
-                            : (iconColor ??
-                            colorScheme.onPrimary),
+                            : (iconColor ?? colorScheme.onPrimary),
                       ).paddingRight(20),
                       Text(
                         title,
-                        textAlign: TextAlign.start,
                         style: TextStyle(
                             color: data.index == index
                                 ? colorScheme.primary
                                 : (colorScheme.onPrimary)),
-                      ),
+                      ).paddingTop(.5),
                     ],
                   ),
                 ),

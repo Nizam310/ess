@@ -18,10 +18,25 @@ class Tasks extends StatelessWidget {
       return ListView(
         padding: const EdgeInsets.all(10),
         children: [
+          Align(
+            alignment: AlignmentDirectional.topEnd,
+            child: TextButton(
+                onPressed: () {
+                  context.read<DashBoardVm>().index = 6;
+                  context.read<DashBoardVm>().refresh();
+                  context.read<TaskVm>().type = null;
+                },
+                child: const Text(
+                  "Add New Work Item",
+                )),
+          ),
           CusDropdown<ActivityType>(
             label: "Work Item",
             items: ActivityType.values,
-            itemBuilder: (c) => Text(c.name,style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
+            itemBuilder: (c) => Text(
+              c.name,
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
             value: context.select((TaskVm value) => value.type),
             onChanged: (val) {
               if (val != null) {
@@ -31,14 +46,6 @@ class Tasks extends StatelessWidget {
             },
             verPadding: 10,
             horPadding: 0,
-          ),
-          CusButton(
-            text: "New Work Item",
-            onTap: () {
-              context.read<DashBoardVm>().index = 6;
-              context.read<DashBoardVm>().refresh();
-              context.read<TaskVm>().type = null;
-            },
           ),
           Consumer<TaskVm>(
             builder: (context, data, _) {

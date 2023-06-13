@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../enum.dart';
 
 class ThemeProvider with ChangeNotifier {
-  ThemeModeType _themeMode = ThemeModeType.dark;
+  ThemeModeType _themeMode = ThemeModeType.light;
 
   ThemeModeType get themeMode => _themeMode;
 
