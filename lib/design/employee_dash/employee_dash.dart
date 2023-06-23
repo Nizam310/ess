@@ -93,14 +93,9 @@ class _DetailsTab extends StatelessWidget {
                     text: ' ${e['last_name']}',
                     style: mainHead,
                   )
-                ])) /*Text(
-                            e['first_name'],
-                            style: context.textTheme.bodyLarge
-                                ?.copyWith(color: colorScheme.onPrimary),
-                          )*/
-                ,
+                ])),
                 children: [
-                  /// basic details
+                  /// basic details..........................
 
                   _CustomWidget(
                     children: [
@@ -136,7 +131,7 @@ class _DetailsTab extends StatelessWidget {
                     ],
                   ),
 
-                  /// contact
+                  /// contact..............................
 
                   _CustomWidget(
                     children: [
@@ -168,7 +163,7 @@ class _DetailsTab extends StatelessWidget {
                     ],
                   ),
 
-                  /// work
+                  /// work..............................
 
                   _CustomWidget(
                     children: [
@@ -480,8 +475,7 @@ class _ContractTab extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LoadingAnim();
                 } else if (snapshot.hasError) {
-                  return const Text(
-                      'Error');
+                  return const Text('Error');
                 } else {
                   if (snapshot.data == true) {
                     return Center(
