@@ -149,7 +149,7 @@ class NewHome extends StatelessWidget {
                       Expanded(
                           child: CusDocCard(
                         onTap: () {
-                          context.read<DashBoardVm>().index = 16;
+                          context.read<DashBoardVm>().index = 15;
                           context.read<DashBoardVm>().refresh();
                         },
                         expiryValue: '1',
