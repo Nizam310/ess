@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constant/enum.dart';
 
-class RequestFormVm extends ChangeNotifier {
+class RequestLeaveVm extends ChangeNotifier {
   TextEditingController reason = TextEditingController();
   TextEditingController days = TextEditingController();
   TextEditingController other = TextEditingController();

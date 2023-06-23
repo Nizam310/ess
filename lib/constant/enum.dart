@@ -17,5 +17,22 @@ enum ThemeModeType {
 
 enum AttendanceRequest{
   Pending,
-  Verified
+  Approved,
+  Rejected
+}
+enum LeaveRequest{
+  Pending,
+  Approved,
+  Rejected
+}
+
+
+
+enum DocumentType {
+  passport,
+  aadhaar,
+  pan,
+  licence,
+  visa,
+  id,
 }

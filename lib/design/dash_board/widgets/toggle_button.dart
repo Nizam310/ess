@@ -26,6 +26,7 @@ class ToggleButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
+            borderRadius: BorderRadius.circular(100),
             onTap: () => themeProvider.toggleThemeMode(),
             child: Container(
               height: 20,
@@ -44,6 +45,7 @@ class ToggleButton extends StatelessWidget {
             ),
           ).paddingRight(1),
           InkWell(
+            borderRadius: BorderRadius.circular(100),
             onTap: () => themeProvider.toggleThemeMode(),
             child: Container(
               height: 20,

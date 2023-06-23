@@ -2,6 +2,7 @@ import 'package:employee_self_service_flutter/design/common_widgets/list_cus_car
 import 'package:employee_self_service_flutter/design/dash_board/widgets/cus_card.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/sorted_calendar.dart';
 import 'package:employee_self_service_flutter/design/dash_board/widgets/toggle_button.dart';
+import 'package:employee_self_service_flutter/design/login/login_screen.dart';
 import 'package:employee_self_service_flutter/design/profile/profile_provider.dart';
 import 'package:employee_self_service_flutter/design/tasks/location/location_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,10 +84,24 @@ class DashBoard extends StatelessWidget {
                                                                   : data.index ==
                                                                           10
                                                                       ? "Clocking"
-                                                                      :data.index ==
-                                                                          11
-                                                                      ? "Who\'s off"
-                                                                      : "",
+                                                                      : data.index ==
+                                                                              11
+                                                                          ? "Who's off"
+                                                                          : data.index == 12
+                                                                              ? "PayRoll"
+                                                                              : data.index == 8
+                                                                                  ? "Request History"
+                                                                                  : data.index == 13
+                                                                                      ? "Attach Documents"
+                                                                                      : data.index == 14
+                                                                                          ? "Attendance history"
+                                                                                          : data.index == 15
+                                                                                          ? "Tasks Summary"
+                                                                                          : data.index == 16
+                                                                                          ? "Document Summary"
+                                                                                          :data.index == 17
+                                                                                          ? "Employee Dash"
+                                                                                          : "",
                               style: TextStyle(color: colorScheme.onPrimary),
                             ),
                             Row(
@@ -163,11 +178,13 @@ class DashBoard extends StatelessWidget {
                                 const ToggleButton()
                                     .paddingSymmetric(horizontal: 8),
                                 const NotificationMenu(),
-                                const SortCalendar()
+                                Visibility(
+                                    visible: data.index==9||data.index==14||data.index ==8,
+                                    child: const SortCalendar())
                               ],
                             ),
                           ],
-                        ).paddingSymmetric(horizontal: 9),
+                        ).paddingOnly(right: 7,left: 1),
                       ),
                     ),
                     Expanded(child: data.screen.elementAt(data.index))
@@ -241,24 +258,6 @@ class DashBoard extends StatelessWidget {
   }
 }
 
-class CustomNotchedShape extends CircularNotchedRectangle {
-  final Color borderColor;
-
-  CustomNotchedShape({required this.borderColor});
-
-  @override
-  Path getOuterPath(Rect host, Rect? guest) {
-    final path = super.getOuterPath(host, guest);
-    final borderPath = Path.combine(
-      PathOperation.difference,
-      path,
-      Path()..addRect(host),
-    );
-
-    return borderPath;
-  }
-}
-
 class CusDrawer extends StatelessWidget {
   const CusDrawer({Key? key}) : super(key: key);
 
@@ -266,154 +265,197 @@ class CusDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Consumer<DashBoardVm>(builder: (context, data, _) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                            fontSize: 17, color: colorScheme.onPrimary),
-                      ).paddingTop(10),
-                      Text(
-                        "Role",
-                        style: TextStyle(
-                            fontSize: 12, color: colorScheme.onPrimary),
-                      ).paddingTop(10),
-                    ],
-                  ).paddingAll(10),
-                ).paddingSymmetric(horizontal: 8, vertical: 5),
-                Divider(
-                  color: colorScheme.outline,
-                  thickness: 0.5,
-                ),
-                CusCard(
-                  index: 0,
-                  icon: Icons.dashboard_customize_rounded,
-                  title: "DashBoard",
-                  onTap: () {
-                    data.index = 0;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 1,
-                  icon: Icons.person,
-                  title: "Profile",
-                  onTap: () {
-                    data.index = 1;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 2,
-                  icon: Icons.add_task,
-                  title: "Tasks",
-                  onTap: () {
-                    data.index = 2;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 3,
-                  icon: CupertinoIcons.calendar_badge_minus,
-                  title: "Request leave",
-                  onTap: () {
-                    data.index = 3;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 4,
-                  icon: Icons.chat_bubble_outline,
-                  title: "Chat",
-                  onTap: () {
-                    data.index = 4;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 9,
-                  icon: Icons.approval,
-                  title: "Approvals",
-                  onTap: () {
-                    data.index = 9;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 10,
-                  icon: Icons.fact_check,
-                  title: "Clocking",
-                  onTap: () {
-                    data.index = 10;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 11,
-                  icon: Icons.group_off,
-                  title: "Who\'s off",
-                  onTap: () {
-                    data.index = 11;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-                CusCard(
-                  index: 7,
-                  icon: Icons.notifications_active_outlined,
-                  title: "Notifications",
-                  onTap: () {
-                    data.index = 7;
-                    Scaffold.of(context).closeDrawer();
-                    data.refresh();
-                  },
-                ),
-              ],
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Name",
+                    style:
+                        TextStyle(fontSize: 17, color: colorScheme.onPrimary),
+                  ).paddingTop(10),
+                  Text(
+                    "Role",
+                    style:
+                        TextStyle(fontSize: 12, color: colorScheme.onPrimary),
+                  ).paddingTop(10),
+                ],
+              ).paddingAll(10),
+            ).paddingSymmetric(horizontal: 8, vertical: 5),
+            Divider(
+              color: colorScheme.outline,
+              thickness: 0.5,
             ),
-          ),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CusCard(
-                  index: 5,
-                  icon: Icons.settings,
-                  title: "Settings",
-                  onTap: () {
-                    data.index = 5;
-                    data.refresh();
-                    Scaffold.of(context).closeDrawer();
-                  },
-                ),
-                CusCard(
-                  icon: Icons.power_settings_new,
-                  title: "Logout",
-                  iconColor: colorScheme.error,
-                  onTap: () {
-                    Navigator.pushNamed(context, "/");
-                  },
-                ),
-              ],
+            CusCard(
+              index: 0,
+              icon: Icons.dashboard_customize_rounded,
+              title: "DashBoard",
+              onTap: () {
+                data.index = 0;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
             ),
-          )
-        ],
+            CusCard(
+              index: 1,
+              icon: Icons.person,
+              title: "Profile",
+              onTap: () {
+                data.index = 1;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 2,
+              icon: Icons.add_task,
+              title: "Tasks",
+              onTap: () {
+                data.index = 2;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 3,
+              icon: CupertinoIcons.calendar_badge_minus,
+              title: "Request leave",
+              onTap: () {
+                data.index = 3;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 8,
+              icon: Icons.history,
+              title: "Request history",
+              onTap: () {
+                data.index = 8;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 4,
+              icon: Icons.chat_bubble_outline,
+              title: "Chat",
+              onTap: () {
+                data.index = 4;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 9,
+              icon: Icons.approval,
+              title: "Approvals",
+              onTap: () {
+                data.index = 9;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 10,
+              icon: Icons.fact_check,
+              title: "Attendance",
+              onTap: () {
+                data.index = 10;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 14,
+              icon: Icons.history_toggle_off,
+              title: "Attendance history",
+              onTap: () {
+                data.index = 14;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 11,
+              icon: Icons.group_off,
+              title: "Who's off",
+              onTap: () {
+                data.index = 11;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 12,
+              icon: Icons.wallet,
+              title: "PayRoll",
+              onTap: () {
+                data.index = 12;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 16,
+              icon: Icons.file_copy_sharp,
+              title: "Documents",
+              onTap: () {
+                data.index == 16;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 17,
+              icon: Icons.supervisor_account_rounded,
+              title: "Employee Dash",
+              onTap: () {
+                data.index = 17;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 7,
+              icon: Icons.notifications_active_outlined,
+              title: "Notifications",
+              onTap: () {
+                data.index = 7;
+                Scaffold.of(context).closeDrawer();
+                data.refresh();
+              },
+            ),
+            CusCard(
+              index: 5,
+              icon: Icons.settings,
+              title: "Settings",
+              onTap: () {
+                data.index = 5;
+                data.refresh();
+                Scaffold.of(context).closeDrawer();
+              },
+            ),
+            CusCard(
+              icon: Icons.power_settings_new,
+              title: "Logout",
+              iconColor: colorScheme.error,
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => true,
+                );
+              },
+            ),
+          ],
+        ),
       );
     });
   }

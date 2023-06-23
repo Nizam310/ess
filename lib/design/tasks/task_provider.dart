@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../constant/enum.dart';
 
 class TaskVm extends ChangeNotifier {
   ///Task
 
-  ActivityType ? type;
+  ActivityType? type;
 
-  int activeIndex =0;
-
+  int activeIndex = 0;
 
   /// Task Add
   TextEditingController taskTitle = TextEditingController();
@@ -26,7 +26,6 @@ class TaskVm extends ChangeNotifier {
   int counter = 0;
   Timer? timer;
   bool isRunning = false;
-
 
   startStop() {
     if (isRunning) {
@@ -54,4 +53,14 @@ class TaskVm extends ChangeNotifier {
   refresh() {
     notifyListeners();
   }
+
+  /// Timer
+  final stopWatchTimer = StopWatchTimer(mode: StopWatchMode.countUp);
+  bool pauseResume = true;
+  bool tapped = false;
+  /// Task Summary
+
+  bool reject = false;
+  bool submit = false;
+  TextEditingController rejectNote = TextEditingController();
 }

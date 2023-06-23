@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-import '../../../constant/decoration_card.dart';
+import '../../common_widgets/decoration_card.dart';
 
 class Indicators extends StatelessWidget {
   const Indicators({Key? key}) : super(key: key);

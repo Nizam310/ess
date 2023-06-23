@@ -1,15 +1,15 @@
-import 'package:employee_self_service_flutter/constant/themes/theme.dart';
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';
+import 'package:employee_self_service_flutter/design/home/widgets/expiring_documents.dart';
+import 'package:employee_self_service_flutter/design/home/widgets/leave_type_carousel.dart';
+import 'package:employee_self_service_flutter/design/home/widgets/leaves.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-import '../../constant/enum.dart';
 import '../dash_board/dash_board_screen.dart';
 import '../dash_board/widgets/toggle_button.dart';
+import '../request_history/request_history.dart';
 
 class NewHome extends StatelessWidget {
   const NewHome({Key? key}) : super(key: key);
@@ -21,17 +21,19 @@ class NewHome extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       children: [
         Row(
-          mainAxisSize: MainAxisSize.max,
+          //  mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             RichText(
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.start,
               text: TextSpan(
                 children: [
                   TextSpan(
                     text: 'CloudMe',
                     style: MediaQuery.of(context).size.width < 330
                         ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: FontWeight.w800,
                             color: colorScheme.onPrimary)
                         : Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -43,7 +45,7 @@ class NewHome extends StatelessWidget {
                     text: 'HR',
                     style: MediaQuery.of(context).size.width < 330
                         ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: colorScheme.primary)
                         : Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -52,7 +54,6 @@ class NewHome extends StatelessWidget {
                             color: colorScheme.primary),
                   )
                 ],
-                style: context.textTheme.labelSmall,
               ),
             ),
             Row(
@@ -84,7 +85,7 @@ class NewHome extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              'Welcome,  Sarah',
+              'Welcome,  Nizam',
               style: MediaQuery.of(context).size.width < 360
                   ? Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontSize: 25,
@@ -93,31 +94,132 @@ class NewHome extends StatelessWidget {
                   : context.textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                       color: colorScheme.onPrimary),
-            ).paddingOnly(top: 10, left: 5),
+            ).paddingOnly(
+              top: 10,
+            ),
           ],
         ),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Your remaining balance',
-              style: context.textTheme.bodySmall
-                  ?.copyWith(color: colorScheme.onPrimary),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                'Full Details',
+
+        Visibility(
+          visible: MediaQuery.of(context).size.width > 300,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Your remaining balance',
                 style: context.textTheme.bodySmall
-                    ?.copyWith(color: colorScheme.primary),
+                    ?.copyWith(color: colorScheme.onPrimary),
+              ),
+              const Leaves()
+            ],
+          ).paddingSymmetric(vertical: 10),
+        ),
+        // Lottie.file(File('C:/Users/ADMIN/Downloads/7731-water-loading.json')),
+        Visibility(
+          visible: MediaQuery.of(context).size.width > 300,
+          child: Row(
+            children: const [
+              Expanded(child: LeaveTypesCarousel()),
+            ],
+          ).paddingSymmetric(vertical: 10),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Tasks').paddingBottom(5),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CusDocCard(
+                        onTap: () {
+                          context.read<DashBoardVm>().index = 15;
+                          context.read<DashBoardVm>().refresh();
+                        },
+                        expiryValue: '5',
+                        monthName: 'Waiting',
+                        color: colorScheme.primary,
+                      )),
+                      Expanded(
+                          child: CusDocCard(
+                        onTap: () {
+                          context.read<DashBoardVm>().index = 16;
+                          context.read<DashBoardVm>().refresh();
+                        },
+                        expiryValue: '1',
+                        monthName: 'Acceptance',
+                        color: colorScheme.primary,
+                      )),
+                      Expanded(
+                          child: CusDocCard(
+                        onTap: () {
+                          context.read<DashBoardVm>().index = 15;
+                          context.read<DashBoardVm>().refresh();
+                        },
+                        expiryValue: '0',
+                        monthName: 'Rejected',
+                        color: colorScheme.error,
+                      )),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
-        ).paddingSymmetric(horizontal: 10),
+        ).paddingSymmetric(vertical: 10),
         Row(
-          children: const [
-            Expanded(child: _LeaveTypesCarousel()),
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Documents').paddingBottom(5),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CusDocCard(
+                        onTap: () {
+                          context.read<DashBoardVm>().index = 16;
+                          context.read<DashBoardVm>().refresh();
+                        },
+                        expiryValue: '5',
+                        monthName: 'Total',
+                        color: colorScheme.primary,
+                      )),
+                      Expanded(
+                          child: CusDocCard(
+                        onTap: () {
+                          context.read<DashBoardVm>().index = 16;
+                          context.read<DashBoardVm>().refresh();
+                        },
+                        expiryValue: '1',
+                        monthName: 'Near to expiry',
+                        color: colorScheme.primary,
+                      )),
+                      Expanded(
+                          child: CusDocCard(
+                        onTap: () {
+                          context.read<DashBoardVm>().index = 16;
+                          context.read<DashBoardVm>().refresh();
+                        },
+                        expiryValue: '0',
+                        monthName: 'Expired',
+                        color: colorScheme.error,
+                      )),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ).paddingSymmetric(vertical: 10),
         Text(
@@ -131,7 +233,7 @@ class NewHome extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: _CustomCardGrid(
+                    child: _CustomCard(
                       onTap: () {
                         data.index = 3;
                         data.refresh();
@@ -142,24 +244,24 @@ class NewHome extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: _CustomCardGrid(
+                    child: _CustomCard(
                       onTap: () {
-                        data.index = 11;
+                        data.index = 8;
                         data.refresh();
                       },
-                      icon: Icons.group_off,
-                      title: 'Who\'s off',
+                      icon: Icons.history,
+                      title: 'Request History',
                       iconColor: const Color(0xFFEF9D87),
                     ),
                   ),
                   Expanded(
-                    child: _CustomCardGrid(
+                    child: _CustomCard(
                       onTap: () {
-                        data.index = 3;
+                        data.index = 9;
                         data.refresh();
                       },
-                      icon: CupertinoIcons.calendar_badge_minus,
-                      title: 'Request leave',
+                      icon: Icons.approval_outlined,
+                      title: 'Approvals',
                       iconColor: const Color(0xFF8CD0FB),
                     ),
                   ),
@@ -168,7 +270,7 @@ class NewHome extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: _CustomCardGrid(
+                    child: _CustomCard(
                       onTap: () {
                         data.index = 10;
                         data.refresh();
@@ -179,7 +281,7 @@ class NewHome extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: _CustomCardGrid(
+                    child: _CustomCard(
                       onTap: () {
                         data.index = 2;
                         data.refresh();
@@ -190,13 +292,13 @@ class NewHome extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: _CustomCardGrid(
+                    child: _CustomCard(
                       onTap: () {
-                        data.index = 1;
+                        data.index = 13;
                         data.refresh();
                       },
-                      icon: CupertinoIcons.person_solid,
-                      title: 'Profile',
+                      icon: Icons.file_copy_sharp,
+                      title: 'Documents',
                       iconColor: const Color(0xFFA06CF7),
                     ),
                   ),
@@ -205,6 +307,7 @@ class NewHome extends StatelessWidget {
             ],
           ).paddingSymmetric(vertical: 10);
         }),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -227,13 +330,9 @@ class NewHome extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: const [
-            Expanded(child: _RequestWidget()),
-          ],
-        )
+        const _RequestWidget()
       ],
-    ).paddingSymmetric(horizontal: 12);
+    ).paddingSymmetric(horizontal: 8);
   }
 }
 
@@ -242,28 +341,23 @@ class _RequestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: ListView.builder(
-                itemCount: 2,
-                itemBuilder: (context, index) => const _RequestCard()),
-          ),
-        ),
-      ],
+    List<Widget> list = const [
+      RequestCard(),
+      RequestCard(),
+    ];
+    return Column(
+      children:list.map((e) => e).toList(),
     );
   }
 }
 
-class _CustomCardGrid extends StatelessWidget {
+class _CustomCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
   final Function() onTap;
 
-  const _CustomCardGrid(
+  const _CustomCard(
       {Key? key,
       required this.title,
       required this.icon,
@@ -304,196 +398,6 @@ class _CustomCardGrid extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _DayDetailsCard extends StatelessWidget {
-  final String leaveType;
-  final String takenLeaves;
-  final String totalLeaves;
-  final String emoji;
-  final double emojiSize;
-
-  const _DayDetailsCard({
-    Key? key,
-    required this.leaveType,
-    required this.takenLeaves,
-    required this.totalLeaves,
-    required this.emoji,
-    required this.emojiSize,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Card(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Lottie.network(emoji, height: emojiSize, width: emojiSize),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    takenLeaves,
-                    style: context.textTheme.headlineMedium?.copyWith(
-                        color: colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold),
-                  ).paddingRight(10),
-                  Text(
-                    '/ $totalLeaves',
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onPrimary,
-                    ),
-                  )
-                ],
-              ),
-              Text(
-                leaveType,
-                style: context.textTheme.bodySmall
-                    ?.copyWith(color: colorScheme.onPrimary),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ).paddingAll(15),
-        ],
-      ),
-    );
-  }
-}
-
-class _RequestCard extends StatelessWidget {
-  const _RequestCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Card(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Jun 16, 2023 - Jun 18, 2023',
-                    style: context.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w300,
-                        color: colorScheme.onPrimary)),
-                Text('Going on vacation',
-                        style: context.textTheme.bodySmall
-                            ?.copyWith(color: colorScheme.onPrimary))
-                    .paddingSymmetric(vertical: 5),
-                Row(
-                  children: [
-                    Text(
-                      'Annual leave',
-                      style: context.textTheme.bodySmall
-                          ?.copyWith(color: colorScheme.onPrimary),
-                    ).paddingRight(10),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(color: colorScheme.outline)),
-                      child: Text('pending',
-                              style: context.textTheme.labelMedium
-                                  ?.copyWith(color: colorScheme.onPrimary))
-                          .paddingAll(6),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            InkWell(
-                radius: 0.0,
-                borderRadius: BorderRadius.circular(100),
-                onTap: () {
-                  context.read<DashBoardVm>().index = 9;
-                  context.read<DashBoardVm>().refresh();
-                },
-                child: Icon(
-                  Icons.more_vert,
-                  color: colorScheme.primary,
-                )),
-          ],
-        ).paddingAll(20));
-  }
-}
-
-class _LeaveTypesCarousel extends StatelessWidget {
-  const _LeaveTypesCarousel({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = ThemeNotifier.of(context, listen: false);
-    final List<Map<String, dynamic>> list = [
-      {
-        'leaveType': 'Casual leave',
-        'takenLeaves': '18',
-        'totalLeaves': '20',
-        'emoji':
-            'https://assets1.lottiefiles.com/private_files/lf30_bb9bkg1h.json',
-        'emojiSize': 100.0,
-      },
-      {
-        'leaveType': 'Annual leave',
-        'takenLeaves': '18',
-        'totalLeaves': '20',
-        'emoji': 'https://assets7.lottiefiles.com/packages/lf20_xlz4hb.json',
-        'emojiSize': 60.0,
-      },
-      {
-        'leaveType': 'Sick leave',
-        'takenLeaves': '18',
-        'totalLeaves': '20',
-        'emoji': 'https://assets5.lottiefiles.com/packages/lf20_5Gqhew.json',
-        'emojiSize': 60.0,
-      },
-      {
-        'leaveType': 'Emergency leave',
-        'takenLeaves': '18',
-        'totalLeaves': '20',
-        'emoji':  'https://assets9.lottiefiles.com/packages/lf20_jol43osd.json',
-        'emojiSize': 90.0,
-      },
-    ];
-
-    return Column(
-      children: [
-        SizedBox(
-          height: 120,
-          child: Row(
-            children: [
-              Expanded(
-                child: CarouselSlider(
-                  items: list.map((item) {
-                    return _DayDetailsCard(
-                      leaveType: item['leaveType'],
-                      takenLeaves: item['takenLeaves'],
-                      totalLeaves: item['totalLeaves'],
-                      emoji: item['emoji'],
-                      emojiSize: item['emojiSize'],
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    enableInfiniteScroll: true,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    animateToClosest: true,
-                    aspectRatio: 0.1 / 8,
-                  ),
-                ),
-              ),
-            ],
           ),
         ),
       ],

@@ -33,7 +33,9 @@ class LocationVm extends ChangeNotifier {
       log(e.toString());
     }
   }
-
+ refresh(){
+    notifyListeners();
+ }
   LocationVm() {
     _initialize();
   }

@@ -1,12 +1,11 @@
-import 'package:employee_self_service_flutter/constant/decoration_card.dart';
-import 'package:employee_self_service_flutter/design/common_widgets/button.dart';
+import 'package:employee_self_service_flutter/design/common_widgets/decoration_card.dart';
 import 'package:employee_self_service_flutter/design/team_approvals/team_approvals_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/enum.dart';
+import '../common_widgets/cusTabBar.dart';
 
 class TeamApprovals extends StatelessWidget {
   const TeamApprovals({Key? key}) : super(key: key);
@@ -19,50 +18,33 @@ class TeamApprovals extends StatelessWidget {
           return ListView(
             children: [
               Row(
-                children: [
+                children: const [
                   Expanded(
-                    child: DefaultTabController(
-                        length: 2,
-                        initialIndex: 0,
-                        child: Column(
-                          children: [
-                            TabBar(
-                              unselectedLabelColor: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withOpacity(0.4),
-                              labelColor:
-                                  Theme.of(context).colorScheme.onPrimary,
-                              indicatorColor:
-                                  Theme.of(context).colorScheme.primary,
-                              tabs: const [
-                                Tab(
-                                  text: 'Pending',
-                                ),
-                                Tab(
-                                  text: 'Verified',
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: Row(
-                                children: const [
-                                  Expanded(
-                                    child: TabBarView(children: [
-                                      _AttendanceWidget(
-                                        type: AttendanceRequest.Pending,
-                                      ),
-                                      _AttendanceWidget(
-                                        type: AttendanceRequest.Verified,
-                                      ),
-                                    ]),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        )),
+                    child:CusTabBar(
+                      length: 3,
+                      tabs: [
+                        Tab(
+                          text: 'Pending',
+                        ),
+                        Tab(
+                          text: 'Approved',
+                        ),Tab(
+                          text: 'Rejected',
+                        ),
+                      ],
+                      children: [
+                        _AttendanceWidget(
+                          type: AttendanceRequest.Pending,
+                        ),
+                        _AttendanceWidget(
+                          type: AttendanceRequest.Approved,
+                        ),
+                        _AttendanceWidget(
+                          type: AttendanceRequest.Rejected,
+                        ),
+                      ],
+                    ) ,
+
                   ),
                 ],
               ),
@@ -224,36 +206,7 @@ class _TeamApprovalsCard extends StatelessWidget {
                   style: context.textTheme.bodyLarge
                       ?.copyWith(color: colorScheme.onPrimary),
                 ).paddingSymmetric(vertical: 5),
-                Row(
-                  children: [
-                    Transform.scale(
-                      scale: 0.6,
-                      child: CupertinoSwitch(
-                          activeColor: colorScheme.tertiary,
-                          value: deductBalance ?? true,
-                          onChanged: (val) {}),
-                    ),
-                    Text('Deduct balance',
-                        style: context.textTheme.bodyLarge
-                            ?.copyWith(color: colorScheme.onPrimary))
-                  ],
-                ).paddingSymmetric(vertical: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                        child: CusButton(
-                      text: 'Reject',
-                      onTap: () {},
-                      color: colorScheme.outlineVariant,
-                      hoverColor: colorScheme.outlineVariant,
-                    ).paddingSymmetric(horizontal: 10)),
-                    Expanded(
-                        child: CusButton(text: 'Approve', onTap: () {})
-                            .paddingSymmetric(horizontal: 10)),
-                  ],
-                ).paddingSymmetric(vertical: 5),
-              ],
+                ],
             ).paddingSymmetric(horizontal: 10,vertical: 10),
           ],
         ),

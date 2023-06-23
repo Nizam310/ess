@@ -1,9 +1,6 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../dash_board_provider.dart';
 
 class SortCalendar extends StatelessWidget {
   const SortCalendar({Key? key}) : super(key: key);
@@ -12,78 +9,77 @@ class SortCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final style = TextStyle(color: colorScheme.onPrimary);
-    return Visibility(
-      visible: context.select((DashBoardVm value) => value.index == 9),
-      child: PopupMenuButton(
-        splashRadius: 0.1,
-        shape: const RoundedRectangleBorder(
-            // borderRadius: BorderRadius.circular(100.0),
-            ),
-        icon: Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: colorScheme.outline)),
+    return PopupMenuButton(
+      splashRadius: 0.1,
+      shape: const RoundedRectangleBorder(
+          // borderRadius: BorderRadius.circular(100.0),
+          ),
+      icon: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: colorScheme.outline)),
+          child: Center(
             child: Icon(
               CupertinoIcons.calendar,
               color: colorScheme.outline,
-              size: 14,
-            )),
-        itemBuilder: (BuildContext context) => [
-          PopupMenuItem(
-              child: Text(
-            'Today',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Yesterday',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'This Week',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Last 7 Days',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'This Month',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Last 30 Days',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'Last 3 Months',
-            style: style,
-          )),
-          PopupMenuItem(
-              child: Text(
-            'This Year',
-            style: style,
-          )),
-          PopupMenuItem(
-            child: Text(
-              'Custom',
-              style: style,
+              size: 12,
             ),
-            onTap: () {
-              Future.delayed(
-                const Duration(minutes: 0),
-                () async => calendarDialogue(context),
-              );
-            },
+          )),
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem(
+            child: Text(
+          'Today',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'Yesterday',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'This Week',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'Last 7 Days',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'This Month',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'Last 30 Days',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'Last 3 Months',
+          style: style,
+        )),
+        PopupMenuItem(
+            child: Text(
+          'This Year',
+          style: style,
+        )),
+        PopupMenuItem(
+          child: Text(
+            'Custom',
+            style: style,
           ),
-        ],
-      ),
+          onTap: () {
+            Future.delayed(
+              const Duration(minutes: 0),
+              () async => calendarDialogue(context),
+            );
+          },
+        ),
+      ],
     );
   }
 

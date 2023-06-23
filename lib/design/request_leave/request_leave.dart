@@ -1,5 +1,5 @@
-import 'package:employee_self_service_flutter/design/request_form/request_form_provider.dart';
-import 'package:employee_self_service_flutter/design/request_form/widgets/range_picker_calendar.dart';
+import 'package:employee_self_service_flutter/design/request_leave/request_leave_provider.dart';
+import 'package:employee_self_service_flutter/design/request_leave/widgets/range_picker_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
@@ -8,16 +8,17 @@ import '../common_widgets/button.dart';
 import '../common_widgets/drop_down.dart';
 import '../common_widgets/text_field.dart';
 
-class RequestForm extends StatelessWidget {
-  const RequestForm({
+class RequestLeave extends StatelessWidget {
+  const RequestLeave({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(color: Theme.of(context).colorScheme.onPrimary);
+    final colorScheme = Theme.of(context).colorScheme;
+    final style = TextStyle(color: colorScheme.onPrimary);
     return ChangeNotifierProvider(
-      create: (_) => RequestFormVm(),
+      create: (_) => RequestLeaveVm(),
       child: Builder(builder: (
         context,
       ) {
@@ -36,32 +37,57 @@ class RequestForm extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 children: [
-                  Visibility(
-                    visible: !(context
-                            .select((RequestFormVm value) => value.leaveType) ==
-                        "Other"),
-                    child: CusDropdown<String>(
-                      label: "Leave Type",
-                      verPadding: 5,
-                      value: context
-                          .select((RequestFormVm value) => value.leaveType),
-                      items: context
-                          .select((RequestFormVm value) => value.leaveTypeList),
-                      itemBuilder: (type) => Text(
-                        type,
-                        style: style,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CusDropdown<String>(
+                          label: "Leave Type",
+                          verPadding: 5,
+                          value: context.select(
+                              (RequestLeaveVm value) => value.leaveType),
+                          items: context.select(
+                              (RequestLeaveVm value) => value.leaveTypeList),
+                          itemBuilder: (type) => Text(
+                            type,
+                            style: style,
+                          ),
+                          onChanged: (String? value) {
+                            if (value != null) {
+                              context.read<RequestLeaveVm>().leaveType =
+                                  value;
+                            }
+                            context.read<RequestLeaveVm>().refresh();
+                          },
+                        ),
                       ),
-                      onChanged: (String? value) {
-                        if (value != null) {
-                          context.read<RequestFormVm>().leaveType = value;
-                        }
-                        context.read<RequestFormVm>().refresh();
-                      },
-                    ),
+                      SizedBox(
+                        width: 100,
+                        height: 68,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: colorScheme.outline),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                            child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Eligibility',
+                              style: context.textTheme.bodyMedium?.copyWith(
+                                  fontSize: 10, color: colorScheme.onPrimary),
+                            ),
+                            Text(
+                              '0',
+                              style: context.textTheme.bodyMedium?.copyWith(
+                                  fontSize: 20, color: colorScheme.onPrimary,fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        )),
+                      )
+                    ],
                   ),
-                  Visibility(
-                    visible: (context
-                            .select((RequestFormVm value) => value.leaveType) ==
+                /*  Visibility(
+                    visible: (context.select(
+                            (RequestLeaveVm value) => value.leaveType) ==
                         "Other"),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,34 +96,34 @@ class RequestForm extends StatelessWidget {
                             child: CusTextField(
                                     hintText: "Leave type",
                                     controller: context.select(
-                                        (RequestFormVm value) => value.other),
+                                        (RequestLeaveVm value) => value.other),
                                     onChanged: (val) {})
                                 .paddingSymmetric(horizontal: 10)),
                         CusButton(
                             text: "Add",
                             onTap: () {
-                              context.read<RequestFormVm>().other.text == ""
+                              context.read<RequestLeaveVm>().other.text == ""
                                   ? null
                                   : context
-                                      .read<RequestFormVm>()
+                                      .read<RequestLeaveVm>()
                                       .leaveTypeList
                                       .add(context
-                                          .read<RequestFormVm>()
+                                          .read<RequestLeaveVm>()
                                           .other
                                           .text);
-                              context.read<RequestFormVm>().leaveType = context
-                                  .read<RequestFormVm>()
+                              context.read<RequestLeaveVm>().leaveType = context
+                                  .read<RequestLeaveVm>()
                                   .leaveTypeList
                                   .last;
-                              context.read<RequestFormVm>().other.clear();
-                              context.read<RequestFormVm>().refresh();
+                              context.read<RequestLeaveVm>().other.clear();
+                              context.read<RequestLeaveVm>().refresh();
                             }).paddingRight(11)
                       ],
                     ).paddingSymmetric(vertical: 5),
-                  ),
+                  ),*/
                   CusTextField(
                     controller:
-                        context.select((RequestFormVm value) => value.reason),
+                        context.select((RequestLeaveVm value) => value.reason),
                     onChanged: (val) {},
                     labelText: "Notes",
                   ).paddingSymmetric(horizontal: 10, vertical: 5),

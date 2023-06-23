@@ -43,7 +43,7 @@ class ColorSchemes {
       secondaryContainer: Color(0xFF24561B),
       onSecondary: Color(0xFF598850),
       onSecondaryContainer: Color(0xFF35622C),
-      tertiary: Color(0xFFB70CF6),
+      tertiary: Color(0xFF37E813),
       tertiaryContainer: Color(0xFF6B4679),
       onTertiary: Color(0xFF6D437C),
       onTertiaryContainer: Color(0xFF260A31),

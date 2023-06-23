@@ -1,7 +1,7 @@
 import 'package:employee_self_service_flutter/constant/themes/theme.dart';
 import 'package:flutter/material.dart';
 
-import 'enum.dart';
+import '../../constant/enum.dart';
 
 class DecorationCard extends StatelessWidget {
   final Widget child;

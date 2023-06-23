@@ -7,11 +7,11 @@ class ClockingVm extends ChangeNotifier{
       'value': '09:30:21 AM',
     },
     {
-      'title': 'Smoke break start',
+      'title': 'break in',
       'value': '__ : __',
     },
     {
-      'title': 'Smoke break end',
+      'title': 'break out',
       'value': '__ : __',
     },
     {
