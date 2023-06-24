@@ -1,4 +1,4 @@
-import 'package:employee_self_service_flutter/design/common_widgets/cusTabBar.dart';
+import 'package:employee_self_service_flutter/design/common_widgets/cus_tab_bar.dart';
 import 'package:employee_self_service_flutter/design/common_widgets/expansion_card_custom.dart';
 import 'package:employee_self_service_flutter/design/common_widgets/loading_anim.dart';
 import 'package:employee_self_service_flutter/design/dash_board/dash_board_provider.dart';

@@ -5,7 +5,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/enum.dart';
-import '../common_widgets/cusTabBar.dart';
+import '../common_widgets/cus_tab_bar.dart';
 
 class TeamApprovals extends StatelessWidget {
   const TeamApprovals({Key? key}) : super(key: key);
