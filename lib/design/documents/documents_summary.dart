@@ -3,12 +3,14 @@ import 'package:flutter/Material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../employee_dash/employee_dash_provider.dart';
+
 class DocumentsSummary extends StatelessWidget {
   const DocumentsSummary({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> list = [
+    /* final List<Map<String, dynamic>> list = [
       {
         'name': 'Aadhaar',
         'added': '17/05/2022',
@@ -44,7 +46,7 @@ class DocumentsSummary extends StatelessWidget {
         'date': '21/05/2023',
         'daysLeft': '20',
       },
-    ];
+    ];*/
     final colorScheme = Theme.of(context).colorScheme;
     final color = colorScheme.onPrimary;
     final headStyle = context.textTheme.bodySmall
@@ -54,6 +56,7 @@ class DocumentsSummary extends StatelessWidget {
       fontSize: 10,
     );
     final divColor = color;
+    final list = context.select((EmployeeDashVm value) => value.list);
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       children: [
@@ -124,7 +127,7 @@ class DocumentsSummary extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                        e['name'],
+                        e[''],
                         style: style,
                         textAlign: TextAlign.center,
                       )),

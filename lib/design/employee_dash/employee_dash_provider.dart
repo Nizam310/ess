@@ -7,6 +7,7 @@ class EmployeeDashVm extends ChangeNotifier {
   List<dynamic> list = [];
   Response ? res;
   Future<dynamic> getData() async {
+
     String url = 'https://app-dev.cloudmesoft.com/hrm/api/employee_details_api';
     String token = 'c5fQiLGSGItfRxq6kv6DVtaux1T0AjYqiSkUW9G1';
 

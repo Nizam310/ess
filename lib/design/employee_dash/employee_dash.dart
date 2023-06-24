@@ -14,54 +14,52 @@ class EmployeeDash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => EmployeeDashVm(),
-      child: Consumer<EmployeeDashVm>(builder: (context, data, _) {
-        return ListView(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                  onPressed: () {
-                    context.read<DashBoardVm>().index = 13;
-                    context.read<DashBoardVm>().refresh();
-                  },
-                  child: const Text('Attach Documents')),
-            ),
-            const CusTabBar(
-                tabs: [
-                  Tab(
-                    text: 'Details',
-                  ),
-                  Tab(
-                    text: 'Leave',
-                  ),
-                  Tab(
-                    text: 'Documents',
-                  ),
-                  Tab(
-                    text: 'Salary',
-                  ),
-                  Tab(
-                    text: 'Bank',
-                  ),
-                  Tab(
-                    text: 'Contract',
-                  ),
-                ],
-                length: 6,
-                children: [
-                  _DetailsTab(),
-                  _LeavesTab(),
-                  _DocumentsTab(),
-                  _SalaryTab(),
-                  _BankTab(),
-                  _ContractTab(),
-                ])
-          ],
-        );
-      }),
-    );
+    return Consumer<EmployeeDashVm>(builder: (context, data, _) {
+      return ListView(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: TextButton(
+                onPressed: () {
+                  context.read<DashBoardVm>().index = 13;
+                  context.read<DashBoardVm>().refresh();
+                },
+                child: const Text('Attach Documents')),
+          ),
+          const CusTabBar(
+            scroll: true,
+              tabs: [
+                Tab(
+                  text: 'Details',
+                ),
+                Tab(
+                  text: 'Leave',
+                ),
+                Tab(
+                  text: 'Documents',
+                ),
+                Tab(
+                  text: 'Salary',
+                ),
+                Tab(
+                  text: 'Bank',
+                ),
+                Tab(
+                  text: 'Contract',
+                ),
+              ],
+              length: 6,
+              children: [
+                _DetailsTab(),
+                _LeavesTab(),
+                _DocumentsTab(),
+                _SalaryTab(),
+                _BankTab(),
+                _ContractTab(),
+              ])
+        ],
+      );
+    });
   }
 }
 
@@ -117,7 +115,7 @@ class _DetailsTab extends StatelessWidget {
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Gender: ${e['user_id']}',
+                        'Gender: ${e['gender']}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
@@ -177,7 +175,8 @@ class _DetailsTab extends StatelessWidget {
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Department ID : ${e['department']['_id']['\$oid']}'.toString(),
+                        'Department ID : ${e['department']['_id']['\$oid']}'
+                            .toString(),
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
@@ -238,7 +237,7 @@ class _LeavesTab extends StatelessWidget {
                       ),
                       TextSpan(
                           style: mainHeadStyle, text: ' ${e['last_name']}'),
-                    ])) /*Text(e['first_name'])*/,
+                    ])),
                 children: [
                   _CustomWidget(
                     children: [

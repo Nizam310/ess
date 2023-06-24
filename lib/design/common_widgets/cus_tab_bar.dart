@@ -5,12 +5,13 @@ class CusTabBar extends StatelessWidget {
   final List<Widget> children;
   final List<Widget> tabs;
   final int length;
-
+  final bool scroll;
   const CusTabBar(
       {Key? key,
       required this.children,
       required this.tabs,
-      required this.length})
+      required this.length,
+      required this.scroll})
       : super(key: key);
 
   @override
@@ -20,8 +21,9 @@ class CusTabBar extends StatelessWidget {
         child: Column(
           children: [
             TabBar(
-              isScrollable:
-                  MediaQuery.of(context).size.width > 600 ? false : true,
+              isScrollable: scroll == true
+                  ? (MediaQuery.of(context).size.width > 600 ? false : true)
+                  : false,
               indicatorSize: TabBarIndicatorSize.tab,
               unselectedLabelStyle: context.textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.4),

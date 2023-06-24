@@ -21,6 +21,7 @@ class TeamApprovals extends StatelessWidget {
                 children: const [
                   Expanded(
                     child:CusTabBar(
+                      scroll: false,
                       length: 3,
                       tabs: [
                         Tab(

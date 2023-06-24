@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:employee_self_service_flutter/design/employee_dash/employee_dash_provider.dart';
 import 'package:employee_self_service_flutter/design/notification/notification.dart';
 import 'package:employee_self_service_flutter/design/profile/profile.dart';
 import 'package:employee_self_service_flutter/design/tasks/task_main.dart';
 import 'package:employee_self_service_flutter/design/team_approvals/team_approvals.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'constant/enum.dart';
 import 'constant/themes/theme.dart';
@@ -14,7 +16,6 @@ import 'design/login/login_screen.dart';
 import 'design/request_leave/request_leave.dart';
 
 void main() {
-
   runApp(const ThemeNotifier(child: MyApp()));
 }
 
@@ -24,29 +25,36 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = ThemeNotifier.of(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      scrollBehavior: MyCustomScrollBehavior(),
-      title: 'Employee Self Service',
-      theme: Themes.lightTheme(context),
-      darkTheme: Themes.darkTheme(context),
-      themeMode: themeProvider.themeMode == ThemeModeType.light
-          ? ThemeMode.light
-          : ThemeMode.dark,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const LoginScreen(),
-        '/dash': (context) => const DashBoard(),
-        '/home': (context) => const Home(),
-        '/profile': (context) => const Profile(),
-        '/leave': (context) => const RequestLeave(),
-        '/notify': (context) => const Notifications(),
-        '/task': (context) => const Tasks(),
-        '/approvals': (context) => const TeamApprovals(),
-      },
-     /* navigatorObservers: [
-        CustomRouteObserver(),
-      ],*/
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (create) => EmployeeDashVm()),
+      ],
+      child: Builder(builder: (context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          scrollBehavior: MyCustomScrollBehavior(),
+          title: 'Employee Self Service',
+          theme: Themes.lightTheme(context),
+          darkTheme: Themes.darkTheme(context),
+          themeMode: themeProvider.themeMode == ThemeModeType.light
+              ? ThemeMode.light
+              : ThemeMode.dark,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const LoginScreen(),
+            '/dash': (context) => const DashBoard(),
+            '/home': (context) => const Home(),
+            '/profile': (context) => const Profile(),
+            '/leave': (context) => const RequestLeave(),
+            '/notify': (context) => const Notifications(),
+            '/task': (context) => const Tasks(),
+            '/approvals': (context) => const TeamApprovals(),
+          },
+          /* navigatorObservers: [
+              CustomRouteObserver(),
+            ],*/
+        );
+      }),
     );
   }
 }

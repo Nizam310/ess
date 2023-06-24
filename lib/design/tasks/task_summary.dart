@@ -21,6 +21,7 @@ class TaskSummary extends StatelessWidget {
           children: [
             Expanded(
                 child: CusTabBar(
+              scroll: false,
               length: 4,
               tabs: const [
                 Tab(
