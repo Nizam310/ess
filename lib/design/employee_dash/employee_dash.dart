@@ -177,7 +177,15 @@ class _DetailsTab extends StatelessWidget {
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
+                        'Department ID : ${e['department']['_id']['\$oid']}'.toString(),
+                        style: textStyle,
+                      ).paddingBottom(5),
+                      Text(
                         'Designation : ${e['designation']['name']}',
+                        style: textStyle,
+                      ).paddingBottom(5),
+                      Text(
+                        'Designation ID: ${e['designation']['_id']['\$oid']}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
@@ -470,7 +478,7 @@ class _ContractTab extends StatelessWidget {
           ])),
           children: [
             FutureBuilder<bool>(
-              future: Future.delayed(const Duration(seconds: 100), () => true),
+              future: Future.delayed(const Duration(seconds: 6), () => true),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LoadingAnim();

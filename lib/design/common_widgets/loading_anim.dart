@@ -7,6 +7,6 @@ class LoadingAnim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Lottie.network('assets/animations/loading.json', height: 200));
+        child: Lottie.asset('assets/animations/loading.json', height: 200));
   }
 }

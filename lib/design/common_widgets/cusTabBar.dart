@@ -19,6 +19,8 @@ class CusTabBar extends StatelessWidget {
         child: Column(
           children: [
             TabBar(
+              isScrollable: MediaQuery.of(context).size.width>600?false:true,
+              indicatorSize: TabBarIndicatorSize.tab,
               unselectedLabelStyle: context.textTheme.bodySmall?.copyWith(
                 color:Theme.of(context).colorScheme.onPrimary.withOpacity(0.4),
               ),
