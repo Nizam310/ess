@@ -127,7 +127,7 @@ class DocumentsSummary extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                        e[''],
+                        '',
                         style: style,
                         textAlign: TextAlign.center,
                       )),
@@ -136,7 +136,7 @@ class DocumentsSummary extends StatelessWidget {
                       ),
                       Expanded(
                           child: Text(
-                        e['added'],
+                       '',
                         style: style,
                         textAlign: TextAlign.center,
                       )),
@@ -145,7 +145,7 @@ class DocumentsSummary extends StatelessWidget {
                       ),
                       Expanded(
                           child: Text(
-                        e['expires'],
+                        '',
                         style: style,
                         textAlign: TextAlign.center,
                       )),
@@ -154,7 +154,7 @@ class DocumentsSummary extends StatelessWidget {
                       ),
                       Expanded(
                           child: Text(
-                        e['daysLeft'],
+                       '',
                         style: style,
                         textAlign: TextAlign.center,
                       )),

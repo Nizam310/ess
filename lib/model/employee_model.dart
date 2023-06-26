@@ -38,7 +38,7 @@ class EmployeeModel {
     this.visaExpiry,
     this.dlExpiry,
     this.emiratesId,
-    this.drivinglNo,
+    this.drivingLNo,
   });
 
   EmployeeModel.fromJson(dynamic json) {
@@ -80,7 +80,7 @@ class EmployeeModel {
     visaExpiry = json['visa_expiry'];
     dlExpiry = json['dl_expiry'];
     emiratesId = json['emirates_id'];
-    drivinglNo = json['drivingl_no'];
+    drivingLNo = json['drivingl_no'];
   }
   String? id;
   String? empNumber;
@@ -114,7 +114,7 @@ class EmployeeModel {
   String? visaExpiry;
   String? dlExpiry;
   dynamic emiratesId;
-  dynamic drivinglNo;
+  dynamic drivingLNo;
   EmployeeModel copyWith({
     String? id,
     String? empNumber,
@@ -183,7 +183,7 @@ class EmployeeModel {
         visaExpiry: visaExpiry ?? this.visaExpiry,
         dlExpiry: dlExpiry ?? this.dlExpiry,
         emiratesId: emiratesId ?? this.emiratesId,
-        drivinglNo: drivinglNo ?? this.drivinglNo,
+        drivingLNo: drivinglNo ?? this.drivingLNo,
       );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -227,7 +227,7 @@ class EmployeeModel {
     map['visa_expiry'] = visaExpiry;
     map['dl_expiry'] = dlExpiry;
     map['emirates_id'] = emiratesId;
-    map['drivingl_no'] = drivinglNo;
+    map['drivingl_no'] = drivingLNo;
     return map;
   }
 }

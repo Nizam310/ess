@@ -27,7 +27,7 @@ class EmployeeDash extends StatelessWidget {
                 child: const Text('Attach Documents')),
           ),
           const CusTabBar(
-            scroll: true,
+              scroll: true,
               tabs: [
                 Tab(
                   text: 'Details',
@@ -78,20 +78,22 @@ class _DetailsTab extends StatelessWidget {
       final headStyle = context.textTheme.titleMedium
           ?.copyWith(color: colorScheme.onPrimary, fontWeight: FontWeight.bold);
       return data.res?.data != null
-          ? ListView(
-              children: data.list.map((e) {
-              return ExpansionCusCard(
-                title: Text.rich(
-                    TextSpan(text: e['first_name'], style: mainHead, children: [
-                  TextSpan(
-                    text: ' ${e['middle_name'] != '' ? '' : e['middle_name']}',
+          ? ListView(children: [
+              ExpansionCusCard(
+                title: Text.rich(TextSpan(
+                    text: data.model?.firstName ?? '',
                     style: mainHead,
-                  ),
-                  TextSpan(
-                    text: ' ${e['last_name']}',
-                    style: mainHead,
-                  )
-                ])),
+                    children: [
+                      TextSpan(
+                        text:
+                            ' ${data.model?.middleName != '' ? '' : data.model?.middleName ?? ''}',
+                        style: mainHead,
+                      ),
+                      TextSpan(
+                        text: ' ${data.model?.lastName ?? ''}',
+                        style: mainHead,
+                      )
+                    ])),
                 children: [
                   /// basic details..........................
 
@@ -103,27 +105,27 @@ class _DetailsTab extends StatelessWidget {
                       ).paddingSymmetric(vertical: 10),
                       const Divider(),
                       Text(
-                        'ID : ${e['_id']}',
+                        'ID : ${data.model?.id ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Employee No : ${e['emp_number']}',
+                        'Employee No : ${data.model?.empNumber ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'User id : ${e['user_id']}',
+                        'User id : ${data.model?.userId ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Gender: ${e['gender']}',
+                        'Gender: ${data.model?.gender ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Martial Status:  : ${e['martial_status']}',
+                        'Martial Status:  : ${data.model?.martialStatus ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Place Of Birth : ${e['place_of_birth']}',
+                        'Place Of Birth : ${data.model?.placeOfBirth ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
@@ -139,23 +141,23 @@ class _DetailsTab extends StatelessWidget {
                       ).paddingSymmetric(vertical: 10),
                       const Divider(),
                       Text(
-                        'Mobile  : ${e['mobile']}',
+                        'Mobile  : ${data.model?.mobile ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Email : ${e['email']}',
+                        'Email : ${data.model?.email ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Alternative Phone : ${e['alt_phone']}',
+                        'Alternative Phone : ${data.model?.altPhone ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Current Address : ${e['c_address']}',
+                        'Current Address : ${data.model?.cAddress ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Residential Address : ${e['r_address']}',
+                        'Residential Address : ${data.model?.rAddress ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
@@ -171,39 +173,39 @@ class _DetailsTab extends StatelessWidget {
                       ).paddingSymmetric(vertical: 10),
                       const Divider(),
                       Text(
-                        'Department name : ${e['department']['name']}',
+                        'Department name : ${data.model?.department?.name ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Department ID : ${e['department']['_id']['\$oid']}'
+                        'Department ID : ${data.model?.department?.id?.oid ?? ''}'
                             .toString(),
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Designation : ${e['designation']['name']}',
+                        'Designation : ${data.model?.designation?.name ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Designation ID: ${e['designation']['_id']['\$oid']}',
+                        'Designation ID: ${data.model?.designation?.id?.oid ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Break Time : ${e['break_time']} hr',
+                        'Break Time : ${data.model?.breakTime ?? ''} hr',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Working Hours : ${e['working_hours']} hr',
+                        'Working Hours : ${data.model?.workingHours ?? ''} hr',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Date Of Birth : ${e['dob']}',
+                        'Date Of Birth : ${data.model?.dob ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
                   ),
                 ],
-              );
-            }).toList())
+              )
+            ])
           : const LoadingAnim();
     });
   }
@@ -227,16 +229,17 @@ class _LeavesTab extends StatelessWidget {
               children: data.list.map((e) {
               return ExpansionCusCard(
                 title: Text.rich(TextSpan(
-                    text: e['first_name'],
+                    text: data.model?.firstName,
                     style: mainHeadStyle,
                     children: [
                       TextSpan(
                         style: mainHeadStyle,
                         text:
-                            ' ${e['middle_name'] != '' ? '' : e['middle_name']}',
+                            ' ${data.model?.middleName ?? '' != '' ? '' : data.model?.middleName ?? ''}',
                       ),
                       TextSpan(
-                          style: mainHeadStyle, text: ' ${e['last_name']}'),
+                          style: mainHeadStyle,
+                          text: ' ${data.model?.lastName ?? ''}'),
                     ])),
                 children: [
                   _CustomWidget(
@@ -247,7 +250,7 @@ class _LeavesTab extends StatelessWidget {
                       ).paddingBottom(10),
                       const Divider(),
                       Text(
-                        'Leave Count : ${e['leave_count']}',
+                        'Leave Count : ${data.model?.leaveCount ?? ''}',
                         style: textStyle,
                       ).paddingSymmetric(vertical: 5),
                     ],
@@ -279,21 +282,22 @@ class _DocumentsTab extends StatelessWidget {
               return ExpansionCusCard(
                 title: Text.rich(TextSpan(
                     style: mainHeadStyle,
-                    text: e['first_name'],
+                    text: data.model?.firstName,
                     children: [
                       TextSpan(
                         style: mainHeadStyle,
                         text:
-                            ' ${e['middle_name'] != '' ? '' : e['middle_name']}',
+                            ' ${data.model?.middleName ?? '' != '' ? '' : data.model?.middleName ?? ''}',
                       ),
                       TextSpan(
-                          style: mainHeadStyle, text: ' ${e['last_name']}'),
+                          style: mainHeadStyle,
+                          text: ' ${data.model?.lastName ?? ''}'),
                     ])),
                 children: [
                   _CustomWidget(
                     children: [
                       Text(
-                        'Date Of Join : ${convertDateFormat(e['doj'])}',
+                        'Date Of Join : ${convertDateFormat(data.model?.doj ?? '')}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
@@ -306,19 +310,19 @@ class _DocumentsTab extends StatelessWidget {
                       ).paddingSymmetric(vertical: 10),
                       const Divider(),
                       Text(
-                        'Passport : ${convertDateFormat(e['pp_expiry'])}',
+                        'Passport : ${convertDateFormat(data.model?.ppExpiry ?? '')}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'ID : ${convertDateFormat(e['id_expiry'])}',
+                        'ID : ${convertDateFormat(data.model?.idExpiry ?? '')}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Visa : ${convertDateFormat(e['visa_expiry'])}',
+                        'Visa : ${convertDateFormat(data.model?.visaExpiry ?? '')}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Dl : ${convertDateFormat(e['dl_expiry'])}',
+                        'Dl : ${convertDateFormat(data.model?.dlExpiry ?? '')}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
@@ -350,16 +354,19 @@ class _SalaryTab extends StatelessWidget {
               return ExpansionCusCard(
                 title: Text.rich(TextSpan(
                     style: mainHeadStyle,
-                    text: e['first_name'],
+                    text: data.model?.firstName,
                     children: [
                       TextSpan(
                         style: mainHeadStyle,
                         text:
-                            ' ${e['middle_name'] != '' ? '' : e['middle_name']}',
+                            ' ${data.model?.middleName ?? '' != '' ? '' : data.model?.middleName ?? ''}',
                       ),
                       TextSpan(
-                          style: mainHeadStyle, text: ' ${e['last_name']}'),
-                    ])) /*Text(e['first_name'])*/,
+                          style: mainHeadStyle,
+                          text: ' ${data.model?.lastName ?? ''}'),
+                    ]))
+/*Text(data.model?.firstName)*/
+                ,
                 children: [
                   _CustomWidget(
                     children: [
@@ -369,11 +376,11 @@ class _SalaryTab extends StatelessWidget {
                       ).paddingBottom(10),
                       const Divider(),
                       Text(
-                        'Basic Salary : ${e['salary']['basic_salary']}',
+                        'Basic Salary : ${data.model?.salary?.basicSalary ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Total Salary : ${e['salary']['total_salary']}',
+                        'Total Salary : ${data.model?.salary?.totalSalary ?? ''}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
@@ -405,16 +412,19 @@ class _BankTab extends StatelessWidget {
               return ExpansionCusCard(
                 title: Text.rich(TextSpan(
                     style: mainHeadStyle,
-                    text: e['first_name'],
+                    text: data.model?.firstName,
                     children: [
                       TextSpan(
                         style: mainHeadStyle,
                         text:
-                            ' ${e['middle_name'] != '' ? '' : e['middle_name']}',
+                            ' ${data.model?.middleName ?? '' != '' ? '' : data.model?.middleName ?? ''}',
                       ),
                       TextSpan(
-                          style: mainHeadStyle, text: ' ${e['last_name']}'),
-                    ])) /*Text(e['first_name'])*/,
+                          style: mainHeadStyle,
+                          text: ' ${data.model?.lastName ?? ''}'),
+                    ]))
+/*Text(data.model?.firstName)*/
+                ,
                 children: [
                   _CustomWidget(
                     children: [
@@ -424,23 +434,23 @@ class _BankTab extends StatelessWidget {
                       ).paddingBottom(10),
                       const Divider(),
                       Text(
-                        'Holder Name : ${e['bank_details']['holder_name']}',
+                        'Holder Name : ${data.model?.bankDetails?.holderName ?? ' '}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Bank Name : ${e['bank_details']['bank_name']}',
+                        'Bank Name : ${data.model?.bankDetails?.bankName ?? ' '}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Acc No : ${e['bank_details']['acc_number']}',
+                        'Acc No : ${data.model?.bankDetails?.accNumber ?? ' '}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'ISBN No : ${e['bank_details']['isbn_num']}',
+                        'ISBN No : ${data.model?.bankDetails?.isbnNum ?? ' '}',
                         style: textStyle,
                       ).paddingBottom(5),
                       Text(
-                        'Swift Code : ${e['bank_details']['swift_code']}',
+                        'Swift Code : ${data.model?.bankDetails?.swiftCode ?? ' '}',
                         style: textStyle,
                       ).paddingBottom(5),
                     ],
@@ -464,17 +474,21 @@ class _ContractTab extends StatelessWidget {
           context.textTheme.bodyMedium?.copyWith(color: colorScheme.onPrimary);
       final headStyle =
           context.textTheme.titleMedium?.copyWith(color: colorScheme.onPrimary);
-      return ListView(
-          children: data.list.map((e) {
-        return ExpansionCusCard(
-          title: Text.rich(
-              TextSpan(style: headStyle, text: e['first_name'], children: [
-            TextSpan(
+
+      return ListView(children: [
+        ExpansionCusCard(
+          title: Text.rich(TextSpan(
               style: headStyle,
-              text: ' ${e['middle_name'] != '' ? '' : e['middle_name']}',
-            ),
-            TextSpan(style: headStyle, text: ' ${e['last_name']}'),
-          ])),
+              text: data.model?.firstName ?? '',
+              children: [
+                TextSpan(
+                  style: headStyle,
+                  text:
+                      ' ${data.model?.middleName ?? '' != '' ? '' : data.model?.middleName ?? ''}',
+                ),
+                TextSpan(
+                    style: headStyle, text: ' ${data.model?.lastName ?? ''}'),
+              ])),
           children: [
             FutureBuilder<bool>(
               future: Future.delayed(const Duration(seconds: 6), () => true),
@@ -499,8 +513,8 @@ class _ContractTab extends StatelessWidget {
               },
             )
           ],
-        );
-      }).toList());
+        )
+      ]);
     });
   }
 }

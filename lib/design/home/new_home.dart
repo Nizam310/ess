@@ -18,8 +18,9 @@ class NewHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    
     return Consumer<EmployeeDashVm>(builder: (context, data, _) {
-      final name = data.list.map((e) => e['first_name']);
+
       return ListView(
         padding: const EdgeInsets.all(2),
         children: [
@@ -93,7 +94,7 @@ class NewHome extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Text(
-                'Welcome,  $name'.replaceAll(RegExp(r':'), ''),
+                'Welcome,  ${context.select((EmployeeDashVm value) => value.model?.firstName??"")}'.replaceAll(RegExp(r':'), ''),
                 style: MediaQuery.of(context).size.width < 360
                     ? Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontSize: 25,
@@ -126,8 +127,8 @@ class NewHome extends StatelessWidget {
           // Lottie.file(File('C:/Users/ADMIN/Downloads/7731-water-loading.json')),
           Visibility(
             visible: MediaQuery.of(context).size.width > 300,
-            child: const Row(
-              children: [
+            child:  Row(
+              children: const [
                 Expanded(child: LeaveTypesCarousel()),
               ],
             ).paddingSymmetric(vertical: 10),

@@ -96,12 +96,12 @@ class DashBoard extends StatelessWidget {
                                                                                       : data.index == 14
                                                                                           ? "Attendance history"
                                                                                           : data.index == 15
-                                                                                          ? "Tasks Summary"
-                                                                                          : data.index == 16
-                                                                                          ? "Document Summary"
-                                                                                          :data.index == 17
-                                                                                          ? "Employee Dash"
-                                                                                          : "",
+                                                                                              ? "Tasks Summary"
+                                                                                              : data.index == 16
+                                                                                                  ? "Document Summary"
+                                                                                                  : data.index == 17
+                                                                                                      ? "Employee Dash"
+                                                                                                      : "",
                               style: TextStyle(color: colorScheme.onPrimary),
                             ),
                             Row(
@@ -142,6 +142,7 @@ class DashBoard extends StatelessWidget {
                                                       onTap: () {
                                                         data.enable = true;
                                                         data.refresh();
+
                                                         Navigator.pop(context);
                                                       },
                                                     ),
@@ -179,12 +180,14 @@ class DashBoard extends StatelessWidget {
                                     .paddingSymmetric(horizontal: 8),
                                 const NotificationMenu(),
                                 Visibility(
-                                    visible: data.index==9||data.index==14||data.index ==8,
+                                    visible: data.index == 9 ||
+                                        data.index == 14 ||
+                                        data.index == 8,
                                     child: const SortCalendar())
                               ],
                             ),
                           ],
-                        ).paddingOnly(right: 7,left: 1),
+                        ).paddingOnly(right: 7, left: 1),
                       ),
                     ),
                     Expanded(child: data.screen.elementAt(data.index))
